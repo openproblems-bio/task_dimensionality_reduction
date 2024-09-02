@@ -1,4 +1,4 @@
-__merge__: ../../api/comp_data_processor.yaml
+__merge__: /src/api/comp_process_dataset.yaml
 name: process_dataset
 status: disabled
 arguments:
