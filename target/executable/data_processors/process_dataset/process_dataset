@@ -488,9 +488,9 @@ function ViashDockerfile {
 FROM openproblems/base_python:1.0.0
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component data_processors process_dataset"
-LABEL org.opencontainers.image.created="2024-09-02T07:14:31Z"
-LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_template"
-LABEL org.opencontainers.image.revision="226dbdb87b64b6cd65676bbb11ad69e78a13601c"
+LABEL org.opencontainers.image.created="2024-09-02T08:02:29Z"
+LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
+LABEL org.opencontainers.image.revision="b23bda3b1525803842db30f1d02c1c5adb3ba6ff"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -804,7 +804,7 @@ if [[ "$VIASH_ENGINE_TYPE" == "docker" ]]; then
 
   # determine docker image id
   if [[ "$VIASH_ENGINE_ID" == 'docker' ]]; then
-    VIASH_DOCKER_IMAGE_ID='ghcr.io/openproblems-bio/task_template/data_processors/process_dataset:build_main'
+    VIASH_DOCKER_IMAGE_ID='ghcr.io/openproblems-bio/task_dimensionality_reduction/data_processors/process_dataset:build_main'
   fi
 
   # print dockerfile
