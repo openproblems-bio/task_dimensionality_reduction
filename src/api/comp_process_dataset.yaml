@@ -1,9 +1,9 @@
-namespace: "data_processors"
+namespace: data_processors
 info:
-  type: data_processor
+  type: process_dataset
   type_info:
     label: Data processor
-    summary: A data processor.
+    summary: A dimensionality reduction dataset processor.
     description: |
       A component for processing a Common Dataset into a task-specific dataset.
 arguments:
@@ -11,12 +11,8 @@ arguments:
     __merge__: file_common_dataset.yaml
     direction: input
     required: true
-  - name: "--output_train"
-    __merge__: file_train_h5ad.yaml
-    direction: output
-    required: true
-  - name: "--output_test"
-    __merge__: file_test_h5ad.yaml
+  - name: "--output_dataset"
+    __merge__: file_dataset.yaml
     direction: output
     required: true
   - name: "--output_solution"
@@ -24,8 +20,7 @@ arguments:
     direction: output
     required: true
 test_resources:
-  - path: /resources_test/common/pancreas
-    dest: resources_test/common/pancreas
+  - path: /resources_test/dimensionality_reduction/pancreas/
+    dest: resources_test/dimensionality_reduction/pancreas/
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
-      
