@@ -3,7 +3,8 @@ example: "resources_test/dimensionality_reduction/pancreas/dataset.h5ad"
 label: "Dataset"
 summary: "The dataset to pass to a method."
 info:
-  slots:
+  format:
+    type: h5ad
     layers: 
       - type: integer
         name: counts
