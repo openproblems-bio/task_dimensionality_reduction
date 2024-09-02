@@ -1,6 +1,8 @@
 name: run_benchmark
 namespace: workflows
 
+status: disabled
+
 argument_groups:
   - name: Inputs
     arguments:
