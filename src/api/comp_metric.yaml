@@ -1,18 +1,18 @@
-namespace: "metrics"
+namespace: metrics
 info:
   type: metric
   type_info:
     label: Metric
-    summary: A task template metric.
+    summary: A dimensionality reduction metric.
     description: |
-      A metric for evaluating method predictions.
+      A metric for evaluating dimensionality reductions.
 arguments:
+  - name: "--input_embedding"
+    direction: input
+    __merge__: file_embedding.yaml
+    required: true
   - name: "--input_solution"
     __merge__: file_solution.yaml
-    direction: input
-    required: true
-  - name: "--input_prediction"
-    __merge__: file_prediction.yaml
     direction: input
     required: true
   - name: "--output"
@@ -20,9 +20,9 @@ arguments:
     direction: output
     required: true
 test_resources:
-  - type: python_script
-    path: /common/component_tests/run_and_check_output.py
+  - path: /resources_test/dimensionality_reduction/pancreas/
+    dest: resources_test/dimensionality_reduction/pancreas/
   - type: python_script
     path: /common/component_tests/check_config.py
-  - path: /resources_test/task_template/pancreas
-    dest: resources_test/task_template/pancreas
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py

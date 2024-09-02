@@ -1,11 +1,9 @@
-#TODO: Change to the required and/or optional fields of the anndata
 type: file
-example: "resources_test/task_template/pancreas/solution.h5ad"
-label: "Solution"
-summary: "The solution for the test data"
+example: "resources_test/dimensionality_reduction/pancreas/solution.h5ad"
+label: "Test data"
+summary: "The data for evaluating a dimensionality reduction."
 info:
-  format:
-    type: h5ad
+  slots:
     layers: 
       - type: integer
         name: counts
@@ -13,30 +11,17 @@ info:
         required: true
       - type: double
         name: normalized
-        description: Normalized counts
+        description: Normalized expression values
         required: true
-    obs:
+    obs: 
       - type: string
-        name: label
-        description: Ground truth cell type labels
-        required: true
-      - type: string
-        name: batch
-        description: Batch information
+        name: cell_type
+        description: Classification of the cell type based on its characteristics and function within the tissue or organism.
         required: true
     var:
-      - type: boolean
-        name: hvg
-        description: Whether or not the feature is considered to be a 'highly variable gene'
-        required: true
       - type: double
         name: hvg_score
-        description: A ranking of the features by hvg.
-        required: true
-    obsm:
-      - type: double
-        name: X_pca
-        description: The resulting PCA embedding.
+        description: High variability gene score (normalized dispersion). The greater, the more variable.
         required: true
     uns:
       - type: string
