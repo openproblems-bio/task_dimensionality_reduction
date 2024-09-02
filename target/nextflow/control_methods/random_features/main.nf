@@ -2811,7 +2811,8 @@ meta = [
           "label" : "Dataset",
           "summary" : "The dataset to pass to a method.",
           "info" : {
-            "slots" : {
+            "format" : {
+              "type" : "h5ad",
               "layers" : [
                 {
                   "type" : "integer",
@@ -2866,7 +2867,8 @@ meta = [
           "label" : "Test data",
           "summary" : "The data for evaluating a dimensionality reduction.",
           "info" : {
-            "slots" : {
+            "format" : {
+              "type" : "h5ad",
               "layers" : [
                 {
                   "type" : "integer",
@@ -2965,7 +2967,8 @@ meta = [
           "label" : "Embedding",
           "summary" : "A dataset with dimensionality reduction embedding.",
           "info" : {
-            "slots" : {
+            "format" : {
+              "type" : "h5ad",
               "obsm" : [
                 {
                   "type" : "double",
@@ -3118,7 +3121,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/random_features",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "2077bdaf9ff05f7c9400f333d8759273a6f2e455",
+    "git_commit" : "3263eddba34a81cd8c11e423840861062bc5c078",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {

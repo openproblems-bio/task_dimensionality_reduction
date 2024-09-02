@@ -3,7 +3,8 @@ example: "resources_test/dimensionality_reduction/pancreas/embedding.h5ad"
 label: "Embedding"
 summary: "A dataset with dimensionality reduction embedding."
 info:
-  slots:
+  format:
+    type: h5ad
     obsm:
       - type: double
         name: X_emb

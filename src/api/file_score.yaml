@@ -3,7 +3,8 @@ example: "resources_test/dimensionality_reduction/pancreas/score.h5ad"
 label: "Score"
 summary: "Metric score file"
 info:
-  slots:
+  format:
+    type: h5ad
     uns:
       - type: string
         name: dataset_id
