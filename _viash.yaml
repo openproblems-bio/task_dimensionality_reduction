@@ -76,40 +76,40 @@ info:
 # Step 6: Update the authors of the task.
 authors:
   - name: Luke Zappia
-    roles: [ maintainer, author ]
+    roles: [maintainer, author]
     info:
       github: lazappi
       orcid: 0000-0001-7744-8565
   - name: Michal Klein
-    roles: [ author ]
+    roles: [author]
     info:
       github: michalk8
   - name: Scott Gigante
-    roles: [ author ]
+    roles: [author]
     info:
       github: scottgigante
       orcid: "0000-0002-4544-2764"
   - name: Ben DeMeo
-    roles: [ author ]
+    roles: [author]
     info:
       github: bendemeo
   - name: Robrecht Cannoodt
-    roles: [ author ]
+    roles: [author]
     info:
       github: rcannood
       orcid: 0000-0003-3641-729X
   - name: Kai Waldrant
-    roles: [ contributor ]
+    roles: [contributor]
     info:
       github: KaiWaldrant
       orcid: 0009-0003-8555-1361
   - name: Sai Nirmayi Yasa
-    roles: [ contributor ]
+    roles: [contributor]
     info:
       github: sainirmayi
       orcid: 0009-0003-6319-9803
   - name: Juan A. Cordero Varela
-    roles: [ contributor ]
+    roles: [contributor]
     info:
       github: jacorvar
       orcid: 0000-0002-7373-5433

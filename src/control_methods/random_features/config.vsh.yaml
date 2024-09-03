@@ -19,5 +19,5 @@ engines:
 runners:
   - type: executable
   - type: nextflow
-    directives: 
+    directives:
       label: [midtime, highmem, highcpu]

@@ -51,7 +51,7 @@ info:
       max: 1
       maximize: true
 
-# Component-specific parameters
+# Component parameters
 arguments:
   - name: "--nmi_avg_method"
     type: string
@@ -65,8 +65,8 @@ engines:
   - type: docker
     image: openproblems/base_python:1.0.0
     setup:
-    - type: python
-      packages: [scikit-learn, scanpy, leidenalg]
+      - type: python
+        packages: [scikit-learn, scanpy, leidenalg]
 runners:
   - type: executable
   - type: nextflow
