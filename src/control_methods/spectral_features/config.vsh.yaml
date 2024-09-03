@@ -1,5 +1,7 @@
+# Base component API configuration
 __merge__: ../../api/comp_control_method.yaml
 
+# Component configuration
 name: "spectral_features"
 info:
   label: Spectral Features
@@ -11,6 +13,8 @@ info:
   preferred_normalization: log_cp10k
   variants:
     spectral_features:
+
+# Script configuration
 arguments:
   - name: "--n_comps"
     type: integer
@@ -27,6 +31,8 @@ arguments:
 resources:
   - type: python_script
     path: script.py
+
+# Platform configuration
 engines:
   - type: docker
     image: openproblems/base_python:1.0.0

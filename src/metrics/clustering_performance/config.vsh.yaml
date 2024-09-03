@@ -1,5 +1,7 @@
+# Base component API configuration
 __merge__: ../../api/comp_metric.yaml
 
+# Component configuration
 name: clustering_performance
 info:
   metrics:
@@ -53,7 +55,7 @@ info:
       max: 1
       maximize: true
 
-# Component parameters
+# Script configuration
 arguments:
   - name: "--nmi_avg_method"
     type: string
@@ -63,6 +65,8 @@ arguments:
 resources:
   - type: python_script
     path: script.py
+
+# Platform configuration
 engines:
   - type: docker
     image: openproblems/base_python:1.0.0

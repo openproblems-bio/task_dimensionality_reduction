@@ -1,5 +1,7 @@
+# Base component API configuration
 __merge__: ../../api/comp_method.yaml
 
+# Component configuration
 name: "pca"
 info:
   label: "PCA"
@@ -25,6 +27,7 @@ info:
     pca_logCP10k_1kHVG:
       n_hvg: 1000
 
+# Script configuration
 arguments:
   - name: "--n_hvg"
     type: integer
@@ -32,6 +35,8 @@ arguments:
 resources:
   - type: python_script
     path: script.py
+
+# Platform configuration
 engines:
   - type: docker
     image: openproblems/base_python:1.0.0

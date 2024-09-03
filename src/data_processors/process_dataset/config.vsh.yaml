@@ -1,6 +1,11 @@
+# Base component API configuration
 __merge__: /src/api/comp_process_dataset.yaml
+
+# Component configuration
 name: process_dataset
 status: disabled
+
+# Script configuration
 arguments:
   - name: "--method"
     type: "string"
@@ -23,6 +28,8 @@ resources:
   - type: python_script
     path: script.py
   - path: /common/helper_functions/subset_h5ad_by_format.py
+
+# Platform configuration
 engines:
   - type: docker
     image: openproblems/base_python:1.0.0
