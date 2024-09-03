@@ -15,8 +15,9 @@ info:
         where H(X) and H(Y) are the entropies of X and Y respectively. Higher NMI score suggests that the method is effective in preserving relevant information.
       references:
         doi: 10.1371/journal.pone.0159161
-      documentation_url: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html
-      repository_url: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html
+      links:
+        documentation: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html
+        repository: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html
       min: 0
       max: 1
       maximize: true
@@ -45,8 +46,9 @@ info:
             doi = {10.1007/978-3-642-04277-5_18},
             url = {https://doi.org/10.1007/978-3-642-04277-5_18}
           }
-      documentation_url: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score
-      repository_url: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score
+      links:
+        documentation: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score
+        repository: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score
       min: 0
       max: 1
       maximize: true
