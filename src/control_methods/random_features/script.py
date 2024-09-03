@@ -20,14 +20,12 @@ X_emb = np.random.normal(0, 1, (input.shape[0], 2))
 print("Create output AnnData", flush=True)
 output = ad.AnnData(
     obs=input.obs[[]],
-    obsm={
-        "X_emb": X_emb
-    },
+    obsm={"X_emb": X_emb},
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"]
-    }
+        "method_id": meta["functionality_name"],
+    },
 )
 
 print("Write output to file", flush=True)
