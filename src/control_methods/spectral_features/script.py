@@ -8,10 +8,9 @@ par = {
     "n_comps": 2,
 }
 meta = {
-    "functionality_name": "foo",
+    "functionality_name": "spectral_features",
 }
 ## VIASH END
-
 
 def diffusion_map(graph, n_comps, t, n_retries):
     import numpy as np
