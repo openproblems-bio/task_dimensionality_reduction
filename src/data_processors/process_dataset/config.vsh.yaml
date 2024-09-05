@@ -7,23 +7,14 @@ status: disabled
 
 # Script configuration
 arguments:
-  - name: "--method"
-    type: "string"
-    description: "The process method to assign train/test."
-    choices: ["batch", "random"]
-    default: "batch"
   - name: "--obs_label"
     type: "string"
     description: "Which .obs slot to use as label."
     default: "cell_type"
-  - name: "--obs_batch"
+  - name: "--var_hvg_score"
     type: "string"
-    description: "Which .obs slot to use as batch covariate."
-    default: "batch"
-  - name: "--seed"
-    type: "integer"
-    description: "A seed for the subsampling."
-    example: 123
+    description: "Which .var slot to use as the hvg score."
+    default: "hvg_score"
 resources:
   - type: python_script
     path: script.py
