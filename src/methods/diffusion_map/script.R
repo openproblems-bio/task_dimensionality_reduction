@@ -2,7 +2,7 @@
 par <- list(
   input = "resources_test/dimensionality_reduction/pancreas/dataset.h5ad",
   output = "output.h5ad",
-  n_dim = 3
+  n_dim = 2
 )
 ## VIASH END
 

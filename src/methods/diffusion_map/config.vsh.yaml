@@ -22,7 +22,7 @@ arguments:
   - name: "--n_dim"
     type: integer
     description: Number of dimensions.
-    default: 3
+    default: 2
 resources:
   - type: r_script
     path: script.R
