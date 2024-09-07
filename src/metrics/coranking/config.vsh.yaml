@@ -1,0 +1,110 @@
+# Base component API configuration
+__merge__: ../../api/comp_metric.yaml
+
+# Component configuration
+name: "coranking"
+info:
+  metrics:
+    - name: continuity_at_k30
+      label: Continuity at k=30
+      references:
+        doi: 10.1016/j.neunet.2006.05.014
+      summary: "The continuity metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      description: "The continuity metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      links:
+        repository: https://github.com/gdkrmr/coRanking/
+        documentation: https://coranking.guido-kraemer.com/
+      min: 0
+      max: 1
+      maximize: true
+    - name: trustworthiness_at_k30
+      label: Trustworthiness at k=30
+      summary: "The trustworthiness metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      description: "The trustworthiness metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      links:
+        repository: https://github.com/gdkrmr/coRanking/
+        documentation: https://coranking.guido-kraemer.com/
+      references:
+        doi: 10.1016/j.neunet.2006.05.014
+      min: 0
+      max: 1
+      maximize: true
+    - name: qnx_at_k30
+      label: The value for QNX at k=30
+      summary: "The QNX metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      description: "The QNX metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      links:
+        repository: https://github.com/gdkrmr/coRanking/
+        documentation: https://coranking.guido-kraemer.com/
+      references:
+        doi: 10.1016/j.neucom.2008.12.017
+      min: 0
+      max: 1
+      maximize: true
+    - name: lcmc_at_k30
+      label: The value for LCMC at k=30
+      summary: "The LCMC metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      description: "The LCMC metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      links:
+        repository: https://github.com/gdkrmr/coRanking/
+        documentation: https://coranking.guido-kraemer.com/
+      references:
+        doi: 10.1198/jasa.2009.0111
+      min: 0
+      max: 1
+      maximize: true
+    - name: qnx_auc
+      label: Area under the QNX curve
+      summary: "The AU-QNX metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      description: "The AU-QNX metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
+      links:
+        repository: https://github.com/gdkrmr/coRanking/
+        documentation: https://coranking.guido-kraemer.com/
+      references:
+        doi: 10.48550/ARXIV.1110.3917
+      min: 0
+      max: 1
+      maximize: true
+    - name: qlocal
+      label: Local quality measure
+      summary: "The local quality metric computed on the co-ranking matrix between expression matrix and embedding."
+      description: "The local quality metric computed on the co-ranking matrix between expression matrix and embedding."
+      links:
+        repository: https://github.com/gdkrmr/coRanking/
+        documentation: https://coranking.guido-kraemer.com/
+      references:
+        doi: 10.48550/ARXIV.1110.3917
+      min: 0
+      max: 1
+      maximize: true
+    - name: qglobal
+      label: Global quality measure
+      summary: "The Global quality metric computed on the co-ranking matrix between expression matrix and embedding."
+      description: "The Global quality metric computed on the co-ranking matrix between expression matrix and embedding."
+      links:
+        repository: https://github.com/gdkrmr/coRanking/
+        documentation: https://coranking.guido-kraemer.com/
+      references:
+        doi: 10.48550/ARXIV.1110.3917
+      min: 0
+      max: 1
+      maximize: true
+
+# Script configuration
+resources:
+  - type: r_script
+    path: script.R
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_r:1.0.0
+    setup:
+    - type: r
+      cran:
+        - coRanking
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, highcpu]

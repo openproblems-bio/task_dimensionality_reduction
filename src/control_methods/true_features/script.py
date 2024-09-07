@@ -1,5 +1,4 @@
 import anndata as ad
-import numpy as np
 
 ## VIASH START
 par = {
@@ -7,15 +6,15 @@ par = {
     "output": "reduced.h5ad",
 }
 meta = {
-    "functionality_name": "random_features",
+    "functionality_name": "true_features",
 }
 ## VIASH END
 
 print("Load input data", flush=True)
 input = ad.read_h5ad(par["input"])
 
-print("Create random embedding", flush=True)
-X_emb = np.random.normal(0, 1, (input.shape[0], 2))
+print("Create high dimensionally embedding with all features", flush=True)
+X_emb = input.layers["normalized"].toarray()
 
 print("Create output AnnData", flush=True)
 output = ad.AnnData(

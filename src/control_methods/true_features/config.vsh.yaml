@@ -2,14 +2,14 @@
 __merge__: ../../api/comp_control_method.yaml
 
 # Component configuration
-name: "random_features"
-label: Random Features
-summary: "Negative control by randomly embedding into a 2D space."
-description: "This method serves as a negative control, where the data is randomly embedded into a two-dimensional space, with no attempt to preserve the original structure."
+name: "true_features"
+label: True Features
+summary: "Positive control by retaining the dimensionality without loss of information."
+description: "This serves as a positive control since the original high-dimensional data is retained as is, without any loss of information"
 info:
-  preferred_normalization: counts
+  preferred_normalization: log_cp10k
   variants:
-    random_features:
+    true_features:
 
 # Script configuration
 resources:

@@ -93,8 +93,40 @@ flowchart LR
 
 The dataset to pass to a method.
 
-Example file:
-`resources_test/dimensionality_reduction/pancreas/dataset.h5ad`
+Example file: `resources_test/common/pancreas/dataset.h5ad`
+
+Format:
+
+<div class="small">
+
+    AnnData object
+     obs: 'cell_type'
+     var: 'hvg_score'
+     layers: 'counts', 'normalized'
+     uns: 'dataset_id', 'dataset_name', 'dataset_url', 'dataset_reference', 'dataset_summary', 'dataset_description', 'dataset_organism', 'normalization_id'
+
+</div>
+
+Data structure:
+
+<div class="small">
+
+| Slot | Type | Description |
+|:---|:---|:---|
+| `obs["cell_type"]` | `string` | Classification of the cell type based on its characteristics and function within the tissue or organism. |
+| `var["hvg_score"]` | `double` | High variability gene score (normalized dispersion). The greater, the more variable. |
+| `layers["counts"]` | `integer` | Raw counts. |
+| `layers["normalized"]` | `double` | Normalized expression values. |
+| `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
+| `uns["dataset_name"]` | `string` | Nicely formatted name. |
+| `uns["dataset_url"]` | `string` | (*Optional*) Link to the original source of the dataset. |
+| `uns["dataset_reference"]` | `string` | (*Optional*) Bibtex reference of the paper in which the dataset was published. |
+| `uns["dataset_summary"]` | `string` | Short description of the dataset. |
+| `uns["dataset_description"]` | `string` | Long description of the dataset. |
+| `uns["dataset_organism"]` | `string` | (*Optional*) The organism of the sample in the dataset. |
+| `uns["normalization_id"]` | `string` | Which normalization was used. |
+
+</div>
 
 ## Component type: Data processor
 
@@ -119,12 +151,70 @@ The dataset to pass to a method.
 Example file:
 `resources_test/dimensionality_reduction/pancreas/dataset.h5ad`
 
+Format:
+
+<div class="small">
+
+    AnnData object
+     var: 'hvg_score'
+     layers: 'counts', 'normalized'
+     uns: 'dataset_id', 'normalization_id'
+
+</div>
+
+Data structure:
+
+<div class="small">
+
+| Slot | Type | Description |
+|:---|:---|:---|
+| `var["hvg_score"]` | `double` | High variability gene score (normalized dispersion). The greater, the more variable. |
+| `layers["counts"]` | `integer` | Raw counts. |
+| `layers["normalized"]` | `double` | Normalized expression values. |
+| `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
+| `uns["normalization_id"]` | `string` | Which normalization was used. |
+
+</div>
+
 ## File format: Test data
 
 The data for evaluating a dimensionality reduction.
 
 Example file:
 `resources_test/dimensionality_reduction/pancreas/solution.h5ad`
+
+Format:
+
+<div class="small">
+
+    AnnData object
+     obs: 'cell_type'
+     var: 'hvg_score'
+     layers: 'counts', 'normalized'
+     uns: 'dataset_id', 'dataset_name', 'dataset_url', 'dataset_reference', 'dataset_summary', 'dataset_description', 'dataset_organism', 'normalization_id'
+
+</div>
+
+Data structure:
+
+<div class="small">
+
+| Slot | Type | Description |
+|:---|:---|:---|
+| `obs["cell_type"]` | `string` | Classification of the cell type based on its characteristics and function within the tissue or organism. |
+| `var["hvg_score"]` | `double` | High variability gene score (normalized dispersion). The greater, the more variable. |
+| `layers["counts"]` | `integer` | Raw counts. |
+| `layers["normalized"]` | `double` | Normalized expression values. |
+| `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
+| `uns["dataset_name"]` | `string` | Nicely formatted name. |
+| `uns["dataset_url"]` | `string` | (*Optional*) Link to the original source of the dataset. |
+| `uns["dataset_reference"]` | `string` | (*Optional*) Bibtex reference of the paper in which the dataset was published. |
+| `uns["dataset_summary"]` | `string` | Short description of the dataset. |
+| `uns["dataset_description"]` | `string` | Long description of the dataset. |
+| `uns["dataset_organism"]` | `string` | (*Optional*) The organism of the sample in the dataset. |
+| `uns["normalization_id"]` | `string` | Which normalization was used. |
+
+</div>
 
 ## Component type: Control method
 
@@ -180,10 +270,56 @@ A dataset with dimensionality reduction embedding.
 Example file:
 `resources_test/dimensionality_reduction/pancreas/embedding.h5ad`
 
+Format:
+
+<div class="small">
+
+    AnnData object
+     obsm: 'X_emb'
+     uns: 'dataset_id', 'method_id', 'normalization_id'
+
+</div>
+
+Data structure:
+
+<div class="small">
+
+| Slot                      | Type     | Description                          |
+|:--------------------------|:---------|:-------------------------------------|
+| `obsm["X_emb"]`           | `double` | The dimensionally reduced embedding. |
+| `uns["dataset_id"]`       | `string` | A unique identifier for the dataset. |
+| `uns["method_id"]`        | `string` | A unique identifier for the method.  |
+| `uns["normalization_id"]` | `string` | Which normalization was used.        |
+
+</div>
+
 ## File format: Score
 
 Metric score file
 
 Example file:
 `resources_test/dimensionality_reduction/pancreas/score.h5ad`
+
+Format:
+
+<div class="small">
+
+    AnnData object
+     uns: 'dataset_id', 'normalization_id', 'method_id', 'metric_ids', 'metric_values'
+
+</div>
+
+Data structure:
+
+<div class="small">
+
+| Slot | Type | Description |
+|:---|:---|:---|
+| `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
+| `uns["normalization_id"]` | `string` | Which normalization was used. |
+| `uns["method_id"]` | `string` | A unique identifier for the method. |
+| `uns["metric_ids"]` | `string` | One or more unique metric identifiers. |
+| `uns["metric_values"]` | `double` | The metric values obtained for the given prediction. Must be of same length as ‘metric_ids’. |
+
+</div>
 

@@ -1,0 +1,38 @@
+# Base component API configuration
+__merge__: ../../api/comp_metric.yaml
+
+# Component configuration
+name: "trustworthiness"
+info:
+  metrics:
+    - name: trustworthiness
+      label: Trustworthiness at k=15
+      summary: "A measurement of similarity between the rank of each point's nearest neighbors in the high-dimensional data and the reduced data."
+      description: "A measurement of similarity between the rank of each point's nearest neighbors in the high-dimensional data and the reduced data."
+      references:
+        doi: 10.1007/3-540-44668-0_68
+      links:
+        repository: https://github.com/scikit-learn/scikit-learn
+        documentation: https://scikit-learn.org/stable/modules/generated/sklearn.manifold.trustworthiness.html
+      min: 0
+      max: 1
+      maximize: true
+
+# Script configuration
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - scikit-learn
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, lowcpu]

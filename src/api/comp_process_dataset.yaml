@@ -20,7 +20,7 @@ arguments:
     direction: output
     required: true
 test_resources:
-  - path: /resources_test/dimensionality_reduction/pancreas/
-    dest: resources_test/dimensionality_reduction/pancreas/
+  - path: /resources_test/common/pancreas/
+    dest: resources_test/common/pancreas/
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
