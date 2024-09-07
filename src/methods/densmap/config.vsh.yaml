@@ -3,18 +3,15 @@ __merge__: ../../api/comp_method.yaml
 
 # Component configuration
 name: "densmap"
+label: densMAP
+summary: "Modified UMAP with preservation of local density information"
+description: "A modification of UMAP that adds an extra cost term in order to preserve information about the relative local density of the data. It is performed on the same inputs as UMAP."
+references:
+  doi: 10.1038/s41587-020-00801-7
+links:
+  repository: https://github.com/lmcinnes/umap
+  documentation: https://umap-learn.readthedocs.io/en/latest/densmap_demo.html
 info:
-  label: densMAP
-  summary: "Modified UMAP with preservation of local density information"
-  description: "A modification of UMAP that adds an extra cost term in order to preserve information about the relative local density of the data. It is performed on the same inputs as UMAP."
-  references:
-    doi: 10.1038/s41587-020-00801-7
-  links:
-    repository: https://github.com/lmcinnes/umap
-    documentation: https://umap-learn.readthedocs.io/en/latest/densmap_demo.html
-  v1:
-    path: openproblems/tasks/dimensionality_reduction/methods/umap.py
-    commit: b3456fd73c04c28516f6df34c57e6e3e8b0dab32
   preferred_normalization: log_cp10k
   variants:
     densmap_logCP10k:

@@ -3,21 +3,18 @@ __merge__: ../../api/comp_method.yaml
 
 # Component configuration
 name: pymde
+label: PyMDE
+summary: "A Python implementation of Minimum-Distortion Embedding"
+description: |
+  PyMDE is a Python implementation of Minimum-Distortion Embedding. It is a
+  non-linear method that preserves distances between cells or neighbourhoods
+  in the original space.
+references:
+  doi: 10.1561/2200000090
+links:
+  repository: https://github.com/cvxgrp/pymde
+  documentation: https://pymde.org
 info:
-  label: PyMDE
-  summary: "A Python implementation of Minimum-Distortion Embedding"
-  description: |
-    PyMDE is a Python implementation of Minimum-Distortion Embedding. It is a
-    non-linear method that preserves distances between cells or neighbourhoods
-    in the original space.
-  references:
-    doi: 10.1561/2200000090
-  links:
-    repository: https://github.com/cvxgrp/pymde
-    documentation: https://pymde.org
-  v1:
-    path: openproblems/tasks/dimensionality_reduction/methods/pymde.py
-    commit: b3456fd73c04c28516f6df34c57e6e3e8b0dab32
   preferred_normalization: log_cp10k
   variants:
     pymde_neighbors:

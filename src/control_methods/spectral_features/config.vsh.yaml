@@ -3,13 +3,10 @@ __merge__: ../../api/comp_control_method.yaml
 
 # Component configuration
 name: "spectral_features"
+label: Spectral Features
+summary: "Positive control by Use 1000-dimensional diffusions maps as an embedding."
+description: "This serves as a positive control since it uses 1000-dimensional diffusions maps as an embedding"
 info:
-  label: Spectral Features
-  summary: "Positive control by Use 1000-dimensional diffusions maps as an embedding."
-  description: "This serves as a positive control since it uses 1000-dimensional diffusions maps as an embedding"
-  v1:
-    path: openproblems/tasks/dimensionality_reduction/methods/baseline.py
-    commit: b3456fd73c04c28516f6df34c57e6e3e8b0dab32
   preferred_normalization: log_cp10k
   variants:
     spectral_features:

@@ -3,26 +3,23 @@ __merge__: ../../api/comp_method.yaml
 
 # Component configuration
 name: phate
+label: PHATE
+summary: Preservating trajectories in a dataset by using heat diffusion potential.
+description: |
+  PHATE or "Potential of Heat - diffusion for Affinity - based Transition
+  Embedding" uses the potential of heat diffusion to preserve trajectories in
+  a dataset via a diffusion process. It is an affinity - based method that
+  creates an embedding by finding the dominant eigenvalues of a Markov
+  transition matrix. We evaluate several variants including using the
+  recommended square - root transformed CPM matrix as input, this input with
+  the gamma parameter set to zero and the normal logCPM transformed matrix
+  with and without HVG selection.
+references:
+  doi: 10.1038/s41587-019-0336-3
+links:
+  repository: https://github.com/KrishnaswamyLab/PHATE
+  documentation: https://phate.readthedocs.io/en/stable/
 info:
-  label: PHATE
-  summary: Preservating trajectories in a dataset by using heat diffusion potential.
-  description: |
-    PHATE or "Potential of Heat - diffusion for Affinity - based Transition
-    Embedding" uses the potential of heat diffusion to preserve trajectories in
-    a dataset via a diffusion process. It is an affinity - based method that
-    creates an embedding by finding the dominant eigenvalues of a Markov
-    transition matrix. We evaluate several variants including using the
-    recommended square - root transformed CPM matrix as input, this input with
-    the gamma parameter set to zero and the normal logCPM transformed matrix
-    with and without HVG selection.
-  references:
-    doi: 10.1038/s41587-019-0336-3
-  links:
-    repository: https://github.com/KrishnaswamyLab/PHATE
-    documentation: https://phate.readthedocs.io/en/stable/
-  v1:
-    path: openproblems/tasks/dimensionality_reduction/methods/phate.py
-    commit: b3456fd73c04c28516f6df34c57e6e3e8b0dab32
   preferred_normalization: sqrt_cp10k
   variants:
     phate_default:

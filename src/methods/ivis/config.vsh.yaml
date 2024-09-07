@@ -5,23 +5,20 @@ __merge__: ../../api/comp_method.yaml
 
 # Component configuration
 name: "ivis"
+label: "ivis"
+summary: "Structure-preserving dimensionality reduction using a siamese neural network trained on triplets."
+description: |
+  ivis is a machine learning library for reducing dimensionality of very large
+  datasets using Siamese Neural Networks. ivis preserves global data
+  structures in a low-dimensional space, adds new data points to existing
+  embeddings using a parametric mapping function, and scales linearly to
+  millions of observations.
+references:
+  doi: 10.1038/s41598-019-45301-0
+links:
+  repository: https://github.com/beringresearch/ivis
+  documentation: https://beringresearch.github.io/ivis/
 info:
-  label: "ivis"
-  summary: "Structure-preserving dimensionality reduction using a siamese neural network trained on triplets."
-  description: |
-    ivis is a machine learning library for reducing dimensionality of very large
-    datasets using Siamese Neural Networks. ivis preserves global data
-    structures in a low-dimensional space, adds new data points to existing
-    embeddings using a parametric mapping function, and scales linearly to
-    millions of observations.
-  references:
-    doi: 10.1038/s41598-019-45301-0
-  links:
-    repository: https://github.com/beringresearch/ivis
-    documentation: https://beringresearch.github.io/ivis/
-  v1:
-    path: openproblems/tasks/dimensionality_reduction/methods/ivis.py
-    commit: 93d2161a08da3edf249abedff5111fb5ce527552
   preferred_normalization: log_cp10k
   variants:
     ivis_logCPM_1kHVG:

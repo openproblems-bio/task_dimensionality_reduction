@@ -17,17 +17,6 @@ info:
       min: 0
       max: 1
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/nn_ranking.py
-        commit: e3be930c6d4bbd656ab1e656badb52bb50e6cdd6
-        note: |
-          The original v1 implementations consisted of a lot of helper functions which were
-          derived from the pyDRMetrics package. This version uses the coRanking package
-          to avoid reimplementing and potentially introducing a lot of bugs in how
-          the various metrics are computed.
-
-          In addition, the references for each of the metrics were looked up to
-          properly attribute the original authors of each of the metrics.
     - name: trustworthiness_at_k30
       label: Trustworthiness at k=30
       summary: "The trustworthiness metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
@@ -40,17 +29,6 @@ info:
       min: 0
       max: 1
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/nn_ranking.py
-        commit: e3be930c6d4bbd656ab1e656badb52bb50e6cdd6
-        note: |
-          The original v1 implementations consisted of a lot of helper functions which were
-          derived from the pyDRMetrics package. This version uses the coRanking package
-          to avoid reimplementing and potentially introducing a lot of bugs in how
-          the various metrics are computed.
-
-          In addition, the references for each of the metrics were looked up to
-          properly attribute the original authors of each of the metrics.
     - name: qnx_at_k30
       label: The value for QNX at k=30
       summary: "The QNX metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
@@ -63,17 +41,6 @@ info:
       min: 0
       max: 1
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/nn_ranking.py
-        commit: e3be930c6d4bbd656ab1e656badb52bb50e6cdd6
-        note: |
-          The original v1 implementations consisted of a lot of helper functions which were
-          derived from the pyDRMetrics package. This version uses the coRanking package
-          to avoid reimplementing and potentially introducing a lot of bugs in how
-          the various metrics are computed.
-
-          In addition, the references for each of the metrics were looked up to
-          properly attribute the original authors of each of the metrics.
     - name: lcmc_at_k30
       label: The value for LCMC at k=30
       summary: "The LCMC metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
@@ -86,17 +53,6 @@ info:
       min: 0
       max: 1
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/nn_ranking.py
-        commit: e3be930c6d4bbd656ab1e656badb52bb50e6cdd6
-        note: |
-          The original v1 implementations consisted of a lot of helper functions which were
-          derived from the pyDRMetrics package. This version uses the coRanking package
-          to avoid reimplementing and potentially introducing a lot of bugs in how
-          the various metrics are computed.
-
-          In addition, the references for each of the metrics were looked up to
-          properly attribute the original authors of each of the metrics.
     - name: qnx_auc
       label: Area under the QNX curve
       summary: "The AU-QNX metric at k=30 computed on the co-ranking matrix between expression matrix and embedding."
@@ -109,17 +65,6 @@ info:
       min: 0
       max: 1
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/nn_ranking.py
-        commit: e3be930c6d4bbd656ab1e656badb52bb50e6cdd6
-        note: |
-          The original v1 implementations consisted of a lot of helper functions which were
-          derived from the pyDRMetrics package. This version uses the coRanking package
-          to avoid reimplementing and potentially introducing a lot of bugs in how
-          the various metrics are computed.
-
-          In addition, the references for each of the metrics were looked up to
-          properly attribute the original authors of each of the metrics.
     - name: qlocal
       label: Local quality measure
       summary: "The local quality metric computed on the co-ranking matrix between expression matrix and embedding."
@@ -132,17 +77,6 @@ info:
       min: 0
       max: 1
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/nn_ranking.py
-        commit: e3be930c6d4bbd656ab1e656badb52bb50e6cdd6
-        note: |
-          The original v1 implementations consisted of a lot of helper functions which were
-          derived from the pyDRMetrics package. This version uses the coRanking package
-          to avoid reimplementing and potentially introducing a lot of bugs in how
-          the various metrics are computed.
-
-          In addition, the references for each of the metrics were looked up to
-          properly attribute the original authors of each of the metrics.
     - name: qglobal
       label: Global quality measure
       summary: "The Global quality metric computed on the co-ranking matrix between expression matrix and embedding."
@@ -155,17 +89,6 @@ info:
       min: 0
       max: 1
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/nn_ranking.py
-        commit: e3be930c6d4bbd656ab1e656badb52bb50e6cdd6
-        note: |
-          The original v1 implementations consisted of a lot of helper functions which were
-          derived from the pyDRMetrics package. This version uses the coRanking package
-          to avoid reimplementing and potentially introducing a lot of bugs in how
-          the various metrics are computed.
-
-          In addition, the references for each of the metrics were looked up to
-          properly attribute the original authors of each of the metrics.
 
 # Script configuration
 resources:

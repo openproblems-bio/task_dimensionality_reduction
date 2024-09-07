@@ -3,18 +3,15 @@ __merge__: ../../api/comp_method.yaml
 
 # Component configuration
 name: diffusion_map
+label: Diffusion Map
+summary: Finding meaningful geometric descriptions of datasets using diffusion maps.
+description: Implements diffusion map method of data parametrization, including creation and visualization of diffusion map, clustering with diffusion K-means and regression using adaptive regression model.
+references:
+  doi: 10.1016/j.acha.2006.04.006
+links:
+  documentation: https://bioconductor.org/packages/release/bioc/html/destiny.html
+  repository: https://github.com/theislab/destiny
 info:
-  label: Diffusion Map
-  summary: Finding meaningful geometric descriptions of datasets using diffusion maps.
-  description: Implements diffusion map method of data parametrization, including creation and visualization of diffusion map, clustering with diffusion K-means and regression using adaptive regression model.
-  references:
-    doi: 10.1016/j.acha.2006.04.006
-  links:
-    documentation: https://bioconductor.org/packages/release/bioc/html/destiny.html
-    repository: https://github.com/theislab/destiny
-  v1:
-    path: openproblems/tasks/dimensionality_reduction/methods/diffusion_map.py
-    commit: b3456fd73c04c28516f6df34c57e6e3e8b0dab32
   preferred_normalization: log_cp10k
 
 # Script configuration

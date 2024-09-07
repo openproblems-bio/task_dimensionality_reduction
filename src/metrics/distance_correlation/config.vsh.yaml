@@ -17,10 +17,6 @@ info:
       min: 0
       max: "+.inf"
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/distance_correlation.py
-        commit: b3456fd73c04c28516f6df34c57e6e3e8b0dab32
-        note: This metric was ported but will probably be removed soon.
     - name: distance_correlation_spectral
       label: Distance Correlation Spectral
       summary: "Spearman correlation between all pairwise diffusion distances in the original and dimension-reduced data."
@@ -32,10 +28,6 @@ info:
       min: 0
       max: "+.inf"
       maximize: true
-      v1:
-        path: openproblems/tasks/dimensionality_reduction/metrics/root_mean_square_error.py
-        commit: b3456fd73c04c28516f6df34c57e6e3e8b0dab32
-        note: This metric was ported but will probably be removed soon.
 
 # Script configuration
 arguments:
