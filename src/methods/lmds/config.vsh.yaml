@@ -9,13 +9,13 @@ description: |
   Landmark Multi-Dimensional Scaling (LMDS) is a non-linear method for
   dimensionality reduction that is based on the concept of multi-dimensional
   scaling.
-preferred_normalization: log_cp10k
 references:
   doi: 10.1038/s41587-019-0071-9
+links:
+  documentation: https://dynverse.org/lmds/
+  repository: https://github.com/dynverse/lmds
 info:
-  links:
-    documentation: https://dynverse.org/lmds/
-    repository: https://github.com/dynverse/lmds
+  preferred_normalization: log_cp10k
 
 # Script configuration
 arguments:
