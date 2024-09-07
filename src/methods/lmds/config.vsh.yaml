@@ -1,0 +1,65 @@
+# Base component API configuration
+__merge__: ../../api/comp_method.yaml
+
+# Component configuration
+name: lmds
+label: LMDS
+summary: Landmark Multi-Dimensional Scaling
+description: |
+  Landmark Multi-Dimensional Scaling (LMDS) is a non-linear method for
+  dimensionality reduction that is based on the concept of multi-dimensional
+  scaling.
+references:
+  doi: 10.1038/s41587-019-0071-9
+links:
+  documentation: https://dynverse.org/lmds/
+  repository: https://github.com/dynverse/lmds
+info:
+  preferred_normalization: log_cp10k
+
+# Script configuration
+arguments:
+  - name: "--n_dim"
+    type: integer
+    description: Number of dimensions.
+    default: 2
+  - name: "--n_landmarks"
+    type: integer
+    description: Number of landmarks.
+    default: 1000
+  - name: "--distance_method"
+    type: string
+    description: Number of clusters to be estimated over the input dataset.
+    choices:
+      [
+        "euclidean",
+        "pearson",
+        "spearman",
+        "cosine",
+        "chisquared",
+        "hamming",
+        "kullback",
+        "manhattan",
+        "maximum",
+        "canberra",
+        "minkowski",
+      ]
+    default: "pearson"
+resources:
+  - type: r_script
+    path: script.R
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_r:1.0.0
+    setup:
+      - type: r
+        cran:
+          - Matrix
+          - lmds
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, midcpu]

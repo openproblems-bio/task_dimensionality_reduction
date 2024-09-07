@@ -1,0 +1,46 @@
+# Base component API configuration
+__merge__: ../../api/comp_control_method.yaml
+
+# Component configuration
+name: "spectral_features"
+label: Spectral Features
+summary: "Positive control by Use 1000-dimensional diffusions maps as an embedding."
+description: "This serves as a positive control since it uses 1000-dimensional diffusions maps as an embedding"
+info:
+  preferred_normalization: log_cp10k
+  variants:
+    spectral_features:
+
+# Script configuration
+arguments:
+  - name: "--n_comps"
+    type: integer
+    default: 1000
+    description: "Number of components to use for the embedding."
+  - name: t
+    type: integer
+    default: 1
+    description: "Number to power the eigenvalues by."
+  - name: n_retries
+    type: integer
+    default: 1
+    description: "Number of times to retry if the embedding fails, each time adding noise."
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - umap-learn
+          - scipy
+          - numpy
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, highcpu]

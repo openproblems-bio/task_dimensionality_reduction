@@ -5,7 +5,7 @@ summary: "The data for evaluating a dimensionality reduction."
 info:
   format:
     type: h5ad
-    layers: 
+    layers:
       - type: integer
         name: counts
         description: Raw counts
@@ -14,7 +14,7 @@ info:
         name: normalized
         description: Normalized expression values
         required: true
-    obs: 
+    obs:
       - type: string
         name: cell_type
         description: Classification of the cell type based on its characteristics and function within the tissue or organism.

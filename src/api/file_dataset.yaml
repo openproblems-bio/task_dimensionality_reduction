@@ -5,7 +5,7 @@ summary: "The dataset to pass to a method."
 info:
   format:
     type: h5ad
-    layers: 
+    layers:
       - type: integer
         name: counts
         description: Raw counts

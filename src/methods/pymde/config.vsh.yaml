@@ -1,0 +1,54 @@
+# Base component API configuration
+__merge__: ../../api/comp_method.yaml
+
+# Component configuration
+name: pymde
+label: PyMDE
+summary: "A Python implementation of Minimum-Distortion Embedding"
+description: |
+  PyMDE is a Python implementation of Minimum-Distortion Embedding. It is a
+  non-linear method that preserves distances between cells or neighbourhoods
+  in the original space.
+references:
+  doi: 10.1561/2200000090
+links:
+  repository: https://github.com/cvxgrp/pymde
+  documentation: https://pymde.org
+info:
+  preferred_normalization: log_cp10k
+  variants:
+    pymde_neighbors:
+      embed_method: neighbors
+    pymde_distances:
+      embed_method: distances
+
+# Script configuration
+arguments:
+  - name: --embed_method
+    type: string
+    description: The method to use for embedding. Options are 'neighbors' and 'distances'.
+    default: neighbors
+    choices: [neighbors, distances]
+  - name: --n_hvg
+    type: integer
+    description: Number of highly variable genes to subset to. If not specified, the input matrix will not be subset.
+  - name: --n_pca_dims
+    type: integer
+    description: Number of principal components to use for the initial PCA step.
+    default: 100
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages: pymde
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, highcpu]

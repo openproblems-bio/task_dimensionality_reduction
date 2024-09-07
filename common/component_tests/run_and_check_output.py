@@ -34,32 +34,37 @@ def check_output_files(arguments):
 
     print(">> Reading h5ad files and checking formats", flush=True)
     for arg in arguments:
-        arg_info = arg.get("info") or {}
-        if arg["type"] == "file":
-            arg_format = arg_info.get("format", {})
-            file_type = arg_format.get("type") or arg_info.get("file_type") or "h5ad"
+        if arg["type"] != "file" or arg["direction"] != "output":
+            continue
+        check_format(arg)
 
-            if file_type == "h5ad":
-                print(f"Reading and checking {arg['clean_name']}", flush=True)
+def check_format(arg):
+    arg_info = arg.get("info") or {}
+    if arg["type"] == "file":
+        arg_format = arg_info.get("format", {})
+        file_type = arg_format.get("type") or arg_info.get("file_type") or "h5ad"
 
-                # try to read as an anndata, else as a parquet file
-                adata = ad.read_h5ad(arg["value"])
+        if file_type == "h5ad":
+            print(f"Reading and checking {arg['clean_name']}", flush=True)
 
-                print(f"  {adata}")
+            # try to read as an anndata, else as a parquet file
+            adata = ad.read_h5ad(arg["value"])
 
-                check_h5ad_slots(adata, arg)
-            elif file_type in ["parquet", "csv", "tsv"]:
-                print(f"Reading and checking {arg['clean_name']}", flush=True)
+            print(f"  {adata}")
 
-                if file_type == "csv":
-                    df = pd.read_csv(arg["value"])
-                if file_type == "tsv":
-                    df = pd.read_csv(arg["value"], sep="\t")
-                else:
-                    df = pd.read_parquet(arg["value"])
-                print(f"  {df}")
-                
-                check_df_columns(df, arg)
+            check_h5ad_slots(adata, arg)
+        elif file_type in ["parquet", "csv", "tsv"]:
+            print(f"Reading and checking {arg['clean_name']}", flush=True)
+
+            if file_type == "csv":
+                df = pd.read_csv(arg["value"])
+            if file_type == "tsv":
+                df = pd.read_csv(arg["value"], sep="\t")
+            else:
+                df = pd.read_parquet(arg["value"])
+            print(f"  {df}")
+            
+            check_df_columns(df, arg)
 
 
 def check_h5ad_slots(adata, arg):
