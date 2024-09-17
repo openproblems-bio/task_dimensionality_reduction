@@ -1,0 +1,38 @@
+# Base component API configuration
+__merge__: ../../api/comp_method.yaml
+
+# Component configuration
+name: diffusion_map
+label: Diffusion Map
+summary: Finding meaningful geometric descriptions of datasets using diffusion maps.
+description: Implements diffusion map method of data parametrization, including creation and visualization of diffusion map, clustering with diffusion K-means and regression using adaptive regression model.
+references:
+  doi: 10.1016/j.acha.2006.04.006
+links:
+  documentation: https://bioconductor.org/packages/release/bioc/html/destiny.html
+  repository: https://github.com/theislab/destiny
+info:
+  preferred_normalization: log_cp10k
+
+# Script configuration
+arguments:
+  - name: "--n_dim"
+    type: integer
+    description: Number of dimensions.
+    default: 2
+resources:
+  - type: r_script
+    path: script.R
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_r:1.0.0
+    setup:
+      - type: r
+        bioc: destiny
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, highcpu]

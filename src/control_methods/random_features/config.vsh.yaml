@@ -1,0 +1,27 @@
+# Base component API configuration
+__merge__: ../../api/comp_control_method.yaml
+
+# Component configuration
+name: "random_features"
+label: Random Features
+summary: "Negative control by randomly embedding into a 2D space."
+description: "This method serves as a negative control, where the data is randomly embedded into a two-dimensional space, with no attempt to preserve the original structure."
+info:
+  preferred_normalization: counts
+  variants:
+    random_features:
+
+# Script configuration
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, highcpu]

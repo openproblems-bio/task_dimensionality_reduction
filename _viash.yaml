@@ -1,0 +1,121 @@
+viash_version: 0.9.0
+# Step 1: Change the name of the task.
+# example: task_name_of_this_task
+name: task_dimensionality_reduction
+organization: openproblems-bio
+version: build_update_workflows
+license: MIT
+# Step 2: Add keywords to describe the task.
+keywords: [single-cell, openproblems, benchmark]
+# Step 3: Update the `task_template` to the name of the task from step 1.
+links:
+  issue_tracker: https://github.com/openproblems-bio/task_dimensionality_reduction/issues
+  repository: https://github.com/openproblems-bio/task_dimensionality_reduction
+  docker_registry: ghcr.io
+# Step 4: Update the label, summary and description.
+# A unique, human-readable, short label. Used for creating summary tables and visualisations.
+label: Dimensionality Reduction for Visualization
+summary: Reduction of high-dimensional datasets to 2D for visualization & interpretation.
+description: |
+  Data visualisation is an important part of all stages of single-cell analysis, from
+  initial quality control to interpretation and presentation of final results. For bulk RNA-seq
+  studies, linear dimensionality reduction techniques such as PCA and MDS are commonly used
+  to visualise the variation between samples. While these methods are highly effective they
+  can only be used to show the first few components of variation which cannot fully represent
+  the increased complexity and number of observations in single-cell datasets. For this reason
+  non-linear techniques (most notably t-SNE and UMAP) have become the standard for visualising
+  single-cell studies. These methods attempt to compress a dataset into a two-dimensional space
+  while attempting to capture as much of the variance between observations as possible. Many
+  methods for solving this problem now exist. In general these methods try to preserve distances,
+  while some additionally consider aspects such as density within the embedded space or conservation
+  of continuous trajectories. Despite almost every single-cell study using one of these visualisations
+  there has been debate as to whether they can effectively capture the variation in single-cell
+  datasets [@chari2023speciousart].
+
+  The dimensionality reduction task attempts to quantify the ability of methods to embed the
+  information present in complex single-cell studies into a two-dimensional space. Thus, this task
+  is specifically designed for dimensionality reduction for visualisation and does not consider other
+  uses of dimensionality reduction in standard single-cell workflows such as improving the
+  signal-to-noise ratio (and in fact several of the methods use PCA as a pre-processing step for this
+  reason). Unlike most tasks, methods for the dimensionality reduction task must accept a matrix
+  containing expression values normalised to 10,000 counts per cell and log transformed (log-10k) and
+  produce a two-dimensional coordinate for each cell. Pre-normalised matrices are required to
+  enforce consistency between the metric evaluation (which generally requires normalised data) and
+  the method runs. When these are not consistent, methods that use the same normalisation as used in
+  the metric tend to score more highly. For some methods we also evaluate the pre-processing
+  recommended by the method.
+# A list of references to relevant literature. Each reference should be a DOI or a bibtex entry
+# references:
+#   doi:
+#     - 10.21203/rs.3.rs-4181617/v1
+#   bibtex:
+#     - |
+#       @article{doe_2021_template,
+#         doi = {10.21203/rs.3.rs-4181617/v1},
+#         url = {https://doi.org/10.21203/rs.3.rs-4181617/v1},
+#         author = {Doe, John},
+#         title = {A template for creating new tasks},
+#         publisher = {Research Square},
+#         year = {2021},
+#       }
+
+info:
+  image: thumbnail.svg
+  # Step 5: Replace the task_template to the name of the task.
+  test_resources:
+    - type: s3
+      path: s3://openproblems-data/resources_test/common/cxg_mouse_pancreas_atlas/
+      dest: resources_test/common/cxg_mouse_pancreas_atlas/
+    - type: s3
+      path: s3://openproblems-data/resources_test/task_dimensionality_reduction/
+      dest: resources_test/task_dimensionality_reduction
+# Step 6: Update the authors of the task.
+authors:
+  - name: Luke Zappia
+    roles: [maintainer, author]
+    info:
+      github: lazappi
+      orcid: 0000-0001-7744-8565
+  - name: Michal Klein
+    roles: [author]
+    info:
+      github: michalk8
+  - name: Scott Gigante
+    roles: [author]
+    info:
+      github: scottgigante
+      orcid: "0000-0002-4544-2764"
+  - name: Ben DeMeo
+    roles: [author]
+    info:
+      github: bendemeo
+  - name: Robrecht Cannoodt
+    roles: [author]
+    info:
+      github: rcannood
+      orcid: 0000-0003-3641-729X
+  - name: Kai Waldrant
+    roles: [contributor]
+    info:
+      github: KaiWaldrant
+      orcid: 0009-0003-8555-1361
+  - name: Sai Nirmayi Yasa
+    roles: [contributor]
+    info:
+      github: sainirmayi
+      orcid: 0009-0003-6319-9803
+  - name: Juan A. Cordero Varela
+    roles: [contributor]
+    info:
+      github: jacorvar
+      orcid: 0000-0002-7373-5433
+# Step 7: Remove all of the comments of the steps you completed
+# Step 8: High five yourself!
+config_mods: |
+  .runners[.type == "nextflow"].config.labels := { lowmem : "memory = 20.Gb", midmem : "memory = 50.Gb", highmem : "memory = 100.Gb", lowcpu : "cpus = 5", midcpu : "cpus = 15", highcpu : "cpus = 30", lowtime : "time = 1.h", midtime : "time = 4.h", hightime : "time = 8.h", veryhightime : "time = 24.h" }
+repositories:
+  - name: core
+    type: github
+    repo: openproblems-bio/core
+    tag: build/main
+    path: viash/core
