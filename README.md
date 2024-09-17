@@ -149,7 +149,7 @@ Arguments:
 The dataset to pass to a method.
 
 Example file:
-`resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad`
+`resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad`
 
 Format:
 
@@ -181,7 +181,7 @@ Data structure:
 The data for evaluating a dimensionality reduction.
 
 Example file:
-`resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad`
+`resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad`
 
 Format:
 
@@ -268,7 +268,7 @@ Arguments:
 A dataset with dimensionality reduction embedding.
 
 Example file:
-`resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad`
+`resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad`
 
 Format:
 
@@ -298,7 +298,7 @@ Data structure:
 Metric score file
 
 Example file:
-`resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/score.h5ad`
+`resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/score.h5ad`
 
 Format:
 

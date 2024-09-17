@@ -1,6 +1,6 @@
 ## VIASH START
 par <- list(
-  input = "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad",
+  input = "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad",
   output = "output.h5ad",
   n_dim = 2
 )

@@ -3,7 +3,7 @@ import umap
 
 ## VIASH START
 par = {
-    "input": "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/test.h5ad",
+    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/test.h5ad",
     "output": "reduced.h5ad",
     "n_comps": 2,
 }

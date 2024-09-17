@@ -4,7 +4,7 @@ from umap import UMAP
 
 ## VIASH START
 par = {
-    "input": "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/train.h5ad",
+    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/train.h5ad",
     "output": "reduced.h5ad",
     "n_pca_dims": 50,
     "n_hvg": 1000,
