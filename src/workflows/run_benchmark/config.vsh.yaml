@@ -4,8 +4,13 @@ namespace: workflows
 argument_groups:
   - name: Inputs
     arguments:
-      - name: "--input_dataset"
-        __merge__: /src/api/file_dataset.yaml
+      - name: "--input_train"
+        __merge__: /src/api/file_train.yaml
+        type: file
+        direction: input
+        required: true
+      - name: "--input_test"
+        __merge__: /src/api/file_test.yaml
         type: file
         direction: input
         required: true
@@ -59,11 +64,9 @@ resources:
 dependencies:
   - name: h5ad/extract_uns_metadata
     repository: core
-  - name: control_methods/true_features
-  - name: control_methods/random_features
-  - name: control_methods/spectral_features
-  - name: methods/pca
-  - name: metrics/clustering_performance
+  - name: control_methods/true_labels
+  - name: methods/logistic_regression
+  - name: metrics/accuracy
 
 runners:
   - type: nextflow
