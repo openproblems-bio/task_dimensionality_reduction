@@ -3,8 +3,8 @@ from sklearn import manifold
 
 ## VIASH START
 par = {
-    "input_embedding": "resources_test/dimensionality_reduction/pancreas/reduced.h5ad",
-    "input_solution": "resources_test/dimensionality_reduction/pancreas/test.h5ad",
+    "input_embedding": "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/reduced.h5ad",
+    "input_solution": "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/test.h5ad",
     "output": "score.h5ad",
 }
 ## VIASH END

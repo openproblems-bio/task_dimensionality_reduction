@@ -8,8 +8,8 @@ import umap.spectral
 
 ## VIASH START
 par = {
-    "input_embedding": "resources_test/dimensionality_reduction/pancreas/embedding.h5ad",
-    "input_solution": "resources_test/dimensionality_reduction/pancreas/solution.h5ad",
+    "input_embedding": "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad",
+    "input_solution": "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad",
     "output": "score.h5ad",
 }
 ## VIASH END

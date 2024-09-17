@@ -27,12 +27,12 @@ nextflow run . \
 
 # run one method
 viash run src/methods/logistic_regression/config.vsh.yaml -- \
-    --input_train $DATASET_DIR/pancreas/train.h5ad \
-    --input_test $DATASET_DIR/pancreas/test.h5ad \
-    --output $DATASET_DIR/pancreas/denoised.h5ad
+    --input_train $DATASET_DIR/cxg_mouse_pancreas_atlas/train.h5ad \
+    --input_test $DATASET_DIR/cxg_mouse_pancreas_atlas/test.h5ad \
+    --output $DATASET_DIR/cxg_mouse_pancreas_atlas/denoised.h5ad
 
 # run one metric
 viash run src/metrics/accuracy/config.vsh.yaml -- \
-    --input_predicition $DATASET_DIR/pancreas/predicted.h5ad \
-    --input_solution $DATASET_DIR/pancreas/solution.h5ad \
-    --output $DATASET_DIR/pancreas/score.h5ad
+    --input_predicition $DATASET_DIR/cxg_mouse_pancreas_atlas/predicted.h5ad \
+    --input_solution $DATASET_DIR/cxg_mouse_pancreas_atlas/solution.h5ad \
+    --output $DATASET_DIR/cxg_mouse_pancreas_atlas/score.h5ad

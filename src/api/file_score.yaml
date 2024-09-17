@@ -1,5 +1,5 @@
 type: file
-example: "resources_test/dimensionality_reduction/pancreas/score.h5ad"
+example: "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/score.h5ad"
 label: "Score"
 summary: "Metric score file"
 info:

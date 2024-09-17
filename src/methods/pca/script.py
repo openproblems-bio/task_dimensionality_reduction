@@ -3,7 +3,7 @@ import scanpy as sc
 
 ## VIASH START
 par = {
-    "input": "resources_test/dimensionality_reduction/pancreas/train.h5ad",
+    "input": "resources_test/dimensionality_reduction/cxg_mouse_pancreas_atlas/train.h5ad",
     "output": "reduced.h5ad",
     "n_hvg": 1000,
 }
