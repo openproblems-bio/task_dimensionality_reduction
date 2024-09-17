@@ -7,7 +7,7 @@ par = {
     "output": "reduced.h5ad",
 }
 meta = {
-    "functionality_name": "random_features",
+    "name": "random_features",
 }
 ## VIASH END
 
@@ -24,7 +24,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 
