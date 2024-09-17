@@ -7,13 +7,15 @@ workflow auto {
 
 // construct list of methods and control methods
 methods = [
-  true_labels,
-  logistic_regression
+  true_features,
+  spectral_features,
+  random_features,
+  pca
 ]
 
 // construct list of metrics
 metrics = [
-  accuracy
+  clustering_performance
 ]
 
 workflow run_wf {
@@ -27,7 +29,7 @@ workflow run_wf {
    ****************************/
   dataset_ch = input_ch
     // store join id
-    | map{ id, state -> 
+    | map{ id, state ->
       [id, state + ["_meta": [join_id: id]]]
     }
 
@@ -70,8 +72,7 @@ workflow run_wf {
       // use 'fromState' to fetch the arguments the component requires from the overall state
       fromState: { id, state, comp ->
         def new_args = [
-          input_train: state.input_train,
-          input_test: state.input_test
+          input: state.input_dataset,
         ]
         if (comp.config.info.type == "control_method") {
           new_args.input_solution = state.input_solution
@@ -96,8 +97,8 @@ workflow run_wf {
       },
       // use 'fromState' to fetch the arguments the component requires from the overall state
       fromState: [
-        input_solution: "input_solution", 
-        input_prediction: "method_output"
+        input_solution: "input_solution",
+        input_embedding: "method_output"
       ],
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->
@@ -109,7 +110,7 @@ workflow run_wf {
     )
 
     // extract the scores
-    | extract_metadata.run(
+    | extract_uns_metadata.run(
       key: "extract_scores",
       fromState: [input: "metric_output"],
       toState: { id, output, state ->
@@ -120,23 +121,6 @@ workflow run_wf {
     )
 
     | joinStates { ids, states ->
-      // store the method configs in a file
-      def method_configs = methods.collect{it.config}
-      def method_configs_yaml_blob = toYamlBlob(method_configs)
-      def method_configs_file = tempFile("method_configs.yaml")
-      method_configs_file.write(method_configs_yaml_blob)
-
-      // store the metric configs in a file
-      def metric_configs = metrics.collect{it.config}
-      def metric_configs_yaml_blob = toYamlBlob(metric_configs)
-      def metric_configs_file = tempFile("metric_configs.yaml")
-      metric_configs_file.write(metric_configs_yaml_blob)
-
-      def viash_file = meta.resources_dir.resolve("_viash.yaml")
-      def viash_file_content = toYamlBlob(readYaml(viash_file).info)
-      def task_info_file = tempFile("task_info.yaml")
-      task_info_file.write(viash_file_content)
-
       // store the scores in a file
       def score_uns = states.collect{it.score_uns}
       def score_uns_yaml_blob = toYamlBlob(score_uns)
@@ -145,7 +129,6 @@ workflow run_wf {
 
       ["output", [output_scores: score_uns_file]]
     }
-
 
   /******************************
    * GENERATE OUTPUT YAML FILES *
@@ -186,10 +169,11 @@ workflow run_wf {
 
       // create output state
       def new_state = [
-        dataset_uns: dataset_uns_file,
-        method_configs: method_configs_file,
-        metric_configs: metric_configs_file,
-        task_info: viash_file
+        output_dataset_info: dataset_uns_file,
+        output_method_configs: method_configs_file,
+        output_metric_configs: metric_configs_file,
+        output_task_info: viash_file,
+        _meta: states[0]._meta
       ]
 
       ["output", new_state]
