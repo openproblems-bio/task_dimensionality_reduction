@@ -197,19 +197,61 @@ dependencies:
     repo: "openproblems-bio/core"
     tag: "build/main"
     path: "viash/core"
-- name: "control_methods/true_features"
-  repository:
-    type: "local"
 - name: "control_methods/random_features"
   repository:
     type: "local"
 - name: "control_methods/spectral_features"
   repository:
     type: "local"
+- name: "control_methods/true_features"
+  repository:
+    type: "local"
+- name: "methods/densmap"
+  repository:
+    type: "local"
+- name: "methods/diffusion_map"
+  repository:
+    type: "local"
+- name: "methods/ivis"
+  repository:
+    type: "local"
+- name: "methods/lmds"
+  repository:
+    type: "local"
+- name: "methods/neuralee"
+  repository:
+    type: "local"
 - name: "methods/pca"
   repository:
     type: "local"
+- name: "methods/phate"
+  repository:
+    type: "local"
+- name: "methods/pymde"
+  repository:
+    type: "local"
+- name: "methods/simlr"
+  repository:
+    type: "local"
+- name: "methods/tsne"
+  repository:
+    type: "local"
+- name: "methods/umap"
+  repository:
+    type: "local"
 - name: "metrics/clustering_performance"
+  repository:
+    type: "local"
+- name: "metrics/coranking"
+  repository:
+    type: "local"
+- name: "metrics/density_preservation"
+  repository:
+    type: "local"
+- name: "metrics/distance_correlation"
+  repository:
+    type: "local"
+- name: "metrics/trustworthiness"
   repository:
     type: "local"
 repositories:
@@ -253,15 +295,29 @@ build_info:
   output: "target/nextflow/workflows/run_benchmark"
   executable: "target/nextflow/workflows/run_benchmark/main.nf"
   viash_version: "0.9.0"
-  git_commit: "b1e970d693dc49b21b99b6c816f7fb464be12cec"
+  git_commit: "5822df76e024316297e5ce0cf4eaecfad0e054fe"
   git_remote: "https://github.com/openproblems-bio/task_dimensionality_reduction"
   dependencies:
   - "target/dependencies/github/openproblems-bio/core/build/main/nextflow/h5ad/extract_uns_metadata"
-  - "target/nextflow/control_methods/true_features"
   - "target/nextflow/control_methods/random_features"
   - "target/nextflow/control_methods/spectral_features"
+  - "target/nextflow/control_methods/true_features"
+  - "target/nextflow/methods/densmap"
+  - "target/nextflow/methods/diffusion_map"
+  - "target/nextflow/methods/ivis"
+  - "target/nextflow/methods/lmds"
+  - "target/nextflow/methods/neuralee"
   - "target/nextflow/methods/pca"
+  - "target/nextflow/methods/phate"
+  - "target/nextflow/methods/pymde"
+  - "target/nextflow/methods/simlr"
+  - "target/nextflow/methods/tsne"
+  - "target/nextflow/methods/umap"
   - "target/nextflow/metrics/clustering_performance"
+  - "target/nextflow/metrics/coranking"
+  - "target/nextflow/metrics/density_preservation"
+  - "target/nextflow/metrics/distance_correlation"
+  - "target/nextflow/metrics/trustworthiness"
 package_config:
   name: "task_dimensionality_reduction"
   version: "build_update_workflows"

@@ -258,7 +258,7 @@ build_info:
   output: "target/executable/metrics/distance_correlation"
   executable: "target/executable/metrics/distance_correlation/distance_correlation"
   viash_version: "0.9.0"
-  git_commit: "b1e970d693dc49b21b99b6c816f7fb464be12cec"
+  git_commit: "5822df76e024316297e5ce0cf4eaecfad0e054fe"
   git_remote: "https://github.com/openproblems-bio/task_dimensionality_reduction"
 package_config:
   name: "task_dimensionality_reduction"

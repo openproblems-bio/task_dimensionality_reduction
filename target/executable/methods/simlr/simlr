@@ -506,9 +506,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SIMLR", quietly = TRUE)) BiocManager::install("SIMLR")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods simlr"
-LABEL org.opencontainers.image.created="2024-09-18T15:32:44Z"
+LABEL org.opencontainers.image.created="2024-09-18T16:41:16Z"
 LABEL org.opencontainers.image.source="https://github.com/BatzoglouLabSU/SIMLR"
-LABEL org.opencontainers.image.revision="b1e970d693dc49b21b99b6c816f7fb464be12cec"
+LABEL org.opencontainers.image.revision="5822df76e024316297e5ce0cf4eaecfad0e054fe"
 LABEL org.opencontainers.image.version="build_update_workflows"
 
 VIASHDOCKER

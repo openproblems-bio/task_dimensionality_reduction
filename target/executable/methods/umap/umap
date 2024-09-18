@@ -481,9 +481,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "umap-learn" "pynndescent~=0.5.11"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods umap"
-LABEL org.opencontainers.image.created="2024-09-18T15:32:45Z"
+LABEL org.opencontainers.image.created="2024-09-18T16:41:15Z"
 LABEL org.opencontainers.image.source="https://github.com/lmcinnes/umap"
-LABEL org.opencontainers.image.revision="b1e970d693dc49b21b99b6c816f7fb464be12cec"
+LABEL org.opencontainers.image.revision="5822df76e024316297e5ce0cf4eaecfad0e054fe"
 LABEL org.opencontainers.image.version="build_update_workflows"
 
 VIASHDOCKER

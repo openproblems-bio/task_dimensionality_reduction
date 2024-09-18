@@ -3079,12 +3079,6 @@ meta = [
       }
     },
     {
-      "name" : "control_methods/true_features",
-      "repository" : {
-        "type" : "local"
-      }
-    },
-    {
       "name" : "control_methods/random_features",
       "repository" : {
         "type" : "local"
@@ -3097,13 +3091,103 @@ meta = [
       }
     },
     {
+      "name" : "control_methods/true_features",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/densmap",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/diffusion_map",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/ivis",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/lmds",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/neuralee",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "methods/pca",
       "repository" : {
         "type" : "local"
       }
     },
     {
+      "name" : "methods/phate",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/pymde",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/simlr",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/tsne",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/umap",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "metrics/clustering_performance",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "metrics/coranking",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "metrics/density_preservation",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "metrics/distance_correlation",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "metrics/trustworthiness",
       "repository" : {
         "type" : "local"
       }
@@ -3166,7 +3250,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "b1e970d693dc49b21b99b6c816f7fb464be12cec",
+    "git_commit" : "5822df76e024316297e5ce0cf4eaecfad0e054fe",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3305,11 +3389,25 @@ meta = [
 // resolve dependencies dependencies (if any)
 meta["root_dir"] = getRootDir()
 include { extract_uns_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/core/build/main/nextflow/h5ad/extract_uns_metadata/main.nf"
-include { true_features } from "${meta.resources_dir}/../../../nextflow/control_methods/true_features/main.nf"
 include { random_features } from "${meta.resources_dir}/../../../nextflow/control_methods/random_features/main.nf"
 include { spectral_features } from "${meta.resources_dir}/../../../nextflow/control_methods/spectral_features/main.nf"
+include { true_features } from "${meta.resources_dir}/../../../nextflow/control_methods/true_features/main.nf"
+include { densmap } from "${meta.resources_dir}/../../../nextflow/methods/densmap/main.nf"
+include { diffusion_map } from "${meta.resources_dir}/../../../nextflow/methods/diffusion_map/main.nf"
+include { ivis } from "${meta.resources_dir}/../../../nextflow/methods/ivis/main.nf"
+include { lmds } from "${meta.resources_dir}/../../../nextflow/methods/lmds/main.nf"
+include { neuralee } from "${meta.resources_dir}/../../../nextflow/methods/neuralee/main.nf"
 include { pca } from "${meta.resources_dir}/../../../nextflow/methods/pca/main.nf"
+include { phate } from "${meta.resources_dir}/../../../nextflow/methods/phate/main.nf"
+include { pymde } from "${meta.resources_dir}/../../../nextflow/methods/pymde/main.nf"
+include { simlr } from "${meta.resources_dir}/../../../nextflow/methods/simlr/main.nf"
+include { tsne } from "${meta.resources_dir}/../../../nextflow/methods/tsne/main.nf"
+include { umap } from "${meta.resources_dir}/../../../nextflow/methods/umap/main.nf"
 include { clustering_performance } from "${meta.resources_dir}/../../../nextflow/metrics/clustering_performance/main.nf"
+include { coranking } from "${meta.resources_dir}/../../../nextflow/metrics/coranking/main.nf"
+include { density_preservation } from "${meta.resources_dir}/../../../nextflow/metrics/density_preservation/main.nf"
+include { distance_correlation } from "${meta.resources_dir}/../../../nextflow/metrics/distance_correlation/main.nf"
+include { trustworthiness } from "${meta.resources_dir}/../../../nextflow/metrics/trustworthiness/main.nf"
 
 // inner workflow
 // user-provided Nextflow code

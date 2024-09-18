@@ -59,11 +59,28 @@ resources:
 dependencies:
   - name: h5ad/extract_uns_metadata
     repository: core
-  - name: control_methods/true_features
+  # Control methods
   - name: control_methods/random_features
   - name: control_methods/spectral_features
+  - name: control_methods/true_features
+  # Methods
+  - name: methods/densmap
+  - name: methods/diffusion_map
+  - name: methods/ivis
+  - name: methods/lmds
+  - name: methods/neuralee
   - name: methods/pca
+  - name: methods/phate
+  - name: methods/pymde
+  - name: methods/simlr
+  - name: methods/tsne
+  - name: methods/umap
+  # Metrics
   - name: metrics/clustering_performance
+  - name: metrics/coranking
+  - name: metrics/density_preservation
+  - name: metrics/distance_correlation
+  - name: metrics/trustworthiness
 
 runners:
   - type: nextflow
