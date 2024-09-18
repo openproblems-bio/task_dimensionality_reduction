@@ -200,7 +200,7 @@ build_info:
   output: "target/executable/methods/umap"
   executable: "target/executable/methods/umap/umap"
   viash_version: "0.9.0"
-  git_commit: "e0ef0e077d7cf096412cd9fd14e828b3f38e83ac"
+  git_commit: "745aea123af4dcc5e4878d7f7cc9576c95557a6f"
   git_remote: "https://github.com/openproblems-bio/task_dimensionality_reduction"
 package_config:
   name: "task_dimensionality_reduction"

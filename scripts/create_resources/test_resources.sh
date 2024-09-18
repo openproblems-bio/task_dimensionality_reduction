@@ -31,7 +31,14 @@ viash run src/metrics/clustering_performance/config.vsh.yaml -- \
     --input_solution $DATASET_DIR/cxg_mouse_pancreas_atlas/solution.h5ad \
     --output $DATASET_DIR/cxg_mouse_pancreas_atlas/score.h5ad
 
+cat > $DATASET_DIR/cxg_mouse_pancreas_atlas/state.yaml << HERE
+id: cxg_mouse_pancreas_atlas
+output_dataset: !file dataset.h5ad
+output_solution: !file solution.h5ad
+HERE
+
 # only run this if you have access to the openproblems-data bucket
 aws s3 sync --profile op \
-  "$DATASET_DIR" s3://openproblems-data/resources_test/task_dimensionality_reduction \
+  "resources_test/task_dimensionality_reduction" \
+   s3://openproblems-data/resources_test/task_dimensionality_reduction \
   --delete --dryrun

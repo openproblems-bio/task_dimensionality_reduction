@@ -473,9 +473,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "umap-learn" "scikit-learn" "pynndescent~=0.5.11"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics distance_correlation"
-LABEL org.opencontainers.image.created="2024-09-18T11:19:02Z"
+LABEL org.opencontainers.image.created="2024-09-18T14:11:59Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="e0ef0e077d7cf096412cd9fd14e828b3f38e83ac"
+LABEL org.opencontainers.image.revision="745aea123af4dcc5e4878d7f7cc9576c95557a6f"
 LABEL org.opencontainers.image.version="build_update_workflows"
 
 VIASHDOCKER
