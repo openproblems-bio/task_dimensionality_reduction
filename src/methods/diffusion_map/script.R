@@ -1,6 +1,6 @@
 ## VIASH START
 par <- list(
-  input = "resources_test/dimensionality_reduction/pancreas/dataset.h5ad",
+  input = "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad",
   output = "output.h5ad",
   n_dim = 2
 )
@@ -24,7 +24,7 @@ output <- anndata::AnnData(
   uns = list(
     dataset_id = input$uns[["dataset_id"]],
     normalization_id = input$uns[["normalization_id"]],
-    method_id = meta$functionality_name
+    method_id = meta$name
   ),
   obsm = list(
     X_emb = X_emb

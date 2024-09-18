@@ -21,6 +21,12 @@
 
 ## BUGFIXES -->
 
+# dimensionality_reduction 0.1.1 2024-09-18
+
+## NEW FUNCTIONALITY
+
+* Updated workflows to work correctly for this task (PR #2)
+
 # dimensionality_reduction 0.1.0 2024-09-05
 
 ## NEW FUNCTIONALITY

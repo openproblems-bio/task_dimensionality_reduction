@@ -20,8 +20,8 @@ arguments:
     direction: output
     required: true
 test_resources:
-  - path: /resources_test/dimensionality_reduction/pancreas/
-    dest: resources_test/dimensionality_reduction/pancreas/
+  - path: /resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/
+    dest: resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/
   - type: python_script
     path: /common/component_tests/check_config.py
   - type: python_script

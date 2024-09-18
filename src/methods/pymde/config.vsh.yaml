@@ -46,7 +46,9 @@ engines:
     image: openproblems/base_python:1.0.0
     setup:
       - type: python
-        packages: pymde
+        packages:
+          - pymde
+          - numpy<2.0.0 # Avoid "numpy.ndarray size changed, may indicate binary incompatibility" error, see https://github.com/cvxgrp/pymde/issues/19
 runners:
   - type: executable
   - type: nextflow

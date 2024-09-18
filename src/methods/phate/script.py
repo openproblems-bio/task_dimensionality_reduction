@@ -3,14 +3,14 @@ from phate import PHATE
 
 ## VIASH START
 par = {
-    "input": "resources_test/dimensionality_reduction/pancreas/train.h5ad",
+    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/train.h5ad",
     "output": "reduced.h5ad",
     "n_pca_dims": 50,
     "n_hvg": 1000,
     "gamma": 1,
 }
 meta = {
-    "functionality_name": "foo",
+    "name": "phate",
 }
 ## VIASH END
 
@@ -35,7 +35,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 

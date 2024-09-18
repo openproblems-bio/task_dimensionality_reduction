@@ -1,6 +1,6 @@
 ## VIASH START
 par <- list(
-  input = "resources_test/dimensionality_reduction/pancreas/dataset.h5ad",
+  input = "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad",
   output = "output.h5ad",
   n_dim = 3,
   n_landmarks = 1000,
@@ -25,7 +25,7 @@ message("Write output AnnData to file")
 output <- anndata::AnnData(
   uns = list(
     dataset_id = input$uns[["dataset_id"]],
-    method_id = meta$functionality_name,
+    method_id = meta$name,
     normalization_id = input$uns[["normalization_id"]]
   ),
   obsm = list(
