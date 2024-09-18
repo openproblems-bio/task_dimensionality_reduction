@@ -180,11 +180,13 @@ function ViashHelp {
   echo "Arguments:"
   echo "    --input"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/dimensionality_reduction/pancreas/dataset.h5ad"
+  echo "        example:"
+  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad"
   echo ""
   echo "    --output"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: resources_test/dimensionality_reduction/pancreas/embedding.h5ad"
+  echo "        example:"
+  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
   echo ""
   echo "    --n_dim"
   echo "        type: integer"
@@ -483,9 +485,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("Matrix", "lmds"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods lmds"
-LABEL org.opencontainers.image.created="2024-09-07T15:44:48Z"
+LABEL org.opencontainers.image.created="2024-09-18T19:39:58Z"
 LABEL org.opencontainers.image.source="https://github.com/dynverse/lmds"
-LABEL org.opencontainers.image.revision="ab268cc0d6781cee7140a73b3943761104719ad8"
+LABEL org.opencontainers.image.revision="f4dcca2160d5e278673c8d9ef136f6c2c91e68a9"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1143,7 +1145,7 @@ message("Write output AnnData to file")
 output <- anndata::AnnData(
   uns = list(
     dataset_id = input\$uns[["dataset_id"]],
-    method_id = meta\$functionality_name,
+    method_id = meta\$name,
     normalization_id = input\$uns[["normalization_id"]]
   ),
   obsm = list(

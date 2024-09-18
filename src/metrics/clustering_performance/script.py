@@ -4,12 +4,12 @@ from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
 
 ## VIASH START
 par = {
-    "input_embedding": "resources_test/dimensionality_reduction/pancreas/embedding.h5ad",
-    "input_solution": "resources_test/dimensionality_reduction/pancreas/solution.h5ad",
+    "input_embedding": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad",
+    "input_solution": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad",
     "output": "output.h5ad",
     "nmi_avg_method": "arithmetic",
 }
-meta = {"functionality_name": "clustering_performance"}
+meta = {"name": "clustering_performance"}
 ## VIASH END
 
 print("Reading input files", flush=True)

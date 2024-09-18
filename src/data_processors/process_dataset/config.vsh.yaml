@@ -3,18 +3,8 @@ __merge__: /src/api/comp_process_dataset.yaml
 
 # Component configuration
 name: process_dataset
-status: disabled
 
 # Script configuration
-arguments:
-  - name: "--obs_label"
-    type: "string"
-    description: "Which .obs slot to use as label."
-    default: "cell_type"
-  - name: "--var_hvg_score"
-    type: "string"
-    description: "Which .var slot to use as the hvg score."
-    default: "hvg_score"
 resources:
   - type: python_script
     path: script.py

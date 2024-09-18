@@ -2858,7 +2858,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/dimensionality_reduction/pancreas/dataset.h5ad"
+            "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2906,7 +2906,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/dimensionality_reduction/pancreas/embedding.h5ad"
+            "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2997,8 +2997,8 @@ meta = [
   "test_resources" : [
     {
       "type" : "file",
-      "path" : "/resources_test/dimensionality_reduction/pancreas/",
-      "dest" : "resources_test/dimensionality_reduction/pancreas/"
+      "path" : "/resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/",
+      "dest" : "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/"
     },
     {
       "type" : "python_script",
@@ -3024,9 +3024,10 @@ meta = [
   "repositories" : [
     {
       "type" : "github",
-      "name" : "openproblems-v2",
-      "repo" : "openproblems-bio/openproblems-v2",
-      "tag" : "main_build"
+      "name" : "core",
+      "repo" : "openproblems-bio/core",
+      "tag" : "build/main",
+      "path" : "viash/core"
     }
   ],
   "license" : "MIT",
@@ -3104,7 +3105,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/simlr",
     "viash_version" : "0.9.0",
-    "git_commit" : "ab268cc0d6781cee7140a73b3943761104719ad8",
+    "git_commit" : "f4dcca2160d5e278673c8d9ef136f6c2c91e68a9",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3118,22 +3119,23 @@ meta = [
       "test_resources" : [
         {
           "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/common/pancreas/",
-          "dest" : "resources_test/common/pancreas/"
+          "path" : "s3://openproblems-data/resources_test/common/cxg_mouse_pancreas_atlas/",
+          "dest" : "resources_test/common/cxg_mouse_pancreas_atlas/"
         },
         {
           "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/dimensionality_reduction/",
-          "dest" : "resources_test/dimensionality_reduction"
+          "path" : "s3://openproblems-data/resources_test/task_dimensionality_reduction/",
+          "dest" : "resources_test/task_dimensionality_reduction"
         }
       ]
     },
     "repositories" : [
       {
         "type" : "github",
-        "name" : "openproblems-v2",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
+        "name" : "core",
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/main",
+        "path" : "viash/core"
       }
     ],
     "viash_version" : "0.9.0",
@@ -3335,7 +3337,7 @@ message("Write output AnnData to file")
 output <- anndata::AnnData(
   uns = list(
     dataset_id = input\\$uns[["dataset_id"]],
-    method_id = meta\\$functionality_name,
+    method_id = meta\\$name,
     normalization_id = input\\$uns[["normalization_id"]]
   ),
   obsm = list(

@@ -3,12 +3,12 @@ import umap
 
 ## VIASH START
 par = {
-    "input": "resources_test/dimensionality_reduction/pancreas/test.h5ad",
+    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/test.h5ad",
     "output": "reduced.h5ad",
     "n_comps": 2,
 }
 meta = {
-    "functionality_name": "spectral_features",
+    "name": "spectral_features",
 }
 ## VIASH END
 
@@ -64,7 +64,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 

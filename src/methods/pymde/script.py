@@ -4,14 +4,14 @@ import scanpy as sc
 
 ## VIASH START
 par = {
-    "input": "resources_test/dimensionality_reduction/pancreas/dataset.h5ad",
+    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad",
     "output": "reduced.h5ad",
     "embed_method": "neighbors",
     "n_hvg": 1000,
     "n_pca_dims": 50,
 }
 meta = {
-    "functionality_name": "foo",
+    "name": "pymde",
 }
 ## VIASH END
 
@@ -46,7 +46,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 

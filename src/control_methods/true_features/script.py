@@ -2,11 +2,11 @@ import anndata as ad
 
 ## VIASH START
 par = {
-    "input": "resources_test/dimensionality_reduction/pancreas/test.h5ad",
+    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/test.h5ad",
     "output": "reduced.h5ad",
 }
 meta = {
-    "functionality_name": "true_features",
+    "name": "true_features",
 }
 ## VIASH END
 
@@ -23,7 +23,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 

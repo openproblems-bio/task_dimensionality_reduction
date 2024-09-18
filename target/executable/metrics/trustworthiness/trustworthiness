@@ -176,15 +176,18 @@ function ViashHelp {
   echo "Arguments:"
   echo "    --input_embedding"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/dimensionality_reduction/pancreas/embedding.h5ad"
+  echo "        example:"
+  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
   echo ""
   echo "    --input_solution"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/dimensionality_reduction/pancreas/solution.h5ad"
+  echo "        example:"
+  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad"
   echo ""
   echo "    --output"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: resources_test/dimensionality_reduction/pancreas/score.h5ad"
+  echo "        example:"
+  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/score.h5ad"
 }
 
 # initialise variables
@@ -466,9 +469,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "scikit-learn"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics trustworthiness"
-LABEL org.opencontainers.image.created="2024-09-07T15:44:49Z"
+LABEL org.opencontainers.image.created="2024-09-18T19:39:59Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="ab268cc0d6781cee7140a73b3943761104719ad8"
+LABEL org.opencontainers.image.revision="f4dcca2160d5e278673c8d9ef136f6c2c91e68a9"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
