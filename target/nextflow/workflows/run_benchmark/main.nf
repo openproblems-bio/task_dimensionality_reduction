@@ -3166,7 +3166,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "745aea123af4dcc5e4878d7f7cc9576c95557a6f",
+    "git_commit" : "b1e970d693dc49b21b99b6c816f7fb464be12cec",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3322,15 +3322,31 @@ workflow auto {
 
 // construct list of methods and control methods
 methods = [
-  true_features,
-  spectral_features,
+  // Control methods
   random_features,
-  pca
+  spectral_features,
+  true_features,
+  // Real methods
+  densmap,
+  diffusion_map,
+  ivis,
+  lmds,
+  neuralee,
+  pca,
+  phate,
+  pymde,
+  simlr,
+  tsne,
+  umap
 ]
 
 // construct list of metrics
 metrics = [
-  clustering_performance
+  clustering_performance,
+  coranking,
+  density_preservation,
+  distance_correlation,
+  trustworthiness
 ]
 
 workflow run_wf {

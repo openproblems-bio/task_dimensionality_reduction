@@ -3086,7 +3086,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/pymde",
     "viash_version" : "0.9.0",
-    "git_commit" : "745aea123af4dcc5e4878d7f7cc9576c95557a6f",
+    "git_commit" : "b1e970d693dc49b21b99b6c816f7fb464be12cec",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {

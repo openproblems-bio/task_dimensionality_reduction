@@ -7,15 +7,31 @@ workflow auto {
 
 // construct list of methods and control methods
 methods = [
-  true_features,
-  spectral_features,
+  // Control methods
   random_features,
-  pca
+  spectral_features,
+  true_features,
+  // Real methods
+  densmap,
+  diffusion_map,
+  ivis,
+  lmds,
+  neuralee,
+  pca,
+  phate,
+  pymde,
+  simlr,
+  tsne,
+  umap
 ]
 
 // construct list of metrics
 metrics = [
-  clustering_performance
+  clustering_performance,
+  coranking,
+  density_preservation,
+  distance_correlation,
+  trustworthiness
 ]
 
 workflow run_wf {
