@@ -469,9 +469,9 @@ function ViashDockerfile {
 FROM openproblems/base_python:1.0.0
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component control_methods true_features"
-LABEL org.opencontainers.image.created="2024-09-17T07:46:49Z"
+LABEL org.opencontainers.image.created="2024-09-18T11:19:02Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="628fea155ab75a67a6145bf75597216789c1137c"
+LABEL org.opencontainers.image.revision="e0ef0e077d7cf096412cd9fd14e828b3f38e83ac"
 LABEL org.opencontainers.image.version="build_update_workflows"
 
 VIASHDOCKER
@@ -1071,7 +1071,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 

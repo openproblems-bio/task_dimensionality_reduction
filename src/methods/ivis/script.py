@@ -12,7 +12,7 @@ par = {
     "n_pca_dims": 50,
 }
 meta = {
-    "functionality_name": "foo",
+    "name": "ivis",
 }
 ## VIASH END
 
@@ -47,7 +47,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 

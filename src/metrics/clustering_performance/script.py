@@ -9,7 +9,7 @@ par = {
     "output": "output.h5ad",
     "nmi_avg_method": "arithmetic",
 }
-meta = {"functionality_name": "clustering_performance"}
+meta = {"name": "clustering_performance"}
 ## VIASH END
 
 print("Reading input files", flush=True)

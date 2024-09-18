@@ -25,7 +25,7 @@ message("Write output AnnData to file")
 output <- anndata::AnnData(
   uns = list(
     dataset_id = input$uns[["dataset_id"]],
-    method_id = meta$functionality_name,
+    method_id = meta$name,
     normalization_id = input$uns[["normalization_id"]]
   ),
   obsm = list(

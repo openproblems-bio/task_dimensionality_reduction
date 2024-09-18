@@ -58,6 +58,7 @@ engines:
           - phate==1.0.*
           - scprep
           - "scikit-learn<1.2"
+          - numpy<2.0.0 # Avoid "numpy.ndarray size changed, may indicate binary incompatibility" error
 runners:
   - type: executable
   - type: nextflow

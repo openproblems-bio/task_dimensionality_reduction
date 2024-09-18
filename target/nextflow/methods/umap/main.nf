@@ -3074,7 +3074,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/umap",
     "viash_version" : "0.9.0",
-    "git_commit" : "628fea155ab75a67a6145bf75597216789c1137c",
+    "git_commit" : "e0ef0e077d7cf096412cd9fd14e828b3f38e83ac",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3283,7 +3283,7 @@ output = ad.AnnData(
     uns={
         "dataset_id": input.uns["dataset_id"],
         "normalization_id": input.uns["normalization_id"],
-        "method_id": meta["functionality_name"],
+        "method_id": meta["name"],
     },
 )
 
