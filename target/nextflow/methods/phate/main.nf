@@ -3088,7 +3088,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/phate",
     "viash_version" : "0.9.0",
-    "git_commit" : "f4dcca2160d5e278673c8d9ef136f6c2c91e68a9",
+    "git_commit" : "c3221528561c355858ce68b7fc0c63d9dd59652c",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {

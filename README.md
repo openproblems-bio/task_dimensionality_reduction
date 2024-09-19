@@ -93,7 +93,8 @@ flowchart LR
 
 The dataset to pass to a method.
 
-Example file: `resources_test/common/cxg_mouse_pancreas_atlas/dataset.h5ad`
+Example file:
+`resources_test/common/cxg_mouse_pancreas_atlas/dataset.h5ad`
 
 Format:
 
