@@ -2975,7 +2975,7 @@ meta = [
         {
           "type" : "file",
           "name" : "--output_solution",
-          "label" : "Test data",
+          "label" : "Solution data",
           "summary" : "The data for evaluating a dimensionality reduction.",
           "info" : {
             "format" : {
@@ -3162,7 +3162,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0",
-    "git_commit" : "c3221528561c355858ce68b7fc0c63d9dd59652c",
+    "git_commit" : "f87631f5c573582a2ca29cd5df74409b99a84187",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {

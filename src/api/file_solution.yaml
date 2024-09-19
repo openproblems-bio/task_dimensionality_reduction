@@ -1,6 +1,6 @@
 type: file
 example: "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad"
-label: "Test data"
+label: "Solution data"
 summary: "The data for evaluating a dimensionality reduction."
 info:
   format:

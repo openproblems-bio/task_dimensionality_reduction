@@ -70,7 +70,7 @@ flowchart LR
   file_common_dataset("Dataset")
   comp_process_dataset[/"Data processor"/]
   file_dataset("Dataset")
-  file_solution("Test data")
+  file_solution("Solution data")
   comp_control_method[/"Control method"/]
   comp_method[/"Method"/]
   comp_metric[/"Metric"/]
@@ -177,7 +177,7 @@ Data structure:
 
 </div>
 
-## File format: Test data
+## File format: Solution data
 
 The data for evaluating a dimensionality reduction.
 
