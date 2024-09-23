@@ -29,7 +29,7 @@ arguments:
     default: 1000
   - name: "--distance_method"
     type: string
-    description: Number of clusters to be estimated over the input dataset.
+    description: Distance measure to use.
     choices:
       [
         "euclidean",
@@ -62,4 +62,4 @@ runners:
   - type: executable
   - type: nextflow
     directives:
-      label: [midtime, highmem, midcpu]
+      label: [lowtime, highmem, lowcpu]
