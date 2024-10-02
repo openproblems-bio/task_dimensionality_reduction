@@ -476,9 +476,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "scikit-learn" "scanpy" "leidenalg"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics clustering_performance"
-LABEL org.opencontainers.image.created="2024-09-19T10:47:44Z"
+LABEL org.opencontainers.image.created="2024-10-02T11:17:07Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="f87631f5c573582a2ca29cd5df74409b99a84187"
+LABEL org.opencontainers.image.revision="791c6f6a1ad37b4fe4639faaca811e8c1ccd9232"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

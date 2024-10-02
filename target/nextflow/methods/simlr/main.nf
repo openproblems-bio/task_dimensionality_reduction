@@ -3052,9 +3052,9 @@ meta = [
       "id" : "nextflow",
       "directives" : {
         "label" : [
-          "midtime",
+          "hightime",
           "highmem",
-          "highcpu"
+          "lowcpu"
         ],
         "tag" : "$id"
       },
@@ -3105,7 +3105,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/simlr",
     "viash_version" : "0.9.0",
-    "git_commit" : "f87631f5c573582a2ca29cd5df74409b99a84187",
+    "git_commit" : "791c6f6a1ad37b4fe4639faaca811e8c1ccd9232",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3710,9 +3710,9 @@ meta["defaults"] = [
     "tag" : "build_main"
   },
   "label" : [
-    "midtime",
+    "hightime",
     "highmem",
-    "highcpu"
+    "lowcpu"
   ],
   "tag" : "$id"
 }'''),

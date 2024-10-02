@@ -488,9 +488,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "torch" "git+https://github.com/michalk8/neuralee@8946abf"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods neuralee"
-LABEL org.opencontainers.image.created="2024-09-19T10:47:43Z"
+LABEL org.opencontainers.image.created="2024-10-02T11:17:08Z"
 LABEL org.opencontainers.image.source="https://github.com/HiBearME/NeuralEE"
-LABEL org.opencontainers.image.revision="f87631f5c573582a2ca29cd5df74409b99a84187"
+LABEL org.opencontainers.image.revision="791c6f6a1ad37b4fe4639faaca811e8c1ccd9232"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

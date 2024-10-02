@@ -203,7 +203,7 @@ function ViashHelp {
   echo "        default: pearson"
   echo "        choices: [ euclidean, pearson, spearman, cosine, chisquared, hamming,"
   echo "kullback, manhattan, maximum, canberra, minkowski ]"
-  echo "        Number of clusters to be estimated over the input dataset."
+  echo "        Distance measure to use."
 }
 
 # initialise variables
@@ -485,9 +485,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("Matrix", "lmds"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods lmds"
-LABEL org.opencontainers.image.created="2024-09-19T10:47:43Z"
+LABEL org.opencontainers.image.created="2024-10-02T11:17:07Z"
 LABEL org.opencontainers.image.source="https://github.com/dynverse/lmds"
-LABEL org.opencontainers.image.revision="f87631f5c573582a2ca29cd5df74409b99a84187"
+LABEL org.opencontainers.image.revision="791c6f6a1ad37b4fe4639faaca811e8c1ccd9232"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

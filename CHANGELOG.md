@@ -21,6 +21,12 @@
 
 ## BUGFIXES -->
 
+# dimensionality_reduction 0.1.2 2024-09-23
+
+## MINOR CHANGES
+
+* Updated workflow resources for method and metric components (PR #3)
+
 # dimensionality_reduction 0.1.1 2024-09-18
 
 ## NEW FUNCTIONALITY
