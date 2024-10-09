@@ -30,8 +30,8 @@ if (any(is.na(X_emb))) {
   # TODO: computing a square distance matrix is problematic for large datasets!
   # TODO: should we use a different distance metric for the high_dim?
   # TODO: or should we subset to the HVG?
-  dist_highdim <- coRanking:::euclidean(as.matrix(high_dim))
-  dist_emb <- coRanking:::euclidean(as.matrix(X_emb))
+  dist_highdim <- Rfast::Dist(as.matrix(high_dim))
+  dist_emb <- Rfast::Dist(as.matrix(X_emb))
 
   message("Compute ranking matrices")
   rmat_highdim <- rankmatrix(dist_highdim, input = "dist")

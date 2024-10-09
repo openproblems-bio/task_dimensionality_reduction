@@ -21,6 +21,12 @@
 
 ## BUGFIXES -->
 
+# dimensionality_reduction 0.1.3 2024-10-09
+
+## MINOR CHANGES
+
+* Speed up calculating distance matrices in the co-ranking metrics (PR #4)
+
 # dimensionality_reduction 0.1.2 2024-09-23
 
 ## MINOR CHANGES
