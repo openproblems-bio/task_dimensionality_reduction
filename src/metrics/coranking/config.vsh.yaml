@@ -103,7 +103,8 @@ engines:
     - type: r
       cran:
         - coRanking
-        - Rfast
+        - proxyC
+        - parallelDist
 runners:
   - type: executable
   - type: nextflow
