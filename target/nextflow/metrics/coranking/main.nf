@@ -3189,7 +3189,7 @@ meta = [
       "directives" : {
         "label" : [
           "hightime",
-          "lowmem",
+          "midmem",
           "lowcpu"
         ],
         "tag" : "$id"
@@ -3228,7 +3228,8 @@ meta = [
         {
           "type" : "r",
           "cran" : [
-            "coRanking"
+            "coRanking",
+            "proxyC"
           ],
           "bioc_force_install" : false
         }
@@ -3241,7 +3242,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/coranking",
     "viash_version" : "0.9.0",
-    "git_commit" : "791c6f6a1ad37b4fe4639faaca811e8c1ccd9232",
+    "git_commit" : "b845d57e71c28c71c26a4682400d76372132de49",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3451,8 +3452,14 @@ if (any(is.na(X_emb))) {
   # TODO: computing a square distance matrix is problematic for large datasets!
   # TODO: should we use a different distance metric for the high_dim?
   # TODO: or should we subset to the HVG?
-  dist_highdim <- coRanking:::euclidean(as.matrix(high_dim))
-  dist_emb <- coRanking:::euclidean(as.matrix(X_emb))
+  message("Compute high-dimensional distances")
+  dist_highdim <- proxyC::dist(
+    high_dim, method = "euclidean", diag = TRUE, drop0 = TRUE
+  )
+  message("Compute embedding distances")
+  dist_emb <- proxyC::dist(
+    X_emb, method = "euclidean", diag = TRUE, drop0 = TRUE
+  )
 
   message("Compute ranking matrices")
   rmat_highdim <- rankmatrix(dist_highdim, input = "dist")
@@ -3885,7 +3892,7 @@ meta["defaults"] = [
   },
   "label" : [
     "hightime",
-    "lowmem",
+    "midmem",
     "lowcpu"
   ],
   "tag" : "$id"

@@ -466,12 +466,12 @@ function ViashDockerfile {
 FROM openproblems/base_r:1.0.0
 ENTRYPOINT []
 RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
-  Rscript -e 'remotes::install_cran(c("coRanking"), repos = "https://cran.rstudio.com")'
+  Rscript -e 'remotes::install_cran(c("coRanking", "proxyC"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics coranking"
-LABEL org.opencontainers.image.created="2024-10-02T11:17:08Z"
+LABEL org.opencontainers.image.created="2024-10-22T06:32:05Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="791c6f6a1ad37b4fe4639faaca811e8c1ccd9232"
+LABEL org.opencontainers.image.revision="b845d57e71c28c71c26a4682400d76372132de49"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1088,8 +1088,14 @@ if (any(is.na(X_emb))) {
   # TODO: computing a square distance matrix is problematic for large datasets!
   # TODO: should we use a different distance metric for the high_dim?
   # TODO: or should we subset to the HVG?
-  dist_highdim <- coRanking:::euclidean(as.matrix(high_dim))
-  dist_emb <- coRanking:::euclidean(as.matrix(X_emb))
+  message("Compute high-dimensional distances")
+  dist_highdim <- proxyC::dist(
+    high_dim, method = "euclidean", diag = TRUE, drop0 = TRUE
+  )
+  message("Compute embedding distances")
+  dist_emb <- proxyC::dist(
+    X_emb, method = "euclidean", diag = TRUE, drop0 = TRUE
+  )
 
   message("Compute ranking matrices")
   rmat_highdim <- rankmatrix(dist_highdim, input = "dist")
