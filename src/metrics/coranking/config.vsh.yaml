@@ -104,7 +104,6 @@ engines:
       cran:
         - coRanking
         - proxyC
-        - parallelDist
 runners:
   - type: executable
   - type: nextflow

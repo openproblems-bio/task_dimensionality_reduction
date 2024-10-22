@@ -31,10 +31,13 @@ if (any(is.na(X_emb))) {
   # TODO: should we use a different distance metric for the high_dim?
   # TODO: or should we subset to the HVG?
   message("Compute high-dimensional distances")
-  dist_highdim <- proxyC::dist(high_dim, method = "euclidean")
-  diag(dist_highdim) <- 0 # Force diagonal to be 0
+  dist_highdim <- proxyC::dist(
+    high_dim, method = "euclidean", diag = TRUE, drop0 = TRUE
+  )
   message("Compute embedding distances")
-  dist_emb <- parallelDist::parallelDist(as.matrix(X_emb))
+  dist_emb <- proxyC::dist(
+    X_emb, method = "euclidean", diag = TRUE, drop0 = TRUE
+  )
 
   message("Compute ranking matrices")
   rmat_highdim <- rankmatrix(dist_highdim, input = "dist")
