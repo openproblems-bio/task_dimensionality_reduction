@@ -103,8 +103,9 @@ engines:
     - type: r
       cran:
         - coRanking
+        - proxyC
 runners:
   - type: executable
   - type: nextflow
     directives:
-      label: [hightime, lowmem, lowcpu]
+      label: [hightime, midmem, lowcpu]
