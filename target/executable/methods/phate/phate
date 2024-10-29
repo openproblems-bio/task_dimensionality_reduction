@@ -488,9 +488,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "phate==1.0.*" "scprep" "scikit-learn<1.2" "numpy<2.0.0"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods phate"
-LABEL org.opencontainers.image.created="2024-10-22T06:32:05Z"
+LABEL org.opencontainers.image.created="2024-10-29T13:27:36Z"
 LABEL org.opencontainers.image.source="https://github.com/KrishnaswamyLab/PHATE"
-LABEL org.opencontainers.image.revision="b845d57e71c28c71c26a4682400d76372132de49"
+LABEL org.opencontainers.image.revision="a62a6cba6b3099d66007c230f2e5f83965c118a8"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
