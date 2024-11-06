@@ -17,12 +17,25 @@ info:
     obs:
       - type: string
         name: cell_type
-        description: Classification of the cell type based on its characteristics and function within the tissue or organism.
+        description: Ground truth cell type based on a cells characteristics and function within the tissue or organism.
+        required: true
+      - type: boolean
+        name: is_waypoint
+        description: Whether or not this cell is a waypoint used for some metric calculations.
         required: true
     var:
       - type: double
         name: hvg_score
         description: High variability gene score (normalized dispersion). The greater, the more variable.
+        required: true
+    obsm:
+      - type: double
+        name: waypoint_distances
+        description: Euclidean distances between all cells and waypoint cells calculated using normalized data.
+        required: true
+      - type: double
+        name: centroid_distances
+        description: Euclidean distances between all cells and label centroids calculated using normalized data.
         required: true
     uns:
       - type: string
@@ -57,3 +70,6 @@ info:
         name: normalization_id
         description: "Which normalization was used"
         required: true
+      - name: label_centroids
+        type: double
+        description: Centroid positions of each label in the normalized expression space.
