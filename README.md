@@ -55,6 +55,7 @@ recommended by the method.
 | name                   | roles              |
 |:-----------------------|:-------------------|
 | Luke Zappia            | maintainer, author |
+| Michael Vinyard        | author             |
 | Michal Klein           | author             |
 | Scott Gigante          | author             |
 | Ben DeMeo              | author             |
