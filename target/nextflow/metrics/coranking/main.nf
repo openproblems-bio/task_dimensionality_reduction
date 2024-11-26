@@ -3242,7 +3242,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/coranking",
     "viash_version" : "0.9.0",
-    "git_commit" : "a62a6cba6b3099d66007c230f2e5f83965c118a8",
+    "git_commit" : "cda4dcffc7cdd364d04cf7192626f7e4f4d0a711",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3291,6 +3291,15 @@ meta = [
         "info" : {
           "github" : "lazappi",
           "orcid" : "0000-0001-7744-8565"
+        }
+      },
+      {
+        "name" : "Michael Vinyard",
+        "roles" : [
+          "author"
+        ],
+        "info" : {
+          "github" : "mvinyard"
         }
       },
       {

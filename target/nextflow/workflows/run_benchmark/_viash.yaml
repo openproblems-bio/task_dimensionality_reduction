@@ -76,6 +76,10 @@ authors:
     info:
       github: lazappi
       orcid: 0000-0001-7744-8565
+  - name: Michael Vinyard
+    roles: [author]
+    info:
+      github: mvinyard
   - name: Michal Klein
     roles: [author]
     info:
