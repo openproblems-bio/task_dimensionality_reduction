@@ -31,14 +31,20 @@ emb_dists = embedding.obsm["centroid_distances"]
 centroid_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
 print(f"Centroid distance correlation: {centroid_corr}", flush=True)
 
+print("\n>>> Calculating label distance correlation..", flush=True)
+high_dists = solution.uns["between_centroid_distances"]
+emb_dists = embedding.uns["between_centroid_distances"]
+label_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
+print(f"Label distance correlation: {label_corr}", flush=True)
+
 print("\n>>> Creating output AnnData object...", flush=True)
 output = ad.AnnData(
     uns={
         "dataset_id": solution.uns["dataset_id"],
         "normalization_id": solution.uns["normalization_id"],
         "method_id": embedding.uns["method_id"],
-        "metric_ids": ["waypoint_distance_correlation", "centroid_distance_correlation"],
-        "metric_values": [waypoint_corr, centroid_corr],
+        "metric_ids": ["waypoint_distance_correlation", "centroid_distance_correlation", "label_distance_correlation"],
+        "metric_values": [waypoint_corr, centroid_corr, label_corr],
     }
 )
 print(output, flush=True)

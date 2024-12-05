@@ -29,6 +29,18 @@ info:
       min: -1
       max: 1
       maximize: true
+    - name: label_distance_correlation
+      label: Label Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances between label centroids."
+      description: |
+        Calculates the distance correlation by computing Spearman correlations
+        between distances between label centroids on the full (or processed) data
+        matrix and the dimensionally-reduced matrix."
+      references:
+        doi: 10.1007/bf02289565
+      min: -1
+      max: 1
+      maximize: true
 
 # Script configuration
 resources:
