@@ -82,6 +82,7 @@ dependencies:
   - name: metrics/coranking
   - name: metrics/density_preservation
   - name: metrics/distance_correlation
+  - name: metrics/spectral_distance_correlation
   - name: metrics/trustworthiness
 
 runners:

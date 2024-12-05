@@ -31,6 +31,7 @@ metrics = [
   coranking,
   density_preservation,
   distance_correlation,
+  spectral_distance_correlation,
   trustworthiness
 ]
 
