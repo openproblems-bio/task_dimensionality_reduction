@@ -105,6 +105,14 @@ workflow run_wf {
       }
     )
 
+    // process output embeddings
+    | process_embedding.run(
+      fromState: [ input_embedding: "method_output", input_solution: "input_solution" ],
+      toState: [
+        processed_output: "output"
+      ]
+    )
+
     // run all metrics
     | runEach(
       components: metrics,
@@ -114,7 +122,7 @@ workflow run_wf {
       // use 'fromState' to fetch the arguments the component requires from the overall state
       fromState: [
         input_solution: "input_solution",
-        input_embedding: "method_output"
+        input_embedding: "processed_output"
       ],
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->
