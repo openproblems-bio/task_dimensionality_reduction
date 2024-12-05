@@ -5,13 +5,25 @@ __merge__: ../../api/comp_metric.yaml
 name: distance_correlation
 info:
   metrics:
-    - name: distance_correlation
-      label: Distance Correlation
-      summary: "Calculates the distance correlation by computing Spearman correlations between distances."
+    - name: waypoint_distance_correlation
+      label: Waypoint Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances to waypoint cells."
       description: |
         Calculates the distance correlation by computing Spearman correlations
-        between distances on the full (or processed) data matrix and the
-        dimensionally-reduced matrix."
+        between distances to waypoint cells on the full (or processed) data
+        matrix and the dimensionally-reduced matrix."
+      references:
+        doi: 10.1007/bf02289565
+      min: -1
+      max: 1
+      maximize: true
+    - name: centroid_distance_correlation
+      label: Centroid Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances to label centroids."
+      description: |
+        Calculates the distance correlation by computing Spearman correlations
+        between distances to label centroids on the full (or processed) data
+        matrix and the dimensionally-reduced matrix."
       references:
         doi: 10.1007/bf02289565
       min: -1
