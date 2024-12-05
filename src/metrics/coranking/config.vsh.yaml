@@ -103,7 +103,6 @@ engines:
     - type: r
       cran:
         - coRanking
-        - proxyC
 runners:
   - type: executable
   - type: nextflow

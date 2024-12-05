@@ -9,7 +9,7 @@ info:
 arguments:
   - name: "--input_embedding"
     direction: input
-    __merge__: file_embedding.yaml
+    __merge__: file_processed_embedding.yaml
     required: true
   - name: "--input_solution"
     __merge__: file_solution.yaml
