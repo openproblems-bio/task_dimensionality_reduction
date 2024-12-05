@@ -33,4 +33,5 @@ output <- anndata::AnnData(
   ),
   shape = input$shape
 )
+output$obs_names <- input$obs_names
 output$write_h5ad(par$output, compression = "gzip")
