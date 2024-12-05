@@ -14,8 +14,8 @@ input_solution <- anndata::read_h5ad(par[["input_solution"]])
 input_embedding <- anndata::read_h5ad(par[["input_embedding"]])
 
 # Get datasets
-dist_highdim <- input_solution$obsm[["waypoint_distances"]]
-dist_emb <- input_embedding$obsm[["waypoint_distances"]]
+dist_highdim <- input_solution$uns[["between_waypoint_distances"]]
+dist_emb <- input_embedding$uns[["between_waypoint_distances"]]
 
 if (any(is.na(dist_emb))) {
   continuity_at_k30 <- 0
