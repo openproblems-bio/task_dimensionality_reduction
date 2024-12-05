@@ -70,6 +70,12 @@ info:
         name: normalization_id
         description: "Which normalization was used"
         required: true
+      - name: between_waypoint_distances
+        type: double
+        description: Euclidean distances between waypoint cells.
       - name: label_centroids
         type: double
         description: Centroid positions of each label in the normalized expression space.
+      - name: between_centroid_distances
+        type: double
+        description: Euclidean distances between label centroids.

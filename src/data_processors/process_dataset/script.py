@@ -38,13 +38,23 @@ else:
     waypoint_cells = np.random.choice(adata.obs_names, 10000, replace=False)
 adata.obs["is_waypoint"] = adata.obs_names.isin(waypoint_cells)
 
-print("\n>>> Calculating waypoint distances...", flush=True)
+print("\n>>> Calculating distances to waypoints...", flush=True)
 adata.obsm["waypoint_distances"] = pairwise_distances(
     adata.layers["normalized"],
     adata.layers["normalized"][adata.obs["is_waypoint"].values, :],
     metric="euclidean",
     n_jobs = -2
 )
+np.fill_diagonal(adata.obsm["waypoint_distances"], 0)
+
+print("\n>>> Calculating distances between waypoints...", flush=True)
+adata.uns["between_waypoint_distances"] = pairwise_distances(
+    adata.layers["normalized"][adata.obs["is_waypoint"].values, :],
+    adata.layers["normalized"][adata.obs["is_waypoint"].values, :],
+    metric="euclidean",
+    n_jobs = -2
+)
+np.fill_diagonal(adata.uns["between_waypoint_distances"], 0)
 
 print("\n>>> Calculating label centroids...", flush=True)
 normalized_mat = adata.layers["normalized"].todense()
@@ -56,13 +66,23 @@ for i, label in enumerate(labels):
 
 adata.uns["label_centroids"] = centroids
 
-print("\n>>> Calculating centroid distances...", flush=True)
+print("\n>>> Calculating distances to centroids...", flush=True)
 adata.obsm["centroid_distances"] = pairwise_distances(
     adata.layers["normalized"],
     centroids,
     metric="euclidean",
     n_jobs = -2
 )
+np.fill_diagonal(adata.obsm["centroid_distances"], 0)
+
+print("\n>>> Calculating distances between centroids...", flush=True)
+adata.uns["between_centroid_distances"] = pairwise_distances(
+    centroids,
+    centroids,
+    metric="euclidean",
+    n_jobs = -2
+)
+np.fill_diagonal(adata.uns["between_centroid_distances"], 0)
 
 print("\n>>> Creating input data...", flush=True)
 output_dataset = subset_h5ad_by_format(adata, config, "output_dataset")
