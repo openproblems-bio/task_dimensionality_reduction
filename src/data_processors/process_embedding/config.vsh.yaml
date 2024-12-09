@@ -1,0 +1,20 @@
+# Base component API configuration
+__merge__: /src/api/comp_process_embedding.yaml
+
+# Component configuration
+name: process_embedding
+
+# Script configuration
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [highmem, midcpu, midtime]

@@ -21,6 +21,29 @@
 
 ## BUGFIXES -->
 
+# dimensionality_reduction 0.2.0 2024-12-09
+
+## NEW FUNCTIONALITY
+
+* Add calculation of distances to/between waypoints and label centroids to dataset pre-processing
+* Add a post-processing component that calculates distances in the embedding space
+* Add to centroid and between label distance correlation scores
+
+## MAJOR CHANGES
+
+* Modify co-ranking metrics to use pre-computed distances
+* Modify distance correlation metrics to use pre-computed distances
+* Move spectral distance correlation to a separate component
+* Disable the trustworthiness metric as it is calculated as part of the co-ranking metrics
+
+## DOCUMENTATION
+
+* Update documentation for distance correlation metrics
+
+## MINOR CHANGES
+
+* Speed up calculating distance matrices in the co-ranking metrics (PR #4)
+
 # dimensionality_reduction 0.1.3 2024-10-09
 
 ## MINOR CHANGES

@@ -3,8 +3,8 @@ library(coRanking)
 
 ## VIASH START
 par <- list(
-  "input_embedding" = "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/reduced.h5ad",
-  "input_solution" = "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/test.h5ad",
+  "input_embedding" = "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad",
+  "input_solution" = "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad",
   "output" = "score.h5ad"
 )
 ## VIASH END
@@ -14,10 +14,10 @@ input_solution <- anndata::read_h5ad(par[["input_solution"]])
 input_embedding <- anndata::read_h5ad(par[["input_embedding"]])
 
 # Get datasets
-high_dim <- input_solution$layers[["normalized"]]
-X_emb <- input_embedding$obsm[["X_emb"]]
+dist_highdim <- input_solution$uns[["between_waypoint_distances"]]
+dist_emb <- input_embedding$uns[["between_waypoint_distances"]]
 
-if (any(is.na(X_emb))) {
+if (any(is.na(dist_emb))) {
   continuity_at_k30 <- 0
   trustworthiness_at_k30 <- 0
   qnx_at_k30 <- 0
@@ -26,19 +26,6 @@ if (any(is.na(X_emb))) {
   qlocal <- 0
   qglobal <- 0
 } else {
-  message("Compute pairwise distances")
-  # TODO: computing a square distance matrix is problematic for large datasets!
-  # TODO: should we use a different distance metric for the high_dim?
-  # TODO: or should we subset to the HVG?
-  message("Compute high-dimensional distances")
-  dist_highdim <- proxyC::dist(
-    high_dim, method = "euclidean", diag = TRUE, drop0 = TRUE
-  )
-  message("Compute embedding distances")
-  dist_emb <- proxyC::dist(
-    X_emb, method = "euclidean", diag = TRUE, drop0 = TRUE
-  )
-
   message("Compute ranking matrices")
   rmat_highdim <- rankmatrix(dist_highdim, input = "dist")
   rmat_emb <- rankmatrix(dist_emb, input = "dist")

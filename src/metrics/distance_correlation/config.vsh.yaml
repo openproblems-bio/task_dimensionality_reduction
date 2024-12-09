@@ -5,35 +5,52 @@ __merge__: ../../api/comp_metric.yaml
 name: distance_correlation
 info:
   metrics:
-    - name: distance_correlation
-      label: Distance Correlation
-      summary: "Calculates the distance correlation by computing Spearman correlations between distances."
+    - name: waypoint_distance_correlation
+      label: Waypoint Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances to waypoint cells."
       description: |
         Calculates the distance correlation by computing Spearman correlations
-        between distances on the full (or processed) data matrix and the
-        dimensionally-reduced matrix."
+        between distances to waypoint cells on the full (or processed) data
+        matrix and the dimensionally-reduced matrix. Also known as the
+        cellstruct global single-cell (GS) score when using Pearson correlation.
       references:
-        doi: 10.1007/bf02289565
-      min: 0
-      max: "+.inf"
+        doi:
+          - 10.1101/2023.11.13.566337
+          - 10.1038/s42003-022-03628-x
+      min: -1
+      max: 1
       maximize: true
-    - name: distance_correlation_spectral
-      label: Distance Correlation Spectral
-      summary: "Spearman correlation between all pairwise diffusion distances in the original and dimension-reduced data."
+    - name: centroid_distance_correlation
+      label: Centroid Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances to label centroids."
       description: |
-        Spearman correlation between all pairwise diffusion distances in the
-        original and dimension-reduced data.
+        Calculates the distance correlation by computing Spearman correlations
+        between distances to label centroids on the full (or processed) data
+        matrix and the dimensionally-reduced matrix. Also known as Point-Cluster
+        Distance (PCD) correlation.
       references:
-        doi: 10.1016/j.acha.2006.04.006
-      min: 0
-      max: "+.inf"
+        doi:
+          - 10.1038/s41467-023-37478-w
+      min: -1
+      max: 1
+      maximize: true
+    - name: label_distance_correlation
+      label: Label Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances between label centroids."
+      description: |
+        Calculates the distance correlation by computing Spearman correlations
+        between distances between label centroids on the full (or processed)
+        data matrix and the dimensionally-reduced matrix. Also known as the
+        cellstruct global cluster (GC) score when using Pearson correlation.
+      references:
+        doi:
+          - 10.1101/2023.11.13.566337
+          - 10.1038/s42003-022-03628-x
+      min: -1
+      max: 1
       maximize: true
 
 # Script configuration
-arguments:
-  - name: "--spectral"
-    type: boolean_true
-    description: Calculate the spectral root mean squared error.
 resources:
   - type: python_script
     path: script.py
@@ -45,9 +62,7 @@ engines:
     setup:
       - type: python
         packages:
-          - umap-learn
           - scikit-learn
-          - pynndescent~=0.5.11 # See https://github.com/openproblems-bio/openproblems-v2/issues/266
 runners:
   - type: executable
   - type: nextflow
