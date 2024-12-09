@@ -9,7 +9,10 @@ par = {
 }
 ## VIASH END
 
-print(f"====== Distance correlation metrics (scipy v{scipy.__version__}) ======", flush=True)
+print(
+    f"====== Distance correlation metrics (scipy v{scipy.__version__}) ======",
+    flush=True,
+)
 
 print("\n>>> Reading solution...", flush=True)
 solution = ad.read_h5ad(par["input_solution"])
@@ -43,7 +46,11 @@ output = ad.AnnData(
         "dataset_id": solution.uns["dataset_id"],
         "normalization_id": solution.uns["normalization_id"],
         "method_id": embedding.uns["method_id"],
-        "metric_ids": ["waypoint_distance_correlation", "centroid_distance_correlation", "label_distance_correlation"],
+        "metric_ids": [
+            "waypoint_distance_correlation",
+            "centroid_distance_correlation",
+            "label_distance_correlation",
+        ],
         "metric_values": [waypoint_corr, centroid_corr, label_corr],
     }
 )
