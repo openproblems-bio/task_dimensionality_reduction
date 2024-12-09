@@ -31,8 +31,8 @@ metrics = [
   coranking,
   density_preservation,
   distance_correlation,
-  spectral_distance_correlation,
-  trustworthiness
+  spectral_distance_correlation
+  // trustworthiness
 ]
 
 workflow run_wf {
