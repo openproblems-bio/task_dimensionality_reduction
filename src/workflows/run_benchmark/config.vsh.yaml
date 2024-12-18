@@ -83,7 +83,7 @@ dependencies:
   - name: metrics/density_preservation
   - name: metrics/distance_correlation
   - name: metrics/spectral_distance_correlation
-  - name: metrics/trustworthiness
+  # - name: metrics/trustworthiness
 
 runners:
   - type: nextflow
