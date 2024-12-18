@@ -67,16 +67,18 @@ recommended by the method.
 ## API
 
 ``` mermaid
-flowchart LR
-  file_common_dataset("Dataset")
-  comp_process_dataset[/"Data processor"/]
-  file_dataset("Dataset")
-  file_solution("Solution data")
-  comp_control_method[/"Control method"/]
-  comp_method[/"Method"/]
-  comp_metric[/"Metric"/]
-  file_embedding("Embedding")
-  file_score("Score")
+flowchart TB
+  file_common_dataset("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-dataset'>Dataset</a>")
+  comp_process_dataset[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-data-processor'>Data processor</a>"/]
+  file_dataset("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-dataset'>Dataset</a>")
+  file_solution("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-solution-data'>Solution data</a>")
+  comp_control_method[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-control-method'>Control method</a>"/]
+  comp_method[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-method'>Method</a>"/]
+  comp_metric[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-metric'>Metric</a>"/]
+  comp_process_embedding[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-data-processor'>Data processor</a>"/]
+  file_embedding("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-embedding'>Embedding</a>")
+  file_score("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-score'>Score</a>")
+  file_processed_embedding("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-embedding'>Embedding</a>")
   file_common_dataset---comp_process_dataset
   comp_process_dataset-->file_dataset
   comp_process_dataset-->file_solution
@@ -84,10 +86,13 @@ flowchart LR
   file_dataset---comp_method
   file_solution---comp_control_method
   file_solution---comp_metric
+  file_solution---comp_process_embedding
   comp_control_method-->file_embedding
   comp_method-->file_embedding
   comp_metric-->file_score
-  file_embedding---comp_metric
+  comp_process_embedding-->file_processed_embedding
+  file_embedding---comp_process_embedding
+  file_processed_embedding---comp_metric
 ```
 
 ## File format: Dataset
@@ -190,10 +195,11 @@ Format:
 <div class="small">
 
     AnnData object
-     obs: 'cell_type'
+     obs: 'cell_type', 'is_waypoint'
      var: 'hvg_score'
+     obsm: 'waypoint_distances', 'centroid_distances'
      layers: 'counts', 'normalized'
-     uns: 'dataset_id', 'dataset_name', 'dataset_url', 'dataset_reference', 'dataset_summary', 'dataset_description', 'dataset_organism', 'normalization_id'
+     uns: 'dataset_id', 'dataset_name', 'dataset_url', 'dataset_reference', 'dataset_summary', 'dataset_description', 'dataset_organism', 'normalization_id', 'between_waypoint_distances', 'label_centroids', 'between_centroid_distances'
 
 </div>
 
@@ -203,8 +209,11 @@ Data structure:
 
 | Slot | Type | Description |
 |:---|:---|:---|
-| `obs["cell_type"]` | `string` | Classification of the cell type based on its characteristics and function within the tissue or organism. |
+| `obs["cell_type"]` | `string` | Ground truth cell type based on a cells characteristics and function within the tissue or organism. |
+| `obs["is_waypoint"]` | `boolean` | Whether or not this cell is a waypoint used for some metric calculations. |
 | `var["hvg_score"]` | `double` | High variability gene score (normalized dispersion). The greater, the more variable. |
+| `obsm["waypoint_distances"]` | `double` | Euclidean distances between all cells and waypoint cells calculated using normalized data. |
+| `obsm["centroid_distances"]` | `double` | Euclidean distances between all cells and label centroids calculated using normalized data. |
 | `layers["counts"]` | `integer` | Raw counts. |
 | `layers["normalized"]` | `double` | Normalized expression values. |
 | `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
@@ -215,6 +224,9 @@ Data structure:
 | `uns["dataset_description"]` | `string` | Long description of the dataset. |
 | `uns["dataset_organism"]` | `string` | (*Optional*) The organism of the sample in the dataset. |
 | `uns["normalization_id"]` | `string` | Which normalization was used. |
+| `uns["between_waypoint_distances"]` | `double` | Euclidean distances between waypoint cells. |
+| `uns["label_centroids"]` | `double` | Centroid positions of each label in the normalized expression space. |
+| `uns["between_centroid_distances"]` | `double` | Euclidean distances between label centroids. |
 
 </div>
 
@@ -259,9 +271,25 @@ Arguments:
 
 | Name | Type | Description |
 |:---|:---|:---|
-| `--input_embedding` | `file` | A dataset with dimensionality reduction embedding. |
+| `--input_embedding` | `file` | A dataset with dimensionality reduction embedding that has been processed to add information required by metrics. |
 | `--input_solution` | `file` | The data for evaluating a dimensionality reduction. |
 | `--output` | `file` | (*Output*) Metric score file. |
+
+</div>
+
+## Component type: Data processor
+
+A dimensionality reduction embedding processor.
+
+Arguments:
+
+<div class="small">
+
+| Name | Type | Description |
+|:---|:---|:---|
+| `--input_embedding` | `file` | A dataset with dimensionality reduction embedding. |
+| `--input_solution` | `file` | The data for evaluating a dimensionality reduction. |
+| `--output` | `file` | (*Output*) A dataset with dimensionality reduction embedding that has been processed to add information required by metrics. |
 
 </div>
 
@@ -322,6 +350,42 @@ Data structure:
 | `uns["method_id"]` | `string` | A unique identifier for the method. |
 | `uns["metric_ids"]` | `string` | One or more unique metric identifiers. |
 | `uns["metric_values"]` | `double` | The metric values obtained for the given prediction. Must be of same length as ‘metric_ids’. |
+
+</div>
+
+## File format: Embedding
+
+A dataset with dimensionality reduction embedding that has been
+processed to add information required by metrics.
+
+Example file:
+`resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad`
+
+Format:
+
+<div class="small">
+
+    AnnData object
+     obsm: 'X_emb', 'waypoint_distances', 'centroid_distances'
+     uns: 'dataset_id', 'method_id', 'normalization_id', 'between_waypoint_distances', 'label_centroids', 'between_centroid_distances'
+
+</div>
+
+Data structure:
+
+<div class="small">
+
+| Slot | Type | Description |
+|:---|:---|:---|
+| `obsm["X_emb"]` | `double` | The dimensionally reduced embedding. |
+| `obsm["waypoint_distances"]` | `double` | Euclidean distances between all cells and waypoint cells calculated using the embedding. |
+| `obsm["centroid_distances"]` | `double` | Euclidean distances between all cells and label centroids calculated using the embedding. |
+| `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
+| `uns["method_id"]` | `string` | A unique identifier for the method. |
+| `uns["normalization_id"]` | `string` | Which normalization was used. |
+| `uns["between_waypoint_distances"]` | `double` | Euclidean distances between waypoint cells. |
+| `uns["label_centroids"]` | `double` | Centroid positions of each label in the normalized expression space. |
+| `uns["between_centroid_distances"]` | `double` | Euclidean distances between label centroids. |
 
 </div>
 

@@ -1,61 +1,63 @@
 import anndata as ad
-import numpy as np
-import scipy.spatial
-import scipy.stats
-import sklearn.decomposition
-import umap
-import umap.spectral
+import scipy
 
 ## VIASH START
 par = {
-    "input_embedding": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad",
+    "input_embedding": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad",
     "input_solution": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/solution.h5ad",
     "output": "score.h5ad",
 }
 ## VIASH END
 
-
-def _distance_correlation(X, X_emb):
-    high_dimensional_distance_vector = scipy.spatial.distance.pdist(X)
-    low_dimensional_distance_vector = scipy.spatial.distance.pdist(X_emb)
-    corr = scipy.stats.spearmanr(
-        low_dimensional_distance_vector, high_dimensional_distance_vector
-    )
-    return corr
-
-
-print("Load data", flush=True)
-input_solution = ad.read_h5ad(par["input_solution"])
-input_embedding = ad.read_h5ad(par["input_embedding"])
-
-high_dim = input_solution.layers["normalized"]
-X_emb = input_embedding.obsm["X_emb"]
-
-print("Compute NNLS residual after SVD", flush=True)
-n_svd = 500
-svd_emb = sklearn.decomposition.TruncatedSVD(n_svd).fit_transform(high_dim)
-dist_corr = _distance_correlation(svd_emb, X_emb).correlation
-
-#! Explicitly not changing it to use diffusion map method as this will have a
-# positive effect on the diffusion map method for this specific metric.
-print("Compute NLSS residual after spectral embedding", flush=True)
-n_comps = min(1000, min(input_solution.shape) - 2)
-umap_graph = umap.UMAP(transform_mode="graph").fit_transform(high_dim)
-spectral_emb = umap.spectral.spectral_layout(
-    high_dim, umap_graph, n_comps, random_state=np.random.default_rng()
+print(
+    f"====== Distance correlation metrics (scipy v{scipy.__version__}) ======",
+    flush=True,
 )
-dist_corr_spectral = _distance_correlation(spectral_emb, X_emb).correlation
 
-print("Create output AnnData object", flush=True)
+print("\n>>> Reading solution...", flush=True)
+solution = ad.read_h5ad(par["input_solution"])
+print(solution, flush=True)
+
+print("\n>>> Reading embedding...", flush=True)
+embedding = ad.read_h5ad(par["input_embedding"])
+print(embedding, flush=True)
+
+print("\n>>> Calculating waypoint distance correlation..", flush=True)
+high_dists = solution.obsm["waypoint_distances"]
+emb_dists = embedding.obsm["waypoint_distances"]
+waypoint_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
+print(f"Waypoint distance correlation: {waypoint_corr}", flush=True)
+
+print("\n>>> Calculating centroid distance correlation..", flush=True)
+high_dists = solution.obsm["centroid_distances"]
+emb_dists = embedding.obsm["centroid_distances"]
+centroid_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
+print(f"Centroid distance correlation: {centroid_corr}", flush=True)
+
+print("\n>>> Calculating label distance correlation..", flush=True)
+high_dists = solution.uns["between_centroid_distances"]
+emb_dists = embedding.uns["between_centroid_distances"]
+label_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
+print(f"Label distance correlation: {label_corr}", flush=True)
+
+print("\n>>> Creating output AnnData object...", flush=True)
 output = ad.AnnData(
     uns={
-        "dataset_id": input_solution.uns["dataset_id"],
-        "normalization_id": input_solution.uns["normalization_id"],
-        "method_id": input_embedding.uns["method_id"],
-        "metric_ids": ["distance_correlation", "distance_correlation_spectral"],
-        "metric_values": [dist_corr, dist_corr_spectral],
+        "dataset_id": solution.uns["dataset_id"],
+        "normalization_id": solution.uns["normalization_id"],
+        "method_id": embedding.uns["method_id"],
+        "metric_ids": [
+            "waypoint_distance_correlation",
+            "centroid_distance_correlation",
+            "label_distance_correlation",
+        ],
+        "metric_values": [waypoint_corr, centroid_corr, label_corr],
     }
 )
+print(output, flush=True)
 
-print("Write data to file", flush=True)
+print("\n>>> Writing output file...", flush=True)
 output.write_h5ad(par["output"], compression="gzip")
+print(f"Output file: '{par['output']}'", flush=True)
+
+print("\n>>> Done!", flush=True)

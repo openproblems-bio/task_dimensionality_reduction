@@ -3,6 +3,9 @@ __merge__: ../../api/comp_metric.yaml
 
 # Component configuration
 name: "trustworthiness"
+# Disabled due to being calculated as part of co-ranking metrics. May be removed
+# in the future.
+status: disabled
 info:
   metrics:
     - name: trustworthiness
