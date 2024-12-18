@@ -2893,7 +2893,13 @@ meta = [
                 {
                   "type" : "string",
                   "name" : "cell_type",
-                  "description" : "Classification of the cell type based on its characteristics and function within the tissue or organism.",
+                  "description" : "Ground truth cell type based on a cells characteristics and function within the tissue or organism.",
+                  "required" : true
+                },
+                {
+                  "type" : "boolean",
+                  "name" : "is_waypoint",
+                  "description" : "Whether or not this cell is a waypoint used for some metric calculations.",
                   "required" : true
                 }
               ],
@@ -2902,6 +2908,20 @@ meta = [
                   "type" : "double",
                   "name" : "hvg_score",
                   "description" : "High variability gene score (normalized dispersion). The greater, the more variable.",
+                  "required" : true
+                }
+              ],
+              "obsm" : [
+                {
+                  "type" : "double",
+                  "name" : "waypoint_distances",
+                  "description" : "Euclidean distances between all cells and waypoint cells calculated using normalized data.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "centroid_distances",
+                  "description" : "Euclidean distances between all cells and label centroids calculated using normalized data.",
                   "required" : true
                 }
               ],
@@ -2953,6 +2973,21 @@ meta = [
                   "name" : "normalization_id",
                   "description" : "Which normalization was used",
                   "required" : true
+                },
+                {
+                  "name" : "between_waypoint_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between waypoint cells."
+                },
+                {
+                  "name" : "label_centroids",
+                  "type" : "double",
+                  "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "between_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between label centroids."
                 }
               ]
             }
@@ -3172,7 +3207,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/spectral_features",
     "viash_version" : "0.9.0",
-    "git_commit" : "cda4dcffc7cdd364d04cf7192626f7e4f4d0a711",
+    "git_commit" : "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {

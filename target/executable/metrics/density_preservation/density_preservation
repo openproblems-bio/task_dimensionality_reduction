@@ -177,7 +177,7 @@ function ViashHelp {
   echo "    --input_embedding"
   echo "        type: file, required parameter, file must exist"
   echo "        example:"
-  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
+  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad"
   echo ""
   echo "    --input_solution"
   echo "        type: file, required parameter, file must exist"
@@ -479,9 +479,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "umap-learn" "pynndescent~=0.5.11"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics density_preservation"
-LABEL org.opencontainers.image.created="2024-11-26T14:15:59Z"
+LABEL org.opencontainers.image.created="2024-12-18T09:36:16Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="cda4dcffc7cdd364d04cf7192626f7e4f4d0a711"
+LABEL org.opencontainers.image.revision="df707e458c5a497f4ae33d8f3b6f16d80fe2ad05"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

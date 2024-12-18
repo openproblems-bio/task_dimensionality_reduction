@@ -2815,7 +2815,7 @@ meta = [
           "type" : "file",
           "name" : "--input_embedding",
           "label" : "Embedding",
-          "summary" : "A dataset with dimensionality reduction embedding.",
+          "summary" : "A dataset with dimensionality reduction embedding that has been processed to\nadd information required by metrics.\n",
           "info" : {
             "format" : {
               "type" : "h5ad",
@@ -2824,6 +2824,18 @@ meta = [
                   "type" : "double",
                   "name" : "X_emb",
                   "description" : "The dimensionally reduced embedding.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "waypoint_distances",
+                  "description" : "Euclidean distances between all cells and waypoint cells calculated using the embedding.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "centroid_distances",
+                  "description" : "Euclidean distances between all cells and label centroids calculated using the embedding.",
                   "required" : true
                 }
               ],
@@ -2845,12 +2857,27 @@ meta = [
                   "name" : "normalization_id",
                   "description" : "Which normalization was used",
                   "required" : true
+                },
+                {
+                  "name" : "between_waypoint_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between waypoint cells."
+                },
+                {
+                  "name" : "label_centroids",
+                  "type" : "double",
+                  "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "between_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between label centroids."
                 }
               ]
             }
           },
           "example" : [
-            "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
+            "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2885,7 +2912,13 @@ meta = [
                 {
                   "type" : "string",
                   "name" : "cell_type",
-                  "description" : "Classification of the cell type based on its characteristics and function within the tissue or organism.",
+                  "description" : "Ground truth cell type based on a cells characteristics and function within the tissue or organism.",
+                  "required" : true
+                },
+                {
+                  "type" : "boolean",
+                  "name" : "is_waypoint",
+                  "description" : "Whether or not this cell is a waypoint used for some metric calculations.",
                   "required" : true
                 }
               ],
@@ -2894,6 +2927,20 @@ meta = [
                   "type" : "double",
                   "name" : "hvg_score",
                   "description" : "High variability gene score (normalized dispersion). The greater, the more variable.",
+                  "required" : true
+                }
+              ],
+              "obsm" : [
+                {
+                  "type" : "double",
+                  "name" : "waypoint_distances",
+                  "description" : "Euclidean distances between all cells and waypoint cells calculated using normalized data.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "centroid_distances",
+                  "description" : "Euclidean distances between all cells and label centroids calculated using normalized data.",
                   "required" : true
                 }
               ],
@@ -2945,6 +2992,21 @@ meta = [
                   "name" : "normalization_id",
                   "description" : "Which normalization was used",
                   "required" : true
+                },
+                {
+                  "name" : "between_waypoint_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between waypoint cells."
+                },
+                {
+                  "name" : "label_centroids",
+                  "type" : "double",
+                  "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "between_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between label centroids."
                 }
               ]
             }
@@ -3012,12 +3074,6 @@ meta = [
           "direction" : "output",
           "multiple" : false,
           "multiple_sep" : ";"
-        },
-        {
-          "type" : "boolean_true",
-          "name" : "--spectral",
-          "description" : "Calculate the spectral root mean squared error.",
-          "direction" : "input"
         }
       ]
     }
@@ -3049,27 +3105,47 @@ meta = [
   "info" : {
     "metrics" : [
       {
-        "name" : "distance_correlation",
-        "label" : "Distance Correlation",
-        "summary" : "Calculates the distance correlation by computing Spearman correlations between distances.",
-        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances on the full (or processed) data matrix and the\ndimensionally-reduced matrix.\\"\n",
+        "name" : "waypoint_distance_correlation",
+        "label" : "Waypoint Distance Correlation",
+        "summary" : "Calculates the distance correlation by computing Spearman correlations between distances to waypoint cells.",
+        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances to waypoint cells on the full (or processed) data\nmatrix and the dimensionally-reduced matrix. Also known as the\ncellstruct global single-cell (GS) score when using Pearson correlation.\n",
         "references" : {
-          "doi" : "10.1007/bf02289565"
+          "doi" : [
+            "10.1101/2023.11.13.566337",
+            "10.1038/s42003-022-03628-x"
+          ]
         },
-        "min" : 0,
-        "max" : "+.inf",
+        "min" : -1,
+        "max" : 1,
         "maximize" : true
       },
       {
-        "name" : "distance_correlation_spectral",
-        "label" : "Distance Correlation Spectral",
-        "summary" : "Spearman correlation between all pairwise diffusion distances in the original and dimension-reduced data.",
-        "description" : "Spearman correlation between all pairwise diffusion distances in the\noriginal and dimension-reduced data.\n",
+        "name" : "centroid_distance_correlation",
+        "label" : "Centroid Distance Correlation",
+        "summary" : "Calculates the distance correlation by computing Spearman correlations between distances to label centroids.",
+        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances to label centroids on the full (or processed) data\nmatrix and the dimensionally-reduced matrix. Also known as Point-Cluster\nDistance (PCD) correlation.\n",
         "references" : {
-          "doi" : "10.1016/j.acha.2006.04.006"
+          "doi" : [
+            "10.1038/s41467-023-37478-w"
+          ]
         },
-        "min" : 0,
-        "max" : "+.inf",
+        "min" : -1,
+        "max" : 1,
+        "maximize" : true
+      },
+      {
+        "name" : "label_distance_correlation",
+        "label" : "Label Distance Correlation",
+        "summary" : "Calculates the distance correlation by computing Spearman correlations between distances between label centroids.",
+        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances between label centroids on the full (or processed)\ndata matrix and the dimensionally-reduced matrix. Also known as the\ncellstruct global cluster (GC) score when using Pearson correlation.\n",
+        "references" : {
+          "doi" : [
+            "10.1101/2023.11.13.566337",
+            "10.1038/s42003-022-03628-x"
+          ]
+        },
+        "min" : -1,
+        "max" : 1,
         "maximize" : true
       }
     ],
@@ -3147,9 +3223,7 @@ meta = [
           "type" : "python",
           "user" : false,
           "packages" : [
-            "umap-learn",
-            "scikit-learn",
-            "pynndescent~=0.5.11"
+            "scikit-learn"
           ],
           "upgrade" : true
         }
@@ -3162,7 +3236,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/distance_correlation",
     "viash_version" : "0.9.0",
-    "git_commit" : "cda4dcffc7cdd364d04cf7192626f7e4f4d0a711",
+    "git_commit" : "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3317,20 +3391,14 @@ def innerWorkflowFactory(args) {
 tempscript=".viash_script.sh"
 cat > "$tempscript" << VIASHMAIN
 import anndata as ad
-import numpy as np
-import scipy.spatial
-import scipy.stats
-import sklearn.decomposition
-import umap
-import umap.spectral
+import scipy
 
 ## VIASH START
 # The following code has been auto-generated by Viash.
 par = {
   'input_embedding': $( if [ ! -z ${VIASH_PAR_INPUT_EMBEDDING+x} ]; then echo "r'${VIASH_PAR_INPUT_EMBEDDING//\\'/\\'\\"\\'\\"r\\'}'"; else echo None; fi ),
   'input_solution': $( if [ ! -z ${VIASH_PAR_INPUT_SOLUTION+x} ]; then echo "r'${VIASH_PAR_INPUT_SOLUTION//\\'/\\'\\"\\'\\"r\\'}'"; else echo None; fi ),
-  'output': $( if [ ! -z ${VIASH_PAR_OUTPUT+x} ]; then echo "r'${VIASH_PAR_OUTPUT//\\'/\\'\\"\\'\\"r\\'}'"; else echo None; fi ),
-  'spectral': $( if [ ! -z ${VIASH_PAR_SPECTRAL+x} ]; then echo "r'${VIASH_PAR_SPECTRAL//\\'/\\'\\"\\'\\"r\\'}'.lower() == 'true'"; else echo None; fi )
+  'output': $( if [ ! -z ${VIASH_PAR_OUTPUT+x} ]; then echo "r'${VIASH_PAR_OUTPUT//\\'/\\'\\"\\'\\"r\\'}'"; else echo None; fi )
 }
 meta = {
   'name': $( if [ ! -z ${VIASH_META_NAME+x} ]; then echo "r'${VIASH_META_NAME//\\'/\\'\\"\\'\\"r\\'}'"; else echo None; fi ),
@@ -3358,51 +3426,58 @@ dep = {
 
 ## VIASH END
 
-
-def _distance_correlation(X, X_emb):
-    high_dimensional_distance_vector = scipy.spatial.distance.pdist(X)
-    low_dimensional_distance_vector = scipy.spatial.distance.pdist(X_emb)
-    corr = scipy.stats.spearmanr(
-        low_dimensional_distance_vector, high_dimensional_distance_vector
-    )
-    return corr
-
-
-print("Load data", flush=True)
-input_solution = ad.read_h5ad(par["input_solution"])
-input_embedding = ad.read_h5ad(par["input_embedding"])
-
-high_dim = input_solution.layers["normalized"]
-X_emb = input_embedding.obsm["X_emb"]
-
-print("Compute NNLS residual after SVD", flush=True)
-n_svd = 500
-svd_emb = sklearn.decomposition.TruncatedSVD(n_svd).fit_transform(high_dim)
-dist_corr = _distance_correlation(svd_emb, X_emb).correlation
-
-#! Explicitly not changing it to use diffusion map method as this will have a
-# positive effect on the diffusion map method for this specific metric.
-print("Compute NLSS residual after spectral embedding", flush=True)
-n_comps = min(1000, min(input_solution.shape) - 2)
-umap_graph = umap.UMAP(transform_mode="graph").fit_transform(high_dim)
-spectral_emb = umap.spectral.spectral_layout(
-    high_dim, umap_graph, n_comps, random_state=np.random.default_rng()
+print(
+    f"====== Distance correlation metrics (scipy v{scipy.__version__}) ======",
+    flush=True,
 )
-dist_corr_spectral = _distance_correlation(spectral_emb, X_emb).correlation
 
-print("Create output AnnData object", flush=True)
+print("\\\\n>>> Reading solution...", flush=True)
+solution = ad.read_h5ad(par["input_solution"])
+print(solution, flush=True)
+
+print("\\\\n>>> Reading embedding...", flush=True)
+embedding = ad.read_h5ad(par["input_embedding"])
+print(embedding, flush=True)
+
+print("\\\\n>>> Calculating waypoint distance correlation..", flush=True)
+high_dists = solution.obsm["waypoint_distances"]
+emb_dists = embedding.obsm["waypoint_distances"]
+waypoint_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
+print(f"Waypoint distance correlation: {waypoint_corr}", flush=True)
+
+print("\\\\n>>> Calculating centroid distance correlation..", flush=True)
+high_dists = solution.obsm["centroid_distances"]
+emb_dists = embedding.obsm["centroid_distances"]
+centroid_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
+print(f"Centroid distance correlation: {centroid_corr}", flush=True)
+
+print("\\\\n>>> Calculating label distance correlation..", flush=True)
+high_dists = solution.uns["between_centroid_distances"]
+emb_dists = embedding.uns["between_centroid_distances"]
+label_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
+print(f"Label distance correlation: {label_corr}", flush=True)
+
+print("\\\\n>>> Creating output AnnData object...", flush=True)
 output = ad.AnnData(
     uns={
-        "dataset_id": input_solution.uns["dataset_id"],
-        "normalization_id": input_solution.uns["normalization_id"],
-        "method_id": input_embedding.uns["method_id"],
-        "metric_ids": ["distance_correlation", "distance_correlation_spectral"],
-        "metric_values": [dist_corr, dist_corr_spectral],
+        "dataset_id": solution.uns["dataset_id"],
+        "normalization_id": solution.uns["normalization_id"],
+        "method_id": embedding.uns["method_id"],
+        "metric_ids": [
+            "waypoint_distance_correlation",
+            "centroid_distance_correlation",
+            "label_distance_correlation",
+        ],
+        "metric_values": [waypoint_corr, centroid_corr, label_corr],
     }
 )
+print(output, flush=True)
 
-print("Write data to file", flush=True)
+print("\\\\n>>> Writing output file...", flush=True)
 output.write_h5ad(par["output"], compression="gzip")
+print(f"Output file: '{par['output']}'", flush=True)
+
+print("\\\\n>>> Done!", flush=True)
 VIASHMAIN
 python -B "$tempscript"
 '''

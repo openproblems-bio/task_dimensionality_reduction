@@ -1,0 +1,44 @@
+type: file
+example: "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad"
+label: "Embedding"
+summary: |
+  A dataset with dimensionality reduction embedding that has been processed to
+  add information required by metrics.
+info:
+  format:
+    type: h5ad
+    obsm:
+      - type: double
+        name: X_emb
+        description: The dimensionally reduced embedding.
+        required: true
+      - type: double
+        name: waypoint_distances
+        description: Euclidean distances between all cells and waypoint cells calculated using the embedding.
+        required: true
+      - type: double
+        name: centroid_distances
+        description: Euclidean distances between all cells and label centroids calculated using the embedding.
+        required: true
+    uns:
+      - type: string
+        name: dataset_id
+        description: "A unique identifier for the dataset"
+        required: true
+      - type: string
+        name: method_id
+        description: "A unique identifier for the method"
+        required: true
+      - type: string
+        name: normalization_id
+        description: "Which normalization was used"
+        required: true
+      - name: between_waypoint_distances
+        type: double
+        description: Euclidean distances between waypoint cells.
+      - name: label_centroids
+        type: double
+        description: Centroid positions of each label in the normalized expression space.
+      - name: between_centroid_distances
+        type: double
+        description: Euclidean distances between label centroids.

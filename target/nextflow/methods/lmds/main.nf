@@ -3089,7 +3089,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/lmds",
     "viash_version" : "0.9.0",
-    "git_commit" : "cda4dcffc7cdd364d04cf7192626f7e4f4d0a711",
+    "git_commit" : "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3311,6 +3311,7 @@ output <- anndata::AnnData(
   ),
   shape = input\\$shape
 )
+output\\$obs_names <- input\\$obs_names
 output\\$write_h5ad(par\\$output, compression = "gzip")
 VIASHMAIN
 Rscript "$tempscript"

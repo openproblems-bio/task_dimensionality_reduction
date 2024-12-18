@@ -177,7 +177,7 @@ function ViashHelp {
   echo "    --input_embedding"
   echo "        type: file, required parameter, file must exist"
   echo "        example:"
-  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
+  echo "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad"
   echo ""
   echo "    --input_solution"
   echo "        type: file, required parameter, file must exist"
@@ -466,12 +466,12 @@ function ViashDockerfile {
 FROM openproblems/base_r:1.0.0
 ENTRYPOINT []
 RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
-  Rscript -e 'remotes::install_cran(c("coRanking", "proxyC"), repos = "https://cran.rstudio.com")'
+  Rscript -e 'remotes::install_cran(c("coRanking"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics coranking"
-LABEL org.opencontainers.image.created="2024-11-26T14:16:00Z"
+LABEL org.opencontainers.image.created="2024-12-18T09:36:16Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="cda4dcffc7cdd364d04cf7192626f7e4f4d0a711"
+LABEL org.opencontainers.image.revision="df707e458c5a497f4ae33d8f3b6f16d80fe2ad05"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1072,10 +1072,10 @@ input_solution <- anndata::read_h5ad(par[["input_solution"]])
 input_embedding <- anndata::read_h5ad(par[["input_embedding"]])
 
 # Get datasets
-high_dim <- input_solution\$layers[["normalized"]]
-X_emb <- input_embedding\$obsm[["X_emb"]]
+dist_highdim <- input_solution\$uns[["between_waypoint_distances"]]
+dist_emb <- input_embedding\$uns[["between_waypoint_distances"]]
 
-if (any(is.na(X_emb))) {
+if (any(is.na(dist_emb))) {
   continuity_at_k30 <- 0
   trustworthiness_at_k30 <- 0
   qnx_at_k30 <- 0
@@ -1084,19 +1084,6 @@ if (any(is.na(X_emb))) {
   qlocal <- 0
   qglobal <- 0
 } else {
-  message("Compute pairwise distances")
-  # TODO: computing a square distance matrix is problematic for large datasets!
-  # TODO: should we use a different distance metric for the high_dim?
-  # TODO: or should we subset to the HVG?
-  message("Compute high-dimensional distances")
-  dist_highdim <- proxyC::dist(
-    high_dim, method = "euclidean", diag = TRUE, drop0 = TRUE
-  )
-  message("Compute embedding distances")
-  dist_emb <- proxyC::dist(
-    X_emb, method = "euclidean", diag = TRUE, drop0 = TRUE
-  )
-
   message("Compute ranking matrices")
   rmat_highdim <- rankmatrix(dist_highdim, input = "dist")
   rmat_emb <- rankmatrix(dist_emb, input = "dist")

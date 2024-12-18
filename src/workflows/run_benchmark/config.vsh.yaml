@@ -75,12 +75,15 @@ dependencies:
   - name: methods/simlr
   - name: methods/tsne
   - name: methods/umap
+  # Embedding processors
+  - name: data_processors/process_embedding
   # Metrics
   - name: metrics/clustering_performance
   - name: metrics/coranking
   - name: metrics/density_preservation
   - name: metrics/distance_correlation
-  - name: metrics/trustworthiness
+  - name: metrics/spectral_distance_correlation
+  # - name: metrics/trustworthiness
 
 runners:
   - type: nextflow

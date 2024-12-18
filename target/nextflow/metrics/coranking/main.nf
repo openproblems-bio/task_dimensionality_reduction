@@ -2815,7 +2815,7 @@ meta = [
           "type" : "file",
           "name" : "--input_embedding",
           "label" : "Embedding",
-          "summary" : "A dataset with dimensionality reduction embedding.",
+          "summary" : "A dataset with dimensionality reduction embedding that has been processed to\nadd information required by metrics.\n",
           "info" : {
             "format" : {
               "type" : "h5ad",
@@ -2824,6 +2824,18 @@ meta = [
                   "type" : "double",
                   "name" : "X_emb",
                   "description" : "The dimensionally reduced embedding.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "waypoint_distances",
+                  "description" : "Euclidean distances between all cells and waypoint cells calculated using the embedding.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "centroid_distances",
+                  "description" : "Euclidean distances between all cells and label centroids calculated using the embedding.",
                   "required" : true
                 }
               ],
@@ -2845,12 +2857,27 @@ meta = [
                   "name" : "normalization_id",
                   "description" : "Which normalization was used",
                   "required" : true
+                },
+                {
+                  "name" : "between_waypoint_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between waypoint cells."
+                },
+                {
+                  "name" : "label_centroids",
+                  "type" : "double",
+                  "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "between_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between label centroids."
                 }
               ]
             }
           },
           "example" : [
-            "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
+            "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2885,7 +2912,13 @@ meta = [
                 {
                   "type" : "string",
                   "name" : "cell_type",
-                  "description" : "Classification of the cell type based on its characteristics and function within the tissue or organism.",
+                  "description" : "Ground truth cell type based on a cells characteristics and function within the tissue or organism.",
+                  "required" : true
+                },
+                {
+                  "type" : "boolean",
+                  "name" : "is_waypoint",
+                  "description" : "Whether or not this cell is a waypoint used for some metric calculations.",
                   "required" : true
                 }
               ],
@@ -2894,6 +2927,20 @@ meta = [
                   "type" : "double",
                   "name" : "hvg_score",
                   "description" : "High variability gene score (normalized dispersion). The greater, the more variable.",
+                  "required" : true
+                }
+              ],
+              "obsm" : [
+                {
+                  "type" : "double",
+                  "name" : "waypoint_distances",
+                  "description" : "Euclidean distances between all cells and waypoint cells calculated using normalized data.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "centroid_distances",
+                  "description" : "Euclidean distances between all cells and label centroids calculated using normalized data.",
                   "required" : true
                 }
               ],
@@ -2945,6 +2992,21 @@ meta = [
                   "name" : "normalization_id",
                   "description" : "Which normalization was used",
                   "required" : true
+                },
+                {
+                  "name" : "between_waypoint_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between waypoint cells."
+                },
+                {
+                  "name" : "label_centroids",
+                  "type" : "double",
+                  "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "between_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between label centroids."
                 }
               ]
             }
@@ -3228,8 +3290,7 @@ meta = [
         {
           "type" : "r",
           "cran" : [
-            "coRanking",
-            "proxyC"
+            "coRanking"
           ],
           "bioc_force_install" : false
         }
@@ -3242,7 +3303,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/coranking",
     "viash_version" : "0.9.0",
-    "git_commit" : "cda4dcffc7cdd364d04cf7192626f7e4f4d0a711",
+    "git_commit" : "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3445,10 +3506,10 @@ input_solution <- anndata::read_h5ad(par[["input_solution"]])
 input_embedding <- anndata::read_h5ad(par[["input_embedding"]])
 
 # Get datasets
-high_dim <- input_solution\\$layers[["normalized"]]
-X_emb <- input_embedding\\$obsm[["X_emb"]]
+dist_highdim <- input_solution\\$uns[["between_waypoint_distances"]]
+dist_emb <- input_embedding\\$uns[["between_waypoint_distances"]]
 
-if (any(is.na(X_emb))) {
+if (any(is.na(dist_emb))) {
   continuity_at_k30 <- 0
   trustworthiness_at_k30 <- 0
   qnx_at_k30 <- 0
@@ -3457,19 +3518,6 @@ if (any(is.na(X_emb))) {
   qlocal <- 0
   qglobal <- 0
 } else {
-  message("Compute pairwise distances")
-  # TODO: computing a square distance matrix is problematic for large datasets!
-  # TODO: should we use a different distance metric for the high_dim?
-  # TODO: or should we subset to the HVG?
-  message("Compute high-dimensional distances")
-  dist_highdim <- proxyC::dist(
-    high_dim, method = "euclidean", diag = TRUE, drop0 = TRUE
-  )
-  message("Compute embedding distances")
-  dist_emb <- proxyC::dist(
-    X_emb, method = "euclidean", diag = TRUE, drop0 = TRUE
-  )
-
   message("Compute ranking matrices")
   rmat_highdim <- rankmatrix(dist_highdim, input = "dist")
   rmat_emb <- rankmatrix(dist_emb, input = "dist")

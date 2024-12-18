@@ -2893,7 +2893,13 @@ meta = [
                 {
                   "type" : "string",
                   "name" : "cell_type",
-                  "description" : "Classification of the cell type based on its characteristics and function within the tissue or organism.",
+                  "description" : "Ground truth cell type based on a cells characteristics and function within the tissue or organism.",
+                  "required" : true
+                },
+                {
+                  "type" : "boolean",
+                  "name" : "is_waypoint",
+                  "description" : "Whether or not this cell is a waypoint used for some metric calculations.",
                   "required" : true
                 }
               ],
@@ -2902,6 +2908,20 @@ meta = [
                   "type" : "double",
                   "name" : "hvg_score",
                   "description" : "High variability gene score (normalized dispersion). The greater, the more variable.",
+                  "required" : true
+                }
+              ],
+              "obsm" : [
+                {
+                  "type" : "double",
+                  "name" : "waypoint_distances",
+                  "description" : "Euclidean distances between all cells and waypoint cells calculated using normalized data.",
+                  "required" : true
+                },
+                {
+                  "type" : "double",
+                  "name" : "centroid_distances",
+                  "description" : "Euclidean distances between all cells and label centroids calculated using normalized data.",
                   "required" : true
                 }
               ],
@@ -2953,6 +2973,21 @@ meta = [
                   "name" : "normalization_id",
                   "description" : "Which normalization was used",
                   "required" : true
+                },
+                {
+                  "name" : "between_waypoint_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between waypoint cells."
+                },
+                {
+                  "name" : "label_centroids",
+                  "type" : "double",
+                  "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "between_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances between label centroids."
                 }
               ]
             }
@@ -3163,6 +3198,12 @@ meta = [
       }
     },
     {
+      "name" : "data_processors/process_embedding",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "metrics/clustering_performance",
       "repository" : {
         "type" : "local"
@@ -3187,7 +3228,7 @@ meta = [
       }
     },
     {
-      "name" : "metrics/trustworthiness",
+      "name" : "metrics/spectral_distance_correlation",
       "repository" : {
         "type" : "local"
       }
@@ -3250,7 +3291,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "cda4dcffc7cdd364d04cf7192626f7e4f4d0a711",
+    "git_commit" : "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3412,11 +3453,12 @@ include { pymde } from "${meta.resources_dir}/../../../nextflow/methods/pymde/ma
 include { simlr } from "${meta.resources_dir}/../../../nextflow/methods/simlr/main.nf"
 include { tsne } from "${meta.resources_dir}/../../../nextflow/methods/tsne/main.nf"
 include { umap } from "${meta.resources_dir}/../../../nextflow/methods/umap/main.nf"
+include { process_embedding } from "${meta.resources_dir}/../../../nextflow/data_processors/process_embedding/main.nf"
 include { clustering_performance } from "${meta.resources_dir}/../../../nextflow/metrics/clustering_performance/main.nf"
 include { coranking } from "${meta.resources_dir}/../../../nextflow/metrics/coranking/main.nf"
 include { density_preservation } from "${meta.resources_dir}/../../../nextflow/metrics/density_preservation/main.nf"
 include { distance_correlation } from "${meta.resources_dir}/../../../nextflow/metrics/distance_correlation/main.nf"
-include { trustworthiness } from "${meta.resources_dir}/../../../nextflow/metrics/trustworthiness/main.nf"
+include { spectral_distance_correlation } from "${meta.resources_dir}/../../../nextflow/metrics/spectral_distance_correlation/main.nf"
 
 // inner workflow
 // user-provided Nextflow code
@@ -3453,7 +3495,8 @@ metrics = [
   coranking,
   density_preservation,
   distance_correlation,
-  trustworthiness
+  spectral_distance_correlation
+  // trustworthiness
 ]
 
 workflow run_wf {
@@ -3527,6 +3570,14 @@ workflow run_wf {
       }
     )
 
+    // process output embeddings
+    | process_embedding.run(
+      fromState: [ input_embedding: "method_output", input_solution: "input_solution" ],
+      toState: [
+        processed_output: "output"
+      ]
+    )
+
     // run all metrics
     | runEach(
       components: metrics,
@@ -3536,7 +3587,7 @@ workflow run_wf {
       // use 'fromState' to fetch the arguments the component requires from the overall state
       fromState: [
         input_solution: "input_solution",
-        input_embedding: "method_output"
+        input_embedding: "processed_output"
       ],
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->

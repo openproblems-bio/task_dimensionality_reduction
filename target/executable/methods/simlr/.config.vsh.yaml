@@ -234,7 +234,7 @@ build_info:
   output: "target/executable/methods/simlr"
   executable: "target/executable/methods/simlr/simlr"
   viash_version: "0.9.0"
-  git_commit: "cda4dcffc7cdd364d04cf7192626f7e4f4d0a711"
+  git_commit: "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05"
   git_remote: "https://github.com/openproblems-bio/task_dimensionality_reduction"
 package_config:
   name: "task_dimensionality_reduction"

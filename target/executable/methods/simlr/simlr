@@ -506,9 +506,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SIMLR", quietly = TRUE)) BiocManager::install("SIMLR")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods simlr"
-LABEL org.opencontainers.image.created="2024-11-26T14:16:00Z"
+LABEL org.opencontainers.image.created="2024-12-18T09:36:16Z"
 LABEL org.opencontainers.image.source="https://github.com/BatzoglouLabSU/SIMLR"
-LABEL org.opencontainers.image.revision="cda4dcffc7cdd364d04cf7192626f7e4f4d0a711"
+LABEL org.opencontainers.image.revision="df707e458c5a497f4ae33d8f3b6f16d80fe2ad05"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1248,6 +1248,7 @@ output <- anndata::AnnData(
   ),
   shape = input\$shape
 )
+output\$obs_names <- input\$obs_names
 output\$write_h5ad(par\$output, compression = "gzip")
 VIASHMAIN
 Rscript "\$tempscript" &

@@ -481,9 +481,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "ivis[cpu]" "tensorflow<2.16"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods ivis"
-LABEL org.opencontainers.image.created="2024-11-26T14:16:01Z"
+LABEL org.opencontainers.image.created="2024-12-18T09:36:18Z"
 LABEL org.opencontainers.image.source="https://github.com/beringresearch/ivis"
-LABEL org.opencontainers.image.revision="cda4dcffc7cdd364d04cf7192626f7e4f4d0a711"
+LABEL org.opencontainers.image.revision="df707e458c5a497f4ae33d8f3b6f16d80fe2ad05"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
