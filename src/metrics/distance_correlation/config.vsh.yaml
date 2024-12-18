@@ -7,10 +7,10 @@ info:
   metrics:
     - name: waypoint_distance_correlation
       label: Waypoint Distance Correlation
-      summary: "Calculates the distance correlation by computing Spearman correlations between distances to waypoint cells."
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances between waypoint cells."
       description: |
         Calculates the distance correlation by computing Spearman correlations
-        between distances to waypoint cells on the full (or processed) data
+        between distances between waypoint cells on the full (or processed) data
         matrix and the dimensionally-reduced matrix. Also known as the
         cellstruct global single-cell (GS) score when using Pearson correlation.
       references:
@@ -25,9 +25,9 @@ info:
       summary: "Calculates the distance correlation by computing Spearman correlations between distances to label centroids."
       description: |
         Calculates the distance correlation by computing Spearman correlations
-        between distances to label centroids on the full (or processed) data
-        matrix and the dimensionally-reduced matrix. Also known as Point-Cluster
-        Distance (PCD) correlation.
+        between distances from waypoint cells to label centroids on the full
+        (or processed) data matrix and the dimensionally-reduced matrix. Also
+        known as Point-Cluster Distance (PCD) correlation.
       references:
         doi:
           - 10.1038/s41467-023-37478-w

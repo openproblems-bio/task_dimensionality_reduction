@@ -22,15 +22,15 @@ print("\n>>> Reading embedding...", flush=True)
 embedding = ad.read_h5ad(par["input_embedding"])
 print(embedding, flush=True)
 
-print("\n>>> Calculating waypoint distance correlation..", flush=True)
-high_dists = solution.obsm["waypoint_distances"]
-emb_dists = embedding.obsm["waypoint_distances"]
+print("\n>>> Calculating between waypoint distance correlation..", flush=True)
+high_dists = solution.uns["between_waypoint_distances"]
+emb_dists = embedding.uns["between_waypoint_distances"]
 waypoint_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
 print(f"Waypoint distance correlation: {waypoint_corr}", flush=True)
 
-print("\n>>> Calculating centroid distance correlation..", flush=True)
-high_dists = solution.obsm["centroid_distances"]
-emb_dists = embedding.obsm["centroid_distances"]
+print("\n>>> Calculating waypoint-centroid distance correlation..", flush=True)
+high_dists = solution.uns["waypoint_centroid_distances"]
+emb_dists = embedding.uns["waypoint_centroid_distances"]
 centroid_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
 print(f"Centroid distance correlation: {centroid_corr}", flush=True)
 
