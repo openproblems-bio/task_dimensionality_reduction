@@ -31,11 +31,14 @@ adata = ad.read_h5ad(par["input"])
 print(adata, flush=True)
 
 print("\n>>> Selecting waypoint cells...", flush=True)
-if adata.n_obs < 10000:
+n_waypoints = 50000
+if adata.n_obs <= n_waypoints:
+    print(f"Using all {adata.n_obs} cells as waypoints", flush=True)
     waypoint_cells = adata.obs_names
 else:
+    print(f"Using {n_waypoints} random cells as waypoints", flush=True)
     np.random.seed(0)  # Try to get the same cells each time
-    waypoint_cells = np.random.choice(adata.obs_names, 10000, replace=False)
+    waypoint_cells = np.random.choice(adata.obs_names, n_waypoints, replace=False)
 adata.obs["is_waypoint"] = adata.obs_names.isin(waypoint_cells)
 is_waypoint = adata.obs["is_waypoint"].values
 
