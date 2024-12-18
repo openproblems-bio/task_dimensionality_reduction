@@ -12,14 +12,6 @@ info:
         name: X_emb
         description: The dimensionally reduced embedding.
         required: true
-      - type: double
-        name: waypoint_distances
-        description: Euclidean distances between all cells and waypoint cells calculated using the embedding.
-        required: true
-      - type: double
-        name: centroid_distances
-        description: Euclidean distances between all cells and label centroids calculated using the embedding.
-        required: true
     uns:
       - type: string
         name: dataset_id
@@ -39,6 +31,9 @@ info:
       - name: label_centroids
         type: double
         description: Centroid positions of each label in the normalized expression space.
+      - name: waypoint_centroid_distances
+        type: double
+        description: Euclidean distances from waypoint cells to label centroids.
       - name: between_centroid_distances
         type: double
         description: Euclidean distances between label centroids.
