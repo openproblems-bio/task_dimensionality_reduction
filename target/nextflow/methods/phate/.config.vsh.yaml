@@ -1,0 +1,340 @@
+name: "phate"
+namespace: "methods"
+version: "0.2.0"
+argument_groups:
+- name: "Arguments"
+  arguments:
+  - type: "file"
+    name: "--input"
+    label: "Dataset"
+    summary: "The dataset to pass to a method."
+    info:
+      format:
+        type: "h5ad"
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        - type: "double"
+          name: "normalized"
+          description: "Normalized expression values"
+          required: true
+        var:
+        - type: "double"
+          name: "hvg_score"
+          description: "High variability gene score (normalized dispersion). The greater,\
+            \ the more variable."
+          required: true
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset"
+          required: true
+        - type: "string"
+          name: "normalization_id"
+          description: "Which normalization was used"
+          required: true
+    example:
+    - "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--output"
+    label: "Embedding"
+    summary: "A dataset with dimensionality reduction embedding."
+    info:
+      format:
+        type: "h5ad"
+        obsm:
+        - type: "double"
+          name: "X_emb"
+          description: "The dimensionally reduced embedding."
+          required: true
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset"
+          required: true
+        - type: "string"
+          name: "method_id"
+          description: "A unique identifier for the method"
+          required: true
+        - type: "string"
+          name: "normalization_id"
+          description: "Which normalization was used"
+          required: true
+    example:
+    - "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/embedding.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: false
+    multiple_sep: ";"
+  - type: "integer"
+    name: "--n_pca_dims"
+    description: "Number of principal components of PCA to use."
+    info: null
+    default:
+    - 50
+    required: false
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "integer"
+    name: "--n_hvg"
+    description: "Number of highly variable genes to subset to. If not specified,\
+      \ the input matrix will not be subset."
+    info: null
+    required: false
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "double"
+    name: "--gamma"
+    description: "Gamma value"
+    info: null
+    default:
+    - 1.0
+    required: false
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+resources:
+- type: "python_script"
+  path: "script.py"
+  is_executable: true
+label: "PHATE"
+summary: "Preservating trajectories in a dataset by using heat diffusion potential."
+description: "PHATE or \"Potential of Heat - diffusion for Affinity - based Transition\n\
+  Embedding\" uses the potential of heat diffusion to preserve trajectories in\na\
+  \ dataset via a diffusion process. It is an affinity - based method that\ncreates\
+  \ an embedding by finding the dominant eigenvalues of a Markov\ntransition matrix.\
+  \ We evaluate several variants including using the\nrecommended square - root transformed\
+  \ CPM matrix as input, this input with\nthe gamma parameter set to zero and the\
+  \ normal logCPM transformed matrix\nwith and without HVG selection.\n"
+test_resources:
+- type: "file"
+  path: "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/"
+  dest: "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/"
+- type: "python_script"
+  path: "check_config.py"
+  is_executable: true
+- type: "python_script"
+  path: "run_and_check_output.py"
+  is_executable: true
+info:
+  preferred_normalization: "sqrt_cp10k"
+  variants:
+    phate_sqrt:
+      gamma: 0
+    phate_logCP10k:
+      preferred_normalization: "log_cp10k"
+    phate_logCP10k_1kHVG:
+      n_hvg: 1000
+      preferred_normalization: "log_cp10k"
+  type: "method"
+  type_info:
+    label: "Method"
+    summary: "A dimensionality reduction method."
+    description: "A dimensionality reduction method to summarise the biological\n\
+      information in a dataset in as few dimensions as possible.\n"
+status: "enabled"
+repositories:
+- type: "github"
+  name: "core"
+  repo: "openproblems-bio/core"
+  tag: "build/main"
+  path: "viash/core"
+license: "MIT"
+references:
+  doi:
+  - "10.1038/s41587-019-0336-3"
+links:
+  repository: "https://github.com/KrishnaswamyLab/PHATE"
+  docker_registry: "ghcr.io"
+  documentation: "https://phate.readthedocs.io/en/stable/"
+runners:
+- type: "executable"
+  id: "executable"
+  docker_setup_strategy: "ifneedbepullelsecachedbuild"
+- type: "nextflow"
+  id: "nextflow"
+  directives:
+    label:
+    - "lowtime"
+    - "midmem"
+    - "midcpu"
+    tag: "$id"
+  auto:
+    simplifyInput: true
+    simplifyOutput: false
+    transcript: false
+    publish: false
+  config:
+    labels:
+      lowmem: "memory = 20.Gb"
+      midmem: "memory = 50.Gb"
+      highmem: "memory = 100.Gb"
+      lowcpu: "cpus = 5"
+      midcpu: "cpus = 15"
+      highcpu: "cpus = 30"
+      lowtime: "time = 1.h"
+      midtime: "time = 4.h"
+      hightime: "time = 8.h"
+      veryhightime: "time = 24.h"
+  debug: false
+  container: "docker"
+engines:
+- type: "docker"
+  id: "docker"
+  image: "openproblems/base_python:1.0.0"
+  namespace_separator: "/"
+  setup:
+  - type: "python"
+    user: false
+    packages:
+    - "phate==1.0.*"
+    - "scprep"
+    - "scikit-learn<1.2"
+    - "numpy<2.0.0"
+    upgrade: true
+  entrypoint: []
+  cmd: null
+build_info:
+  config: "src/methods/phate/config.vsh.yaml"
+  runner: "nextflow"
+  engine: "docker"
+  output: "target/nextflow/methods/phate"
+  executable: "target/nextflow/methods/phate/main.nf"
+  viash_version: "0.9.0"
+  git_commit: "7adb5a856f2374eda43ee7f133b183e65081635a"
+  git_remote: "https://github.com/openproblems-bio/task_dimensionality_reduction"
+  git_tag: "0.2.0"
+package_config:
+  name: "task_dimensionality_reduction"
+  version: "0.2.0"
+  label: "Dimensionality Reduction for Visualization"
+  summary: "Reduction of high-dimensional datasets to 2D for visualization & interpretation."
+  description: "Data visualisation is an important part of all stages of single-cell\
+    \ analysis, from\ninitial quality control to interpretation and presentation of\
+    \ final results. For bulk RNA-seq\nstudies, linear dimensionality reduction techniques\
+    \ such as PCA and MDS are commonly used\nto visualise the variation between samples.\
+    \ While these methods are highly effective they\ncan only be used to show the\
+    \ first few components of variation which cannot fully represent\nthe increased\
+    \ complexity and number of observations in single-cell datasets. For this reason\n\
+    non-linear techniques (most notably t-SNE and UMAP) have become the standard for\
+    \ visualising\nsingle-cell studies. These methods attempt to compress a dataset\
+    \ into a two-dimensional space\nwhile attempting to capture as much of the variance\
+    \ between observations as possible. Many\nmethods for solving this problem now\
+    \ exist. In general these methods try to preserve distances,\nwhile some additionally\
+    \ consider aspects such as density within the embedded space or conservation\n\
+    of continuous trajectories. Despite almost every single-cell study using one of\
+    \ these visualisations\nthere has been debate as to whether they can effectively\
+    \ capture the variation in single-cell\ndatasets [@chari2023speciousart].\n\n\
+    The dimensionality reduction task attempts to quantify the ability of methods\
+    \ to embed the\ninformation present in complex single-cell studies into a two-dimensional\
+    \ space. Thus, this task\nis specifically designed for dimensionality reduction\
+    \ for visualisation and does not consider other\nuses of dimensionality reduction\
+    \ in standard single-cell workflows such as improving the\nsignal-to-noise ratio\
+    \ (and in fact several of the methods use PCA as a pre-processing step for this\n\
+    reason). Unlike most tasks, methods for the dimensionality reduction task must\
+    \ accept a matrix\ncontaining expression values normalised to 10,000 counts per\
+    \ cell and log transformed (log-10k) and\nproduce a two-dimensional coordinate\
+    \ for each cell. Pre-normalised matrices are required to\nenforce consistency\
+    \ between the metric evaluation (which generally requires normalised data) and\n\
+    the method runs. When these are not consistent, methods that use the same normalisation\
+    \ as used in\nthe metric tend to score more highly. For some methods we also evaluate\
+    \ the pre-processing\nrecommended by the method.\n"
+  info:
+    image: "thumbnail.svg"
+    test_resources:
+    - type: "s3"
+      path: "s3://openproblems-data/resources_test/common/cxg_mouse_pancreas_atlas/"
+      dest: "resources_test/common/cxg_mouse_pancreas_atlas/"
+    - type: "s3"
+      path: "s3://openproblems-data/resources_test/task_dimensionality_reduction/"
+      dest: "resources_test/task_dimensionality_reduction"
+  repositories:
+  - type: "github"
+    name: "core"
+    repo: "openproblems-bio/core"
+    tag: "build/main"
+    path: "viash/core"
+  viash_version: "0.9.0"
+  source: "src"
+  target: "target"
+  config_mods:
+  - ".runners[.type == \"nextflow\"].config.labels := { lowmem : \"memory = 20.Gb\"\
+    , midmem : \"memory = 50.Gb\", highmem : \"memory = 100.Gb\", lowcpu : \"cpus\
+    \ = 5\", midcpu : \"cpus = 15\", highcpu : \"cpus = 30\", lowtime : \"time = 1.h\"\
+    , midtime : \"time = 4.h\", hightime : \"time = 8.h\", veryhightime : \"time =\
+    \ 24.h\" }\n"
+  authors:
+  - name: "Luke Zappia"
+    roles:
+    - "maintainer"
+    - "author"
+    info:
+      github: "lazappi"
+      orcid: "0000-0001-7744-8565"
+  - name: "Michael Vinyard"
+    roles:
+    - "author"
+    info:
+      github: "mvinyard"
+  - name: "Michal Klein"
+    roles:
+    - "author"
+    info:
+      github: "michalk8"
+  - name: "Scott Gigante"
+    roles:
+    - "author"
+    info:
+      github: "scottgigante"
+      orcid: "0000-0002-4544-2764"
+  - name: "Ben DeMeo"
+    roles:
+    - "author"
+    info:
+      github: "bendemeo"
+  - name: "Robrecht Cannoodt"
+    roles:
+    - "author"
+    info:
+      github: "rcannood"
+      orcid: "0000-0003-3641-729X"
+  - name: "Kai Waldrant"
+    roles:
+    - "contributor"
+    info:
+      github: "KaiWaldrant"
+      orcid: "0009-0003-8555-1361"
+  - name: "Sai Nirmayi Yasa"
+    roles:
+    - "contributor"
+    info:
+      github: "sainirmayi"
+      orcid: "0009-0003-6319-9803"
+  - name: "Juan A. Cordero Varela"
+    roles:
+    - "contributor"
+    info:
+      github: "jacorvar"
+      orcid: "0000-0002-7373-5433"
+  keywords:
+  - "single-cell"
+  - "openproblems"
+  - "benchmark"
+  license: "MIT"
+  organization: "openproblems-bio"
+  links:
+    repository: "https://github.com/openproblems-bio/task_dimensionality_reduction"
+    docker_registry: "ghcr.io"
+    issue_tracker: "https://github.com/openproblems-bio/task_dimensionality_reduction/issues"

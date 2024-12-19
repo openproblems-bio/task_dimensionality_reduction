@@ -1,0 +1,26 @@
+namespace: data_processors
+info:
+  type: process_embedding
+  type_info:
+    label: Data processor
+    summary: A dimensionality reduction embedding processor.
+    description: |
+      A component for processing output from a dimensionality reduction method.
+arguments:
+  - name: "--input_embedding"
+    __merge__: file_embedding.yaml
+    direction: input
+    required: true
+  - name: "--input_solution"
+    __merge__: file_solution.yaml
+    direction: input
+    required: true
+  - name: "--output"
+    __merge__: file_processed_embedding.yaml
+    direction: output
+    required: true
+test_resources:
+  - path: /resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/
+    dest: resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py

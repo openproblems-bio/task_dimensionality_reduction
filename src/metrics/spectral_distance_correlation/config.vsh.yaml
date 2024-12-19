@@ -1,0 +1,43 @@
+# Base component API configuration
+__merge__: ../../api/comp_metric.yaml
+
+# Component configuration
+name: spectral_distance_correlation
+info:
+  metrics:
+    - name: spectral_distance_correlation
+      label: Spectral Distance Correlation
+      summary: "Spearman correlation between all pairwise diffusion distances in the original and dimension-reduced data."
+      description: |
+        Spearman correlation between all pairwise diffusion distances in the
+        original and dimension-reduced data.
+      references:
+        doi: 10.1016/j.acha.2006.04.006
+      min: -1
+      max: 1
+      maximize: true
+
+# Script configuration
+arguments:
+  - name: "--spectral"
+    type: boolean_true
+    description: Calculate the spectral root mean squared error.
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - umap-learn
+          - scikit-learn
+          - pynndescent~=0.5.11 # See https://github.com/openproblems-bio/openproblems-v2/issues/266
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, midcpu]

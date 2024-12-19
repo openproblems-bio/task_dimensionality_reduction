@@ -1,0 +1,70 @@
+# Base component API configuration
+__merge__: ../../api/comp_metric.yaml
+
+# Component configuration
+name: distance_correlation
+info:
+  metrics:
+    - name: waypoint_distance_correlation
+      label: Waypoint Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances between waypoint cells."
+      description: |
+        Calculates the distance correlation by computing Spearman correlations
+        between distances between waypoint cells on the full (or processed) data
+        matrix and the dimensionally-reduced matrix. Also known as the
+        cellstruct global single-cell (GS) score when using Pearson correlation.
+      references:
+        doi:
+          - 10.1101/2023.11.13.566337
+          - 10.1038/s42003-022-03628-x
+      min: -1
+      max: 1
+      maximize: true
+    - name: centroid_distance_correlation
+      label: Centroid Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances to label centroids."
+      description: |
+        Calculates the distance correlation by computing Spearman correlations
+        between distances from waypoint cells to label centroids on the full
+        (or processed) data matrix and the dimensionally-reduced matrix. Also
+        known as Point-Cluster Distance (PCD) correlation.
+      references:
+        doi:
+          - 10.1038/s41467-023-37478-w
+      min: -1
+      max: 1
+      maximize: true
+    - name: label_distance_correlation
+      label: Label Distance Correlation
+      summary: "Calculates the distance correlation by computing Spearman correlations between distances between label centroids."
+      description: |
+        Calculates the distance correlation by computing Spearman correlations
+        between distances between label centroids on the full (or processed)
+        data matrix and the dimensionally-reduced matrix. Also known as the
+        cellstruct global cluster (GC) score when using Pearson correlation.
+      references:
+        doi:
+          - 10.1101/2023.11.13.566337
+          - 10.1038/s42003-022-03628-x
+      min: -1
+      max: 1
+      maximize: true
+
+# Script configuration
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - scikit-learn
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, highmem, midcpu]
