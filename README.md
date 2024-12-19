@@ -197,9 +197,8 @@ Format:
     AnnData object
      obs: 'cell_type', 'is_waypoint'
      var: 'hvg_score'
-     obsm: 'waypoint_distances', 'centroid_distances'
      layers: 'counts', 'normalized'
-     uns: 'dataset_id', 'dataset_name', 'dataset_url', 'dataset_reference', 'dataset_summary', 'dataset_description', 'dataset_organism', 'normalization_id', 'between_waypoint_distances', 'label_centroids', 'between_centroid_distances'
+     uns: 'dataset_id', 'dataset_name', 'dataset_url', 'dataset_reference', 'dataset_summary', 'dataset_description', 'dataset_organism', 'normalization_id', 'between_waypoint_distances', 'label_centroids', 'waypoint_centroid_distances', 'between_centroid_distances'
 
 </div>
 
@@ -212,8 +211,6 @@ Data structure:
 | `obs["cell_type"]` | `string` | Ground truth cell type based on a cells characteristics and function within the tissue or organism. |
 | `obs["is_waypoint"]` | `boolean` | Whether or not this cell is a waypoint used for some metric calculations. |
 | `var["hvg_score"]` | `double` | High variability gene score (normalized dispersion). The greater, the more variable. |
-| `obsm["waypoint_distances"]` | `double` | Euclidean distances between all cells and waypoint cells calculated using normalized data. |
-| `obsm["centroid_distances"]` | `double` | Euclidean distances between all cells and label centroids calculated using normalized data. |
 | `layers["counts"]` | `integer` | Raw counts. |
 | `layers["normalized"]` | `double` | Normalized expression values. |
 | `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
@@ -226,6 +223,7 @@ Data structure:
 | `uns["normalization_id"]` | `string` | Which normalization was used. |
 | `uns["between_waypoint_distances"]` | `double` | Euclidean distances between waypoint cells. |
 | `uns["label_centroids"]` | `double` | Centroid positions of each label in the normalized expression space. |
+| `uns["waypoint_centroid_distances"]` | `double` | Euclidean distances from waypoint cells to label centroids. |
 | `uns["between_centroid_distances"]` | `double` | Euclidean distances between label centroids. |
 
 </div>
@@ -366,8 +364,8 @@ Format:
 <div class="small">
 
     AnnData object
-     obsm: 'X_emb', 'waypoint_distances', 'centroid_distances'
-     uns: 'dataset_id', 'method_id', 'normalization_id', 'between_waypoint_distances', 'label_centroids', 'between_centroid_distances'
+     obsm: 'X_emb'
+     uns: 'dataset_id', 'method_id', 'normalization_id', 'between_waypoint_distances', 'label_centroids', 'waypoint_centroid_distances', 'between_centroid_distances'
 
 </div>
 
@@ -378,13 +376,12 @@ Data structure:
 | Slot | Type | Description |
 |:---|:---|:---|
 | `obsm["X_emb"]` | `double` | The dimensionally reduced embedding. |
-| `obsm["waypoint_distances"]` | `double` | Euclidean distances between all cells and waypoint cells calculated using the embedding. |
-| `obsm["centroid_distances"]` | `double` | Euclidean distances between all cells and label centroids calculated using the embedding. |
 | `uns["dataset_id"]` | `string` | A unique identifier for the dataset. |
 | `uns["method_id"]` | `string` | A unique identifier for the method. |
 | `uns["normalization_id"]` | `string` | Which normalization was used. |
 | `uns["between_waypoint_distances"]` | `double` | Euclidean distances between waypoint cells. |
 | `uns["label_centroids"]` | `double` | Centroid positions of each label in the normalized expression space. |
+| `uns["waypoint_centroid_distances"]` | `double` | Euclidean distances from waypoint cells to label centroids. |
 | `uns["between_centroid_distances"]` | `double` | Euclidean distances between label centroids. |
 
 </div>
