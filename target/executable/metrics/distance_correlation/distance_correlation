@@ -469,9 +469,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "scikit-learn"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics distance_correlation"
-LABEL org.opencontainers.image.created="2024-12-18T09:36:16Z"
+LABEL org.opencontainers.image.created="2024-12-19T08:01:05Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="df707e458c5a497f4ae33d8f3b6f16d80fe2ad05"
+LABEL org.opencontainers.image.revision="575355a8fcbebd843612bfc4fc57e83ca9979af3"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1072,15 +1072,15 @@ print("\\n>>> Reading embedding...", flush=True)
 embedding = ad.read_h5ad(par["input_embedding"])
 print(embedding, flush=True)
 
-print("\\n>>> Calculating waypoint distance correlation..", flush=True)
-high_dists = solution.obsm["waypoint_distances"]
-emb_dists = embedding.obsm["waypoint_distances"]
+print("\\n>>> Calculating between waypoint distance correlation..", flush=True)
+high_dists = solution.uns["between_waypoint_distances"]
+emb_dists = embedding.uns["between_waypoint_distances"]
 waypoint_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
 print(f"Waypoint distance correlation: {waypoint_corr}", flush=True)
 
-print("\\n>>> Calculating centroid distance correlation..", flush=True)
-high_dists = solution.obsm["centroid_distances"]
-emb_dists = embedding.obsm["centroid_distances"]
+print("\\n>>> Calculating waypoint-centroid distance correlation..", flush=True)
+high_dists = solution.uns["waypoint_centroid_distances"]
+emb_dists = embedding.uns["waypoint_centroid_distances"]
 centroid_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
 print(f"Centroid distance correlation: {centroid_corr}", flush=True)
 

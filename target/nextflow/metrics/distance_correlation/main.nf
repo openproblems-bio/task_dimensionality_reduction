@@ -2825,18 +2825,6 @@ meta = [
                   "name" : "X_emb",
                   "description" : "The dimensionally reduced embedding.",
                   "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "waypoint_distances",
-                  "description" : "Euclidean distances between all cells and waypoint cells calculated using the embedding.",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "centroid_distances",
-                  "description" : "Euclidean distances between all cells and label centroids calculated using the embedding.",
-                  "required" : true
                 }
               ],
               "uns" : [
@@ -2867,6 +2855,11 @@ meta = [
                   "name" : "label_centroids",
                   "type" : "double",
                   "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "waypoint_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances from waypoint cells to label centroids."
                 },
                 {
                   "name" : "between_centroid_distances",
@@ -2930,20 +2923,6 @@ meta = [
                   "required" : true
                 }
               ],
-              "obsm" : [
-                {
-                  "type" : "double",
-                  "name" : "waypoint_distances",
-                  "description" : "Euclidean distances between all cells and waypoint cells calculated using normalized data.",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "centroid_distances",
-                  "description" : "Euclidean distances between all cells and label centroids calculated using normalized data.",
-                  "required" : true
-                }
-              ],
               "uns" : [
                 {
                   "type" : "string",
@@ -3002,6 +2981,11 @@ meta = [
                   "name" : "label_centroids",
                   "type" : "double",
                   "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "waypoint_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances from waypoint cells to label centroids."
                 },
                 {
                   "name" : "between_centroid_distances",
@@ -3107,8 +3091,8 @@ meta = [
       {
         "name" : "waypoint_distance_correlation",
         "label" : "Waypoint Distance Correlation",
-        "summary" : "Calculates the distance correlation by computing Spearman correlations between distances to waypoint cells.",
-        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances to waypoint cells on the full (or processed) data\nmatrix and the dimensionally-reduced matrix. Also known as the\ncellstruct global single-cell (GS) score when using Pearson correlation.\n",
+        "summary" : "Calculates the distance correlation by computing Spearman correlations between distances between waypoint cells.",
+        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances between waypoint cells on the full (or processed) data\nmatrix and the dimensionally-reduced matrix. Also known as the\ncellstruct global single-cell (GS) score when using Pearson correlation.\n",
         "references" : {
           "doi" : [
             "10.1101/2023.11.13.566337",
@@ -3123,7 +3107,7 @@ meta = [
         "name" : "centroid_distance_correlation",
         "label" : "Centroid Distance Correlation",
         "summary" : "Calculates the distance correlation by computing Spearman correlations between distances to label centroids.",
-        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances to label centroids on the full (or processed) data\nmatrix and the dimensionally-reduced matrix. Also known as Point-Cluster\nDistance (PCD) correlation.\n",
+        "description" : "Calculates the distance correlation by computing Spearman correlations\nbetween distances from waypoint cells to label centroids on the full\n(or processed) data matrix and the dimensionally-reduced matrix. Also\nknown as Point-Cluster Distance (PCD) correlation.\n",
         "references" : {
           "doi" : [
             "10.1038/s41467-023-37478-w"
@@ -3236,7 +3220,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/distance_correlation",
     "viash_version" : "0.9.0",
-    "git_commit" : "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05",
+    "git_commit" : "575355a8fcbebd843612bfc4fc57e83ca9979af3",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
@@ -3439,15 +3423,15 @@ print("\\\\n>>> Reading embedding...", flush=True)
 embedding = ad.read_h5ad(par["input_embedding"])
 print(embedding, flush=True)
 
-print("\\\\n>>> Calculating waypoint distance correlation..", flush=True)
-high_dists = solution.obsm["waypoint_distances"]
-emb_dists = embedding.obsm["waypoint_distances"]
+print("\\\\n>>> Calculating between waypoint distance correlation..", flush=True)
+high_dists = solution.uns["between_waypoint_distances"]
+emb_dists = embedding.uns["between_waypoint_distances"]
 waypoint_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
 print(f"Waypoint distance correlation: {waypoint_corr}", flush=True)
 
-print("\\\\n>>> Calculating centroid distance correlation..", flush=True)
-high_dists = solution.obsm["centroid_distances"]
-emb_dists = embedding.obsm["centroid_distances"]
+print("\\\\n>>> Calculating waypoint-centroid distance correlation..", flush=True)
+high_dists = solution.uns["waypoint_centroid_distances"]
+emb_dists = embedding.uns["waypoint_centroid_distances"]
 centroid_corr = scipy.stats.spearmanr(high_dists, emb_dists, axis=None).correlation
 print(f"Centroid distance correlation: {centroid_corr}", flush=True)
 

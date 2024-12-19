@@ -476,9 +476,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "scanpy"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods pca"
-LABEL org.opencontainers.image.created="2024-12-18T09:36:17Z"
+LABEL org.opencontainers.image.created="2024-12-19T08:01:06Z"
 LABEL org.opencontainers.image.source="https://github.com/scverse/scanpy"
-LABEL org.opencontainers.image.revision="df707e458c5a497f4ae33d8f3b6f16d80fe2ad05"
+LABEL org.opencontainers.image.revision="575355a8fcbebd843612bfc4fc57e83ca9979af3"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

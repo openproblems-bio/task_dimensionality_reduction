@@ -2825,18 +2825,6 @@ meta = [
                   "name" : "X_emb",
                   "description" : "The dimensionally reduced embedding.",
                   "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "waypoint_distances",
-                  "description" : "Euclidean distances between all cells and waypoint cells calculated using the embedding.",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "centroid_distances",
-                  "description" : "Euclidean distances between all cells and label centroids calculated using the embedding.",
-                  "required" : true
                 }
               ],
               "uns" : [
@@ -2867,6 +2855,11 @@ meta = [
                   "name" : "label_centroids",
                   "type" : "double",
                   "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "waypoint_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances from waypoint cells to label centroids."
                 },
                 {
                   "name" : "between_centroid_distances",
@@ -2930,20 +2923,6 @@ meta = [
                   "required" : true
                 }
               ],
-              "obsm" : [
-                {
-                  "type" : "double",
-                  "name" : "waypoint_distances",
-                  "description" : "Euclidean distances between all cells and waypoint cells calculated using normalized data.",
-                  "required" : true
-                },
-                {
-                  "type" : "double",
-                  "name" : "centroid_distances",
-                  "description" : "Euclidean distances between all cells and label centroids calculated using normalized data.",
-                  "required" : true
-                }
-              ],
               "uns" : [
                 {
                   "type" : "string",
@@ -3002,6 +2981,11 @@ meta = [
                   "name" : "label_centroids",
                   "type" : "double",
                   "description" : "Centroid positions of each label in the normalized expression space."
+                },
+                {
+                  "name" : "waypoint_centroid_distances",
+                  "type" : "double",
+                  "description" : "Euclidean distances from waypoint cells to label centroids."
                 },
                 {
                   "name" : "between_centroid_distances",
@@ -3244,7 +3228,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/clustering_performance",
     "viash_version" : "0.9.0",
-    "git_commit" : "df707e458c5a497f4ae33d8f3b6f16d80fe2ad05",
+    "git_commit" : "575355a8fcbebd843612bfc4fc57e83ca9979af3",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
