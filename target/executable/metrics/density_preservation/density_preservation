@@ -479,9 +479,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "umap-learn" "pynndescent~=0.5.11"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics density_preservation"
-LABEL org.opencontainers.image.created="2024-12-19T08:01:04Z"
+LABEL org.opencontainers.image.created="2024-12-19T08:02:53Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="575355a8fcbebd843612bfc4fc57e83ca9979af3"
+LABEL org.opencontainers.image.revision="7adb5a856f2374eda43ee7f133b183e65081635a"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

@@ -3089,7 +3089,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/lmds",
     "viash_version" : "0.9.0",
-    "git_commit" : "575355a8fcbebd843612bfc4fc57e83ca9979af3",
+    "git_commit" : "7adb5a856f2374eda43ee7f133b183e65081635a",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
   },
   "package_config" : {
