@@ -8,3 +8,5 @@ target
 output
 trace-*
 .ipynb_checkpoints
+*.h5ad
+temp/
