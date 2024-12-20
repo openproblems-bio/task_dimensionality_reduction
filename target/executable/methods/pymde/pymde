@@ -485,9 +485,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "pymde" "numpy<2.0.0"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods pymde"
-LABEL org.opencontainers.image.created="2024-12-19T08:02:53Z"
+LABEL org.opencontainers.image.created="2024-12-20T12:34:21Z"
 LABEL org.opencontainers.image.source="https://github.com/cvxgrp/pymde"
-LABEL org.opencontainers.image.revision="7adb5a856f2374eda43ee7f133b183e65081635a"
+LABEL org.opencontainers.image.revision="3766c399cfb43e02379f60439b105ac63da004e1"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

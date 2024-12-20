@@ -3188,8 +3188,9 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0",
-    "git_commit" : "7adb5a856f2374eda43ee7f133b183e65081635a",
-    "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction"
+    "git_commit" : "3766c399cfb43e02379f60439b105ac63da004e1",
+    "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction",
+    "git_tag" : "0.2.0-2-g3766c39"
   },
   "package_config" : {
     "name" : "task_dimensionality_reduction",
