@@ -2988,7 +2988,7 @@ meta = [
         {
           "type" : "file",
           "name" : "--output",
-          "label" : "Embedding",
+          "label" : "Processed Embedding",
           "summary" : "A dataset with dimensionality reduction embedding that has been processed to\nadd information required by metrics.\n",
           "info" : {
             "format" : {
@@ -3153,9 +3153,9 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/data_processors/process_embedding",
     "viash_version" : "0.9.0",
-    "git_commit" : "3766c399cfb43e02379f60439b105ac63da004e1",
+    "git_commit" : "86e6752da3e7fe41ec95031fd61adb41c5d092d4",
     "git_remote" : "https://github.com/openproblems-bio/task_dimensionality_reduction",
-    "git_tag" : "0.2.0-2-g3766c39"
+    "git_tag" : "0.2.0-3-g86e6752"
   },
   "package_config" : {
     "name" : "task_dimensionality_reduction",

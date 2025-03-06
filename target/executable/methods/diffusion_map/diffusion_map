@@ -473,9 +473,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("destiny", quietly = TRUE)) BiocManager::install("destiny")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods diffusion_map"
-LABEL org.opencontainers.image.created="2024-12-20T12:34:21Z"
+LABEL org.opencontainers.image.created="2025-03-06T13:42:08Z"
 LABEL org.opencontainers.image.source="https://github.com/theislab/destiny"
-LABEL org.opencontainers.image.revision="3766c399cfb43e02379f60439b105ac63da004e1"
+LABEL org.opencontainers.image.revision="86e6752da3e7fe41ec95031fd61adb41c5d092d4"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

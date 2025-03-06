@@ -1,6 +1,6 @@
 type: file
 example: "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/processed_embedding.h5ad"
-label: "Embedding"
+label: "Processed Embedding"
 summary: |
   A dataset with dimensionality reduction embedding that has been processed to
   add information required by metrics.

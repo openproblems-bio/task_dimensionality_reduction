@@ -78,7 +78,7 @@ flowchart TB
   comp_process_embedding[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-data-processor'>Data processor</a>"/]
   file_embedding("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-embedding'>Embedding</a>")
   file_score("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-score'>Score</a>")
-  file_processed_embedding("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-embedding'>Embedding</a>")
+  file_processed_embedding("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-processed-embedding'>Processed Embedding</a>")
   file_common_dataset---comp_process_dataset
   comp_process_dataset-->file_dataset
   comp_process_dataset-->file_solution
@@ -351,7 +351,7 @@ Data structure:
 
 </div>
 
-## File format: Embedding
+## File format: Processed Embedding
 
 A dataset with dimensionality reduction embedding that has been
 processed to add information required by metrics.
