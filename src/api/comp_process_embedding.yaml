@@ -2,7 +2,7 @@ namespace: data_processors
 info:
   type: process_embedding
   type_info:
-    label: Data processor
+    label: Process embedding
     summary: A dimensionality reduction embedding processor.
     description: |
       A component for processing output from a dimensionality reduction method.

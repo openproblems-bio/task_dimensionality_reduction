@@ -75,7 +75,7 @@ flowchart TB
   comp_control_method[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-control-method'>Control method</a>"/]
   comp_method[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-method'>Method</a>"/]
   comp_metric[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-metric'>Metric</a>"/]
-  comp_process_embedding[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-data-processor'>Data processor</a>"/]
+  comp_process_embedding[/"<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#component-type-process-embedding'>Process embedding</a>"/]
   file_embedding("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-embedding'>Embedding</a>")
   file_score("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-score'>Score</a>")
   file_processed_embedding("<a href='https://github.com/openproblems-bio/task_dimensionality_reduction#file-format-processed-embedding'>Processed Embedding</a>")
@@ -275,7 +275,7 @@ Arguments:
 
 </div>
 
-## Component type: Data processor
+## Component type: Process embedding
 
 A dimensionality reduction embedding processor.
 

@@ -200,9 +200,9 @@ build_info:
   output: "target/nextflow/methods/umap"
   executable: "target/nextflow/methods/umap/main.nf"
   viash_version: "0.9.0"
-  git_commit: "86e6752da3e7fe41ec95031fd61adb41c5d092d4"
+  git_commit: "c3d4b29d45448b5287cfe2dda1a78393f0d02dae"
   git_remote: "https://github.com/openproblems-bio/task_dimensionality_reduction"
-  git_tag: "0.2.0-3-g86e6752"
+  git_tag: "0.2.0-3-gc3d4b29"
 package_config:
   name: "task_dimensionality_reduction"
   version: "build_main"
