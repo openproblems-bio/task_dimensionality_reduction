@@ -11,7 +11,7 @@ from scprint.tasks import Embedder
 
 ## VIASH START
 par = {
-    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/train.h5ad",
+    "input": "resources_test/task_dimensionality_reduction/cxg_mouse_pancreas_atlas/dataset.h5ad",
     "output": "reduced.h5ad",
     "model_name": "v2-medium",
     "model": None,
