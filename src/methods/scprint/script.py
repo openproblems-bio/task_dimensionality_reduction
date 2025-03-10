@@ -112,7 +112,7 @@ output = ad.AnnData(
     obs=input.obs[[]],
     var=input.var[[]],
     obsm={
-        "X_emb": embedded.obsm["scprint"],
+        "X_emb": embedded.obsm["scprint_emb"],
     },
     uns={
         "dataset_id": input.uns["dataset_id"],
