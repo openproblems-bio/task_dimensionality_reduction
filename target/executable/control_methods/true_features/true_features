@@ -469,9 +469,9 @@ function ViashDockerfile {
 FROM openproblems/base_python:1.0.0
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component control_methods true_features"
-LABEL org.opencontainers.image.created="2025-03-06T13:43:33Z"
+LABEL org.opencontainers.image.created="2025-06-03T06:53:57Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_dimensionality_reduction"
-LABEL org.opencontainers.image.revision="c3d4b29d45448b5287cfe2dda1a78393f0d02dae"
+LABEL org.opencontainers.image.revision="360499d0a6a959b492dfbf3e7ebb9df7ea02078e"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

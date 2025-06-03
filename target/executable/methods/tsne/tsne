@@ -487,9 +487,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "git+https://github.com/DmitryUlyanov/Multicore-TSNE"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods tsne"
-LABEL org.opencontainers.image.created="2025-03-06T13:43:33Z"
+LABEL org.opencontainers.image.created="2025-06-03T06:53:57Z"
 LABEL org.opencontainers.image.source="https://github.com/scverse/scanpy"
-LABEL org.opencontainers.image.revision="c3d4b29d45448b5287cfe2dda1a78393f0d02dae"
+LABEL org.opencontainers.image.revision="360499d0a6a959b492dfbf3e7ebb9df7ea02078e"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
