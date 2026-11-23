@@ -25,7 +25,7 @@
 
 ## NEW FUNCTIONALITY
 
-* Added `methods/scalerank` component.
+* Added `methods/scalerank` component (PR #30).
 
 # dimensionality_reduction 0.2.0 2024-12-19
 
