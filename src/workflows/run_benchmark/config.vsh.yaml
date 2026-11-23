@@ -72,6 +72,7 @@ dependencies:
   - name: methods/pca
   - name: methods/phate
   - name: methods/pymde
+  - name: methods/scalerank
   - name: methods/simlr
   - name: methods/tsne
   - name: methods/umap

@@ -1,0 +1,71 @@
+# Base component API configuration
+__merge__: ../../api/comp_method.yaml
+
+# Component configuration
+name: "scalerank"
+label: ScaleRank
+summary: "Preserves neighbour ranks over a range of scales, with an optional densMAP-style density term."
+description: |
+  ScaleRank optimises a 2D embedding so that each cell's neighbour ranks are
+  preserved over a range of neighbourhood sizes K, sampled with probability
+  proportional to K^-gamma. Exact ranks come from each cell's nearest
+  neighbours and larger ranks are estimated from random subsamples, so no
+  N x N structure is built. Because a rank loss carries no information about
+  local scale, a density term after densMAP correlates each cell's local radius
+  in the embedding with a target radius during the last epochs.
+
+  The ranks are computed on PCA of the top highly variable genes. The target
+  radii for the density term are measured on PCA of all genes (the space the
+  density preservation metric uses); set `dens_pca_dims` to 0 to measure them
+  on the ranks' input instead, or `dens_lambda` to 0 to switch the term off.
+references:
+  doi: 10.5281/zenodo.24462269
+links:
+  repository: https://github.com/tsjshg/scalerank
+  documentation: https://github.com/tsjshg/scalerank#readme
+info:
+  preferred_normalization: log_cp10k
+  variants:
+    scalerank_pca_logCP10k_3kHVG:
+    scalerank_nodensity_pca_logCP10k_3kHVG:
+      dens_lambda: 0
+
+# Script configuration
+arguments:
+  - name: "--n_hvg"
+    type: integer
+    description: Number of highly variable genes to subset to before PCA. 0 uses all genes.
+    default: 3000
+  - name: "--n_pca_dims"
+    type: integer
+    description: Number of PCA dimensions the neighbour ranks are computed on.
+    default: 100
+  - name: "--gamma"
+    type: double
+    description: Scale exponent. Neighbourhood sizes K are sampled with probability proportional to K^-gamma; larger values favour local structure.
+    default: 0.5
+  - name: "--dens_lambda"
+    type: double
+    description: Weight of the density term. 0 switches it off.
+    default: 4
+  - name: "--dens_pca_dims"
+    type: integer
+    description: Number of PCA dimensions of all genes on which the target local radii are measured. 0 measures them on the ranks' input.
+    default: 300
+resources:
+  - type: python_script
+    path: script.py
+
+# Platform configuration
+engines:
+  - type: docker
+    image: openproblems/base_python:1.0.0
+    setup:
+      - type: python
+        packages:
+          - scalerank~=0.1.0
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

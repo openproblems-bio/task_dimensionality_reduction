@@ -20,6 +20,7 @@ methods = [
   pca,
   phate,
   pymde,
+  scalerank,
   simlr,
   tsne,
   umap
