@@ -21,6 +21,12 @@
 
 ## BUGFIXES -->
 
+# dimensionality_reduction x.y.z
+
+## NEW FUNCTIONALITY
+
+* Added `methods/scalerank` component.
+
 # dimensionality_reduction 0.2.0 2024-12-19
 
 ## NEW FUNCTIONALITY
