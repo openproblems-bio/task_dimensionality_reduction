@@ -19,13 +19,7 @@ description: |
   density preservation metric uses); set `dens_pca_dims` to 0 to measure them
   on the ranks' input instead, or `dens_lambda` to 0 to switch the term off.
 references:
-  bibtex: |
-    @misc{tsuji2026scalerank,
-      author = {Tsuji, Shingo},
-      title = {{ScaleRank}: dimensionality reduction that preserves neighbour ranks over a range of scales},
-      year = {2026},
-      howpublished = {\url{https://github.com/tsjshg/scalerank}}
-    }
+  doi: 10.5281/zenodo.24462269
 links:
   repository: https://github.com/tsjshg/scalerank
   documentation: https://github.com/tsjshg/scalerank#readme
